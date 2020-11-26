@@ -3,17 +3,17 @@ import matplotlib.pyplot as plt
 
 
 class GraphVisualization: 
-  def __init__(self):  
+  def __init__(self):
     # visual is a list which stores all  
     # the set of edges that constitutes a 
-    # graph 
-    self.visual = [] 
+    # graph
+    self.visual = []
 
   # addEdge function inputs the vertices of an 
   # edge and appends it to the visual list 
-  def add_edge(self, a, b): 
-    temp = [a, b] 
-    self.visual.append(temp) 
+  def add_edge(self, a, b):
+    temp = [a, b]
+    self.visual.append(temp)
 
   # In visualize function G is an object of 
   # class Graph given by networkx G.add_edges_from(visual) 
@@ -21,7 +21,7 @@ class GraphVisualization:
   # nx.draw_networkx(G) - plots the graph 
   # plt.show() - displays the graph 
   def visualize(self):
-    G = nx.Graph() 
-    G.add_edges_from(self.visual) 
-    nx.draw_networkx(G) 
-    plt.show() 
+    G = nx.DiGraph()
+    G.add_edges_from(self.visual)
+    nx.draw_networkx(G)
+    plt.show()
