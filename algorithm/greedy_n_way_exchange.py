@@ -64,3 +64,7 @@ class GreedyNWayExchange(object):
       self.show_donation_mapping_graph()
     else:
       raise ValueError("Print method not found, available methods: 'text', 'graph'")
+
+  def get_num_of_matched_pairs(self):
+    flatten = lambda t: [item for sublist in t for item in sublist]
+    return len(flatten(self.cycles))

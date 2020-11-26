@@ -15,11 +15,8 @@ class DirectedGraph(object):
     self.build_graph()
 
   def build_graph(self):
-    for donor_idx in self.medical_data.index:
-      for recipient_idx in self.medical_data.index:
-        donor_bloodtype = self.medical_data.at[donor_idx, "donor_bloodtype"]
-        recipient_bloodtype = self.medical_data.at[recipient_idx, "recipient_bloodtype"]
-
+    for donor_idx, donor_bloodtype, _, _ in self.medical_data.values:
+      for recipient_idx, _, recipient_bloodtype, _ in self.medical_data.values:
         if recipient_bloodtype == NO_TYPE:
           continue
         else:
@@ -32,9 +29,7 @@ class DirectedGraph(object):
               else:
                 self.adjacency[donor_idx] = [recipient_idx]
 
-  def get_edge(self, donor_pair_number, recipient_pair_number):
-    donor_idx = self.medical_data[self.medical_data['pair_num'] == str(donor_pair_number)].index[0]
-    recipient_idx = self.medical_data[self.medical_data['pair_num'] == str(recipient_pair_number)].index[0]
+  def get_edge(self, donor_idx, recipient_idx):
     return (recipient_idx in self.adjacency[donor_idx])
 
   def get_cycles(self):
