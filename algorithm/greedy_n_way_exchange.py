@@ -15,6 +15,7 @@ class GreedyNWayExchange(object):
       raise ValueError("Method not found, available methods: 'maximum', 'exact'")
 
     self.cycles = []
+    self.vertices = []
 
   def maximum_method(self, cycles):
     return [cycle for cycle in cycles if (len(cycle) <= self.n)]
@@ -26,6 +27,7 @@ class GreedyNWayExchange(object):
   def element_in_assigned(cycle, assigned):
     return any(item in cycle for item in assigned)
 
+  # Method to finalize exchange of directed graphs
   def finalize_exchange(self, directed_graph):
     cycles = self.method(directed_graph.get_cycles())
     
@@ -39,14 +41,22 @@ class GreedyNWayExchange(object):
         for index in cycle:
           assigned.add(index)
 
+    self.vertices = directed_graph.get_vertices()
+
+  def get_num_of_matched_pairs(self):
+    flatten = lambda t: [item for sublist in t for item in sublist]
+    return len(flatten(self.cycles))
+
   def show_donation_mapping_graph(self):
     gv = GraphVisualization()
+
+    # Add vertices
+    gv.add_vertices_from(self.vertices)
 
     # to visualize cycle, add start node as end node
     vis_cycles = [cycle + cycle[:1] for cycle in self.cycles]
     edges = [ed for cycle in vis_cycles for ed in zip(cycle[:-1], cycle[1:])]
-    for edge in edges:
-      gv.add_edge(edge[0], edge[1])
+    gv.add_edges_from(edges)
 
     gv.visualize()
 
@@ -64,7 +74,3 @@ class GreedyNWayExchange(object):
       self.show_donation_mapping_graph()
     else:
       raise ValueError("Print method not found, available methods: 'text', 'graph'")
-
-  def get_num_of_matched_pairs(self):
-    flatten = lambda t: [item for sublist in t for item in sublist]
-    return len(flatten(self.cycles))
