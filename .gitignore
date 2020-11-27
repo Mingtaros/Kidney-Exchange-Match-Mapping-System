@@ -1,3 +1,4 @@
 .ipynb_checkpoints/
 __pycache__/
 cycle_generation.py
+cycle_generation_all.py

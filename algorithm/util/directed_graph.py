@@ -1,10 +1,13 @@
+import pandas as pd
+import json
+
 from .constants import *
-from .dfs import graph_cycle_search
+from .dfs import dfs
 
 
 class DirectedGraph(object):
   # orientation = list of index adjacency
-  def __init__(self, medical_data):
+  def __init__(self, medical_data = pd.DataFrame()):
     # DATAFRAME NEEDED:
     #   - pair num
     #   - donor bloodtype
@@ -14,7 +17,8 @@ class DirectedGraph(object):
     self.adjacency = {}
     self.cycles = []
     self.got_cycles = False
-    self.build_graph()
+    if (not medical_data.empty):
+      self.build_graph()
 
   def build_graph(self):
     for donor_idx, donor_bloodtype, _, _ in self.medical_data.values:
@@ -31,6 +35,9 @@ class DirectedGraph(object):
               else:
                 self.adjacency[donor_idx] = [recipient_idx]
 
+  def sort_adj(self):
+    self.adjacency = dict(sorted(self.adjacency.items(), key=lambda x: len(x[1])))
+  
   def get_edges(self):
     edge_list = []
     for each_vertices in self.adjacency:
@@ -47,10 +54,29 @@ class DirectedGraph(object):
       return self.cycles
     else:
       # search for cycles if it hasn't been searched
-      cycles = []
-      for each_vertices in self.adjacency:
-        cycles += graph_cycle_search(self.adjacency, each_vertices, each_vertices, {}, [])
+      cycles = dfs(self.adjacency)
 
       self.cycles = cycles
       self.got_cycles = True
       return cycles
+
+  def save_data(self, directory):
+    data = {
+      "adjacency": self.adjacency,
+      "cycles": self.cycles,
+      "medical_data": str(self.medical_data)
+    }
+
+    with open(directory, 'w') as f:
+      json.dump(data, f)
+      print("Data saved at", directory)
+
+  def load_graph_from_data(self, directory):
+    with open(directory, 'r') as f:
+      data = json.load(f)
+    
+    self.medical_data = data['medical_data']
+    self.adjacency = data['adjacency']
+    self.cycles = data['cycles']
+    if (self.cycles):
+      self.got_cycles = True
