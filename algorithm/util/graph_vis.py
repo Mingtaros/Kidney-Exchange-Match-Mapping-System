@@ -9,7 +9,13 @@ class GraphVisualization:
     # graph
     self.edges = []
     self.vertices = []
+    self.vertices_color = []
     self.G = nx.DiGraph()
+
+    self.color_list = {
+      "rb": ['red', 'blue'],
+      "yg": ['yellow', 'green']
+    }
 
   # addEdge function inputs the vertices of an 
   # edge and appends it to the visual list 
@@ -23,13 +29,29 @@ class GraphVisualization:
   def add_vertices_from(self, list_of_vertices):
     self.vertices += list_of_vertices
 
+  def add_color(self, no_edge_color, edgy_color):
+    flatten = lambda t: [item for sublist in t for item in sublist]
+    all_vertices_with_edge = flatten(self.edges)
+    for vertex in self.vertices:
+      if (vertex not in all_vertices_with_edge):
+        self.vertices_color.append(no_edge_color)
+      else:
+        self.vertices_color.append(edgy_color)
+
   # In visualize function G is an object of 
   # class Graph given by networkx G.add_edges_from(visual) 
   # creates a graph with a given list 
   # nx.draw_networkx(G) - plots the graph 
   # plt.show() - displays the graph 
-  def visualize(self):
+  def visualize(self, color='default'):
     self.G.add_nodes_from(self.vertices)
     self.G.add_edges_from(self.edges)
-    nx.draw_networkx(self.G)
+    if (color == "default"):
+      nx.draw_networkx(self.G)
+    elif (color in self.color_list):
+      self.add_color(self.color_list[color][0], self.color_list[color][1])
+      nx.draw_networkx(self.G, node_color=self.vertices_color)
+    else:
+      raise ValueError("Color doesn't exist, existing colors =", list(self.color_list.keys()))
+    
     plt.show()

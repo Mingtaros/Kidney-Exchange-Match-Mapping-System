@@ -1,4 +1,4 @@
-from util.graph_vis import GraphVisualization
+from .util.graph_vis import GraphVisualization
 
 class GreedyNWayExchange(object):
   # orientation: first come first serve
@@ -58,7 +58,7 @@ class GreedyNWayExchange(object):
     edges = [ed for cycle in vis_cycles for ed in zip(cycle[:-1], cycle[1:])]
     gv.add_edges_from(edges)
 
-    gv.visualize()
+    gv.visualize('yg')
 
   def show_donation_mapping_text(self):
     for cycle in self.cycles:
