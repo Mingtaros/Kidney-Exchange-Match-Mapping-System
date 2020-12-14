@@ -1,8 +1,12 @@
-from .util.graph_vis import GraphVisualization
+from .exchange_algorithm import ExchangeAlgorithm
 
-class GreedyNWayExchange(object):
+
+class GreedyNWayExchange(ExchangeAlgorithm):
   # orientation: first come first serve
+  # Inherits from Exchange Algorithm
   def __init__(self, n, method):
+    super().__init__()
+
     self.n = n
     # method:
     #   - "maximum": n as maximum number of edge in cycle
@@ -14,18 +18,14 @@ class GreedyNWayExchange(object):
     else:
       raise ValueError("Method not found, available methods: 'maximum', 'exact'")
 
-    self.cycles = []
-    self.vertices = []
 
   def maximum_method(self, cycles):
     return [cycle for cycle in cycles if (len(cycle) <= self.n)]
 
+
   def exact_method(self, cycles):
     return [cycle for cycle in cycles if (len(cycle) == self.n)]
 
-  @staticmethod
-  def element_in_assigned(cycle, assigned):
-    return any(item in cycle for item in assigned)
 
   # Method to finalize exchange of directed graphs
   def finalize_exchange(self, directed_graph):
@@ -34,7 +34,7 @@ class GreedyNWayExchange(object):
     # remove cycles with previous occurring vertices
     assigned = set()
     for cycle in cycles:
-      if not GreedyNWayExchange.element_in_assigned(cycle, assigned):
+      if not ExchangeAlgorithm.element_in_assigned(cycle, assigned):
         self.cycles.append(cycle)
 
         # add index to assigned
@@ -42,35 +42,3 @@ class GreedyNWayExchange(object):
           assigned.add(index)
 
     self.vertices = directed_graph.get_vertices()
-
-  def get_num_of_matched_pairs(self):
-    flatten = lambda t: [item for sublist in t for item in sublist]
-    return len(flatten(self.cycles))
-
-  def show_donation_mapping_graph(self):
-    gv = GraphVisualization()
-
-    # Add vertices
-    gv.add_vertices_from(self.vertices)
-
-    # to visualize cycle, add start node as end node
-    vis_cycles = [cycle + cycle[:1] for cycle in self.cycles]
-    edges = [ed for cycle in vis_cycles for ed in zip(cycle[:-1], cycle[1:])]
-    gv.add_edges_from(edges)
-
-    gv.visualize('yg')
-
-  def show_donation_mapping_text(self):
-    for cycle in self.cycles:
-      print(" --> ".join(map(str, cycle)))
-
-  def show_donation_mapping(self, print_method='text'):
-    # print_method:
-    #   - "text": print donation mapping as text
-    #   - "graph": print reduced graph of donation mapping
-    if (print_method == 'text'):
-      self.show_donation_mapping_text()
-    elif (print_method =='graph'):
-      self.show_donation_mapping_graph()
-    else:
-      raise ValueError("Print method not found, available methods: 'text', 'graph'")

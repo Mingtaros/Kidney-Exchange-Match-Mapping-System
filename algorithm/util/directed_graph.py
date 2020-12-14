@@ -20,6 +20,7 @@ class DirectedGraph(object):
     if (not medical_data.empty):
       self.build_graph()
 
+
   def build_graph(self):
     for donor_idx, donor_bloodtype, _, _ in self.medical_data.values:
       for recipient_idx, _, recipient_bloodtype, _ in self.medical_data.values:
@@ -35,9 +36,11 @@ class DirectedGraph(object):
               else:
                 self.adjacency[donor_idx] = [recipient_idx]
 
+
   def sort_adj(self):
     self.adjacency = dict(sorted(self.adjacency.items(), key=lambda x: len(x[1])))
-  
+
+
   def get_edges(self):
     edge_list = []
     for each_vertices in self.adjacency:
@@ -46,8 +49,10 @@ class DirectedGraph(object):
 
     return edge_list
 
+
   def get_vertices(self):
     return self.medical_data["pair_num"].tolist()
+
 
   def get_cycles(self):
     if self.got_cycles:
@@ -60,6 +65,7 @@ class DirectedGraph(object):
       self.got_cycles = True
       return cycles
 
+
   def save_data(self, directory):
     data = {
       "adjacency": self.adjacency,
@@ -70,6 +76,7 @@ class DirectedGraph(object):
     with open(directory, 'w') as f:
       json.dump(data, f)
       print("Data saved at", directory)
+
 
   def load_graph_from_data(self, directory):
     with open(directory, 'r') as f:
