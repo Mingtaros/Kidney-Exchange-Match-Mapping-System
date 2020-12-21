@@ -1,7 +1,7 @@
 from .exchange_algorithm import ExchangeAlgorithm
 
 
-class GreedyNWayExchange(ExchangeAlgorithm):
+class FirstAcceptNWayExchange(ExchangeAlgorithm):
   # orientation: first come first serve
   # Inherits from Exchange Algorithm
   def __init__(self, n, method):

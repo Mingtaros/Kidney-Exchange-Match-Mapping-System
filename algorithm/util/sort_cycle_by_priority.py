@@ -15,7 +15,12 @@ def sort_cycle_by_avg_edge_num(directed_graph):
     cycle_priority.append((cycle, priority))
 
   # sort the cycle_priorities
-  final_cycles = sorted(cycle_priority, key=lambda x: x[1])
-  print(final_cycles)
+  return sorted(cycle_priority, key=lambda x: x[1])
 
-  return [cycle for cycle, _ in final_cycles]
+
+def edmond_priority_cycle(directed_graph, priority_threshold):
+  cycles = sort_cycle_by_avg_edge_num(directed_graph)
+  # get cycles with highest priorities (smaller than threshold for edge_num)
+  cycles = [cycle for cycle in cycles if (cycle[1] <= priority_threshold)]
+
+  return [cycle for cycle, _ in cycles]

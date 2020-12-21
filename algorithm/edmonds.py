@@ -1,18 +1,22 @@
 from .exchange_algorithm import ExchangeAlgorithm
-from .util.sort_cycle_by_priority import sort_cycle_by_avg_edge_num
+from .util.sort_cycle_by_priority import edmond_priority_cycle
 
 
 class EdmondsAlgorithm(ExchangeAlgorithm):
   # benchmark algorithm: Edmond's
   # Inherits from Exchange Algorithm
-  def __init__(self):
+  def __init__(self, priority_threshold=10):
     super().__init__()
+
+    # add priority_threshold
+    #   get cycles only if priority in threshold tolerance
+    self.priority_threshold = priority_threshold
 
 
   # Method to finalize exchange of directed graphs
   def finalize_exchange(self, directed_graph):
     # Edmond's Algorithm only solves 2 way exchange
-    cycles = sort_cycle_by_avg_edge_num(directed_graph)
+    cycles = edmond_priority_cycle(directed_graph, self.priority_threshold)
     cycles = [cycle for cycle in cycles if (len(cycle) == 2)]
     
     # remove cycles with previous occurring vertices
