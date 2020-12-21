@@ -10,13 +10,14 @@ class EdmondsAlgorithm(ExchangeAlgorithm):
 
     # add priority_threshold
     #   get cycles only if priority in threshold tolerance
+    #   delete otherwise
     self.priority_threshold = priority_threshold
 
 
   # Method to finalize exchange of directed graphs
   def finalize_exchange(self, directed_graph):
-    # Edmond's Algorithm only solves 2 way exchange
     cycles = edmond_priority_cycle(directed_graph, self.priority_threshold)
+    # Edmond's Algorithm only solves 2 way exchange
     cycles = [cycle for cycle in cycles if (len(cycle) == 2)]
     
     # remove cycles with previous occurring vertices

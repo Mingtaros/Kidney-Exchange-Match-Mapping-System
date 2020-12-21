@@ -1,6 +1,3 @@
-from typing_extensions import final
-
-
 def sort_cycle_by_cycle_len(directed_graph):
   return sorted(directed_graph.get_cycles(), key=len)
 
