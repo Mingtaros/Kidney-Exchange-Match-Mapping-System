@@ -22,6 +22,10 @@ class DirectedGraph(object):
 
 
   def build_graph(self):
+    # initialize adjacency matrix with empty lists
+    self.adjacency = {pair_idx: [] for pair_idx in self.medical_data['pair_num'].values}
+
+    # iterate through data to find donor projection between 2 pairs for every pair 
     for donor_idx, donor_bloodtype, _, _ in self.medical_data.values:
       for recipient_idx, _, recipient_bloodtype, _ in self.medical_data.values:
         if recipient_bloodtype == NO_TYPE:
@@ -33,8 +37,6 @@ class DirectedGraph(object):
               # add adjacency
               if (donor_idx in self.adjacency):
                 self.adjacency[donor_idx].append(recipient_idx)
-              else:
-                self.adjacency[donor_idx] = [recipient_idx]
 
 
   def sort_adj(self):
