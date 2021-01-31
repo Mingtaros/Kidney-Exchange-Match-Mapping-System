@@ -6,12 +6,12 @@ from .dfs import dfs
 
 
 class DirectedGraph(object):
-  # orientation = list of index adjacency
+  # orientation = list of pair_number adjacency
   def __init__(self, medical_data = pd.DataFrame()):
     # DATAFRAME NEEDED:
-    #   - pair num
-    #   - donor bloodtype
-    #   - recipient bloodtype
+    #   - pair_num
+    #   - donor_bloodtype
+    #   - recipient_bloodtype
     #   - pra
     self.medical_data = medical_data
     self.adjacency = {}

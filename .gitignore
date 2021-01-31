@@ -1,4 +1,10 @@
+# Python-generated Files
 .ipynb_checkpoints/
 __pycache__/
+
+# Environments File
+.env
+
+# Misc.
 cycle_generation.py
 cycle_generation_all.py

@@ -1,4 +1,5 @@
 def graph_cycle_search(directed_graph, vertex, cycles, visited, finished):
+  # Recursive DFS to find all cycle from a vertex
   visited.append(vertex)
 
   for adjacent_vertex in directed_graph[vertex]:
@@ -17,6 +18,8 @@ def graph_cycle_search(directed_graph, vertex, cycles, visited, finished):
 
 
 def dfs(directed_graph):
+  # Recursive DFS to find all cycle in a directed graph (from all vertices)
+  # CALLING graph_cycle_search function for all vertices
   visited = []
   finished = set()
   cycles = []
