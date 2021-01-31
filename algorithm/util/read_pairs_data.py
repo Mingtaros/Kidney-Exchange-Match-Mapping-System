@@ -3,7 +3,8 @@ import pandas as pd
 from .postgre.postgre_helper import PostgreSQLHelper
 from .postgre.postgre_env_reader import POSTGRE_ENV, DONOR_RECIPIENT_TABLE_NAME
 
-def read_pairs_data(pairs_filename):
+
+def read_pairs_file(pairs_filename):
   # Read pairs data from local file
   with open(pairs_filename, 'r') as f:
     pairs_data = f.read()
@@ -16,8 +17,10 @@ def read_pairs_data(pairs_filename):
   
   return data
 
+
 def read_pairs_db(pair_num_start, pair_num_end):
-  # Read paris data from PostgreSQL
+  # Read pairs data from PostgreSQL
+  # Read pairs data from range of pair numbers (from start to end)
   if (pair_num_start > pair_num_end):
     raise ValueError("pair_num_end must be >= than pair_num_start")
 
