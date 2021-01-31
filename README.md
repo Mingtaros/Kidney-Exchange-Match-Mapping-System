@@ -1,4 +1,5 @@
 # TA
+Leonardo W. Bachelor Degree Final Project
 
 ## Data Explanation
 ### 100
@@ -9,9 +10,9 @@
     - recipient's blood type
     - PRA (percentage of HLA antibody reaction)
 
-## Algorithms
+## Algorithms Explanation
 ### Benchmark Algorithm
 - Algorithm for benchmarking used here is Edmond's Algorithm (for two way exchange)
 
-### Greedy N Way Algorithm
-- N Way Exchange Mapping algorithm with Greedy First Accept Match approach.
+### First Accept N Way Algorithm
+- N Way Exchange Mapping algorithm with First Accept Match approach.
