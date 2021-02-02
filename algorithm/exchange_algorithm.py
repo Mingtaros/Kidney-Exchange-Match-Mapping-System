@@ -18,6 +18,18 @@ class ExchangeAlgorithm(object):
     return len(flatten(self.cycles))
 
 
+  def occuring_cycle_removal(self, cycles):
+    # remove cycles with previous occurring vertices
+    assigned = set()
+    for cycle in cycles:
+      if not ExchangeAlgorithm.element_in_assigned(cycle, assigned):
+        self.cycles.append(cycle)
+
+        # add index to assigned
+        for index in cycle:
+          assigned.add(index)
+
+
   # Graph Visualization Methods
   def show_donation_mapping_graph(self):
     gv = GraphVisualization()

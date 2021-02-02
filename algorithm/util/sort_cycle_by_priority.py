@@ -11,7 +11,7 @@ def sort_cycle_by_avg_edge_num(directed_graph):
     priority = sum([len(adjacency_list[vertex]) for vertex in cycle]) / len(cycle)
     cycle_priority.append((cycle, priority))
 
-  # sort the cycle_priorities
+  # sort the cycle_priorities (ascending)
   return sorted(cycle_priority, key=lambda x: x[1])
 
 

@@ -1,7 +1,7 @@
 from .exchange_algorithm import ExchangeAlgorithm
 
 
-class FirstAcceptNWayExchange(ExchangeAlgorithm):
+class FirstAcceptNWay(ExchangeAlgorithm):
   # orientation: first come first serve
   # Inherits from Exchange Algorithm
   def __init__(self, n, method):
@@ -31,14 +31,5 @@ class FirstAcceptNWayExchange(ExchangeAlgorithm):
   def finalize_exchange(self, directed_graph):
     cycles = self.method(directed_graph.get_cycles())
     
-    # remove cycles with previous occurring vertices
-    assigned = set()
-    for cycle in cycles:
-      if not ExchangeAlgorithm.element_in_assigned(cycle, assigned):
-        self.cycles.append(cycle)
-
-        # add index to assigned
-        for index in cycle:
-          assigned.add(index)
-
+    self.occuring_cycle_removal(cycles)
     self.vertices = directed_graph.get_vertices()
