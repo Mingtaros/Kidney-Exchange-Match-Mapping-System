@@ -16,3 +16,9 @@ Leonardo W. Bachelor Degree Final Project
 
 ### First Accept N Way Algorithm
 - N Way Exchange Mapping algorithm with First Accept Match approach.
+
+### Priority Based N Way Algorithm
+- N Way Exchange Mapping algorithm with Priority based sorting.
+
+## Docs Folder?
+Owh... NVM that, it's just folder to save my Final Project Report, not an actual documentation for the algorithm...
