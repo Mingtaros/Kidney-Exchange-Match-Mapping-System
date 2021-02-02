@@ -1,4 +1,3 @@
-from algorithm.util.sort_cycle_by_priority import sort_cycle_by_avg_edge_num
 from .exchange_algorithm import ExchangeAlgorithm
 from .util.sort_cycle_by_priority import sort_cycle_by_avg_edge_num
 
