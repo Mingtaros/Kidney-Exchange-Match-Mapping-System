@@ -29,13 +29,10 @@ class DirectedGraph(object):
     # iterate through data to find donor projection between 2 pairs for every pair 
     for donor_idx, donor_bloodtype, _, _ in self.medical_data.values:
       for recipient_idx, _, recipient_bloodtype, _ in self.medical_data.values:
-        if recipient_bloodtype == NO_TYPE:
-          continue
-        else:
-          if (donor_idx != recipient_idx):
+        if (recipient_bloodtype != NO_TYPE) and (donor_idx != recipient_idx):
             can_donate = blood_type_match[donor_bloodtype][recipient_bloodtype]
             if can_donate:
-              # add adjacency
+              # add edge to adjacency list
               self.adjacency[donor_idx].append(recipient_idx)
 
 
@@ -79,5 +76,3 @@ class DirectedGraph(object):
     self.medical_data = data['medical_data']
     self.adjacency = data['adjacency']
     self.cycles = data['cycles']
-    if (self.cycles):
-      self.got_cycles = True

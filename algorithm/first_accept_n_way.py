@@ -29,6 +29,7 @@ class FirstAcceptNWay(ExchangeAlgorithm):
 
   # Method to finalize exchange of directed graphs
   def finalize_exchange(self, directed_graph):
+    # prune if len > n
     cycles = self.method(directed_graph.get_cycles())
     
     self.occuring_cycle_removal(cycles)
