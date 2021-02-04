@@ -2,7 +2,7 @@ import pandas as pd
 import json
 
 from .constants import *
-from .dfs import dfs
+from .cycle_detection import find_all_cycles
 
 
 class DirectedGraph(object):
@@ -13,12 +13,13 @@ class DirectedGraph(object):
     #   - donor_bloodtype
     #   - recipient_bloodtype
     #   - pra
+    if (medical_data.empty):
+      raise AttributeError("Medical Data is Empty.")
+
     self.medical_data = medical_data
     self.adjacency = {}
-    self.cycles = []
-    self.got_cycles = False
-    if (not medical_data.empty):
-      self.build_graph()
+    self.build_graph()
+    self.cycles = find_all_cycles(self.adjacency)
 
 
   def build_graph(self):
@@ -35,14 +36,13 @@ class DirectedGraph(object):
             can_donate = blood_type_match[donor_bloodtype][recipient_bloodtype]
             if can_donate:
               # add adjacency
-              if (donor_idx in self.adjacency):
-                self.adjacency[donor_idx].append(recipient_idx)
+              self.adjacency[donor_idx].append(recipient_idx)
 
 
-  def sort_adj(self):
-    self.adjacency = dict(sorted(self.adjacency.items(), key=lambda x: len(x[1])))
-
-
+  def get_adjacency_list(self):
+    return self.adjacency
+  
+  
   def get_edges(self):
     edge_list = []
     for each_vertices in self.adjacency:
@@ -57,15 +57,7 @@ class DirectedGraph(object):
 
 
   def get_cycles(self):
-    if self.got_cycles:
-      return self.cycles
-    else:
-      # search for cycles if it hasn't been searched
-      cycles = dfs(self.adjacency)
-
-      self.cycles = cycles
-      self.got_cycles = True
-      return cycles
+    return self.cycles
 
 
   def save_data(self, directory):
