@@ -5,6 +5,9 @@ __pycache__/
 # Environments File
 .env
 
+# Database files
+db.sqlite3
+
 # Misc.
 cycle_generation.py
 cycle_generation_all.py
