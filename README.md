@@ -1,24 +1,5 @@
 # TA
 Leonardo W. Bachelor Degree Final Project
 
-## Data Explanation
-### 100
-- compat: compatibility graph vertices and edge of compatibility
-- pairs: data of pair
-    - number
-    - donor's blood type
-    - recipient's blood type
-    - PRA (percentage of HLA antibody reaction)
-
-## Algorithms Explanation
-### Benchmark Algorithm
-- Algorithm for benchmarking used here is Edmond's Algorithm (for two way exchange)
-
-### First Accept N Way Algorithm
-- N Way Exchange Mapping algorithm with First Accept Match approach.
-
-### Priority Based N Way Algorithm
-- N Way Exchange Mapping algorithm with Priority based sorting.
-
 ## Docs Folder?
 Owh... NVM that, it's just folder to save my Final Project Report, not an actual documentation for the algorithm...

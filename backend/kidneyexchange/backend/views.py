@@ -13,20 +13,19 @@ from .exchange_src.algorithm.priority_based_n_way import PriorityBasedNWay
 
 # Utilities
 from .exchange_src.algorithm.util.directed_graph import DirectedGraph
-from .exchange_src.algorithm.util.read_pairs_data import read_pairs_db
+from .exchange_src.algorithm.util.read_pairs_data import read_data_db
 
 # Create your views here.
 @api_view(["GET"])
 def get_finalized_exchange(request):
   data = json.loads(json.dumps(request.query_params))
   
-  if (('startIndex' not in data) or
-      ('endIndex' not in data) or
+  if (('dataDate' not in data) or
       ('exchangeMethod' not in data)):
     return Response(status=status.HTTP_400_BAD_REQUEST)
   
   # create graph from data
-  pairs = read_pairs_db(int(data['startIndex']), int(data['endIndex']))
+  pairs = read_data_db(data['dataDate'])
   grph = DirectedGraph(pairs)
 
   # Finalize exchange
