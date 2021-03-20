@@ -15,13 +15,16 @@ class PostgreSQLHelper(object):
 
     self.cur = self.conn.cursor()
 
+
   def db_select_query(self, query):
     self.cur.execute(query)
     return self.cur.fetchall()
 
+
   def db_edit_query(self, query):
     self.cur.execute(query)
     self.conn.commit()
+
 
   def db_close(self):
     self.cur.close()

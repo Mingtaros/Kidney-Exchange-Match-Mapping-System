@@ -11,4 +11,3 @@ db.sqlite3
 # Misc.
 cycle_generation.py
 cycle_generation_all.py
-insert_to_db.py

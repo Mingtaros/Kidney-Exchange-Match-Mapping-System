@@ -8,6 +8,7 @@ env.read_env() # read .env file, if it exists
 def get_env(environment_name):
   return env(environment_name)
 
+
 def get_postgre_env():
   # get the environment from .env file
 
@@ -18,6 +19,7 @@ def get_postgre_env():
     "HOST": env("POSTGRE_HOST"),
     "PORT": env("POSTGRE_PORT"),
   }
+
 
 # CONSTANTS TO BE USED SOMEWHERE ELSE
 POSTGRE_ENV = get_postgre_env()
