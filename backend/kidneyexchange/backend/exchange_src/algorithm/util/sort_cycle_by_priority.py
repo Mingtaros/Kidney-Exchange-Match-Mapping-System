@@ -1,5 +1,6 @@
-def sort_cycle_by_cycle_len(directed_graph):
-  return sorted(directed_graph.get_cycles(), key=len)
+def greedy_priority(directed_graph):
+  # sort greedy way, descending order
+  return sorted(directed_graph.get_cycles(), key=len, reverse=True)
 
 
 def sort_cycle_by_avg_edge_num(directed_graph):
@@ -13,6 +14,13 @@ def sort_cycle_by_avg_edge_num(directed_graph):
 
   # sort the cycle_priorities (ascending)
   return sorted(cycle_priority, key=lambda x: x[1])
+
+
+def infrequent_priority(directed_graph):
+  # sort by seeing number of edges of vertices in cycles
+  cycle_priority = sort_cycle_by_avg_edge_num(directed_graph)
+  cycle_priority_sorted = sorted(cycle_priority, key=lambda x: x[1])
+  return [cycle for cycle, _ in cycle_priority_sorted]
 
 
 def edmond_priority_cycle(directed_graph, priority_threshold):
