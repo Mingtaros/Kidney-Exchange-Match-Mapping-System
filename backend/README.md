@@ -5,13 +5,23 @@ Backend Endpoints for web app in order to access database and match-searching al
 Get Request to get list of cycles given data from a specific date and also the algorithms
 ```
 /getFinalizedExchange
-
-
-Query Parameters: {
+```
+Query Parameters: 
+```
+{
   dataDate: Data date in %Y_%m_%d format,
   exchangeMethod: Match-Searching algorithm to use,
   n: IF exchangeMethod is one of the N-Way methods; input number of n,
   nMethod: IF exchangeMethod is one of the N-Way methods; input n method to use,
   priorityThreshold: IF exchangeMethod is Edmond's; input priority threshold,
+  priority: IF exchangeMethod is Priority Based; input priority type,
+}
+```
+Returns:
+```
+{
+  status: INT (status of the request),
+  exchanges: LIST of LIST (list of cycles of matchmaking result),
+  timeElapsed: FLOAT (time elapsed for finalizing exchange),
 }
 ```

@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from rest_framework import status
 
 import json
+import time
 
 # Exchange Algorithms
 from .exchange_src.algorithm.edmonds import EdmondsAlgorithm
@@ -28,6 +29,7 @@ def get_finalized_exchange(request):
   pairs = read_data_db(data['dataDate'])
   grph = DirectedGraph(pairs)
 
+  start_time = time.time()
   # Finalize exchange
   if (data['exchangeMethod'] == 'edmond'):
     if ('priorityThreshold' not in data):
@@ -44,17 +46,22 @@ def get_finalized_exchange(request):
   
   elif (data['exchangeMethod'] == 'priority'):
     if (('n' not in data) or
-        ('nMethod' not in data)):
+        ('nMethod' not in data) or
+        ('priority' not in data)):
       return Response(status=status.HTTP_400_BAD_REQUEST)
     else:
-      exchanger = PriorityBasedNWay(n=int(data['n']), method=data['nMethod'])
+      exchanger = PriorityBasedNWay(n=int(data['n']), method=data['nMethod'], priority=data['priority'])
   
   else: # Exchange Method not found
     return Response(status=status.HTTP_400_BAD_REQUEST)
 
   exchanger.finalize_exchange(grph)
 
+  end_time = time.time()
+  time_elapsed = (end_time - start_time) * 1000
+
   return JsonResponse({
     "status": 200,
-    "exchanges": exchanger.cycles
+    "exchanges": exchanger.cycles,
+    "timeElapsed": time_elapsed # in millisecond
   })
