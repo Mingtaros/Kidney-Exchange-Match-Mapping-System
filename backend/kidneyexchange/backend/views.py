@@ -61,7 +61,7 @@ def get_finalized_exchange(request):
   time_elapsed = (end_time - start_time) * 1000
 
   return JsonResponse({
-    "status": 200,
+    "status": status.HTTP_200_OK,
     "exchanges": exchanger.cycles,
     "timeElapsed": time_elapsed # in millisecond
   })
