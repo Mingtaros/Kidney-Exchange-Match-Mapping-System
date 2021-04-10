@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <title>Kidney Paired Exchange Match Mapping System</title>
+    <link rel = "stylesheet" type = "text/css" href = "admin.css">
+    <script src = "adminMasterData.js"></script>
+  </head>
+  <body>
+    <div class="Admin" id="Admin">
+      <select name="datePicker" id="datePicker">
+        <option value="2021/01/01">2021/01/01</option>
+      </select>
+    </div>
+
+    <!-- JS Script -->
+    <script type = "text/javascript">
+      var date = document.getElementById("datePicker").value;
+      // get all date
+      getDate(document);
+      // get all data from selected date
+      getDataDate(date, document);
+    </script>
+  </body>
+</html>
