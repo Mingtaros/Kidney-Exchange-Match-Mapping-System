@@ -20,14 +20,14 @@ def read_pairs_file(filename):
 
 
 def read_data_db(data_date):
-  # DATE FORMAT: %Y_%m_%d
+  # DATE FORMAT: %Y/%m/%d --> converted to %Y_%m_%d
+  psql = PostgreSQLHelper(POSTGRE_ENV)
+  data_date = data_date.replace("/", "_")
   table_name = "dr" + data_date
 
-  psql = PostgreSQLHelper(POSTGRE_ENV)
-  
+  # ditch donor name, recipient name, email
   query = "SELECT pair_num, donor_bloodtype, recipient_bloodtype, pra"
   query += " FROM " + table_name
-  # ditch donor name, recipient name, email
 
   rows = psql.db_select_query(query)
   
@@ -36,3 +36,18 @@ def read_data_db(data_date):
   # convert data to dataframe before returning
   data_columns = ['pair_num', 'donor_bloodtype', 'recipient_bloodtype', 'pra']
   return pd.DataFrame(rows, columns=data_columns)
+
+
+def show_data_db(data_date):
+  # DATE FORMAT: %Y/%m/%d --> converted to %Y_%m_%d
+  psql = PostgreSQLHelper(POSTGRE_ENV)
+  data_date = data_date.replace("/", "_")
+  table_name = "dr" + data_date
+
+  query = "SELECT * FROM " + table_name
+  rows = psql.db_select_query(query)
+  
+  psql.db_close()
+
+  # return data in list of pair format
+  return rows

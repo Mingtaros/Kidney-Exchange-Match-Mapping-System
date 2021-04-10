@@ -4,6 +4,8 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 
+import numpy
+import pandas
 import json
 import time
 
@@ -14,9 +16,27 @@ from .exchange_src.algorithm.priority_based_n_way import PriorityBasedNWay
 
 # Utilities
 from .exchange_src.algorithm.util.directed_graph import DirectedGraph
-from .exchange_src.algorithm.util.read_pairs_data import read_data_db
+from .exchange_src.algorithm.util.read_pairs_data import read_data_db, show_data_db
 
-# Create your views here.
+
+@api_view(["GET"])
+def get_data(request):
+  # get data from database by date
+  data = json.loads(json.dumps(request.query_params))
+
+  if ('dataDate' not in data):
+    return Response(status=status.HTTP_400_BAD_REQUEST)
+
+  db_data = show_data_db(data['dataDate'])
+  # data format: list of pairs
+  #     (pair_num, donor_name, donor_bloodtype, recipient_name, recipient_bloodtype, pra, email)
+
+  return JsonResponse({
+    "status": status.HTTP_200_OK,
+    "data": db_data
+  })
+
+
 @api_view(["GET"])
 def get_finalized_exchange(request):
   data = json.loads(json.dumps(request.query_params))
