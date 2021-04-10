@@ -2,20 +2,33 @@
   <head>
     <title>Kidney Paired Exchange Match Mapping System</title>
     <link rel = "stylesheet" type = "text/css" href = "admin.css">
-    <script src = "adminMasterData.js"></script>
+    <script src="adminMasterData.js"></script>
   </head>
   <body>
     <div class="Admin" id="Admin">
-      <select name="datePicker" id="datePicker">
-        <option value="2021/01/01">2021/01/01</option>
-      </select>
+      <p class="pMasterData">Master Data</p>
+      <div class="divDatePicker">
+        Pick a Date for Data
+        <select name="datePicker" id="datePicker" class="datePicker">
+          <option value="--Pick a Date">--Pick a Date</option> <!-- Placeholder-->
+          <!-- filled by getAllDate -->
+        </select>
+      </div>
+
+      <div class="divMasterDataTable">
+        <!-- filled by getDataDate -->
+      </div>
+
+      <div class="divNumberOfPairs">
+        <p class="numberOfPairs"></p>
+      </div>
     </div>
 
     <!-- JS Script -->
     <script type = "text/javascript">
       var date = document.getElementById("datePicker").value;
       // get all date
-      getDate(document);
+      getAllDate(document);
       // get all data from selected date
       getDataDate(date, document);
     </script>
