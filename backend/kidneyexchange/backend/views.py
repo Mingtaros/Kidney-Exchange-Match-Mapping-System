@@ -38,7 +38,6 @@ def get_all_date(request):
     all_date.append(date_as_format)
 
   psql.db_close()
-  all_date.sort()
 
   return JsonResponse({
     "status": status.HTTP_200_OK,
