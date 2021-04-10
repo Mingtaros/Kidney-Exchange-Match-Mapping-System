@@ -17,6 +17,33 @@ from .exchange_src.algorithm.priority_based_n_way import PriorityBasedNWay
 # Utilities
 from .exchange_src.algorithm.util.directed_graph import DirectedGraph
 from .exchange_src.algorithm.util.read_pairs_data import read_data_db, show_data_db
+from .exchange_src.algorithm.util.postgre.postgre_helper import PostgreSQLHelper
+from .exchange_src.algorithm.util.postgre.postgre_env_reader import POSTGRE_ENV
+
+
+@api_view(["GET"])
+def get_all_date(request):
+  # initialize psql helper
+  psql = PostgreSQLHelper(POSTGRE_ENV) 
+
+  # query to get table names
+  query = "SELECT table_name"
+  query += " FROM information_schema.tables"
+  query += " WHERE table_schema='public' AND table_type='BASE TABLE'"
+
+  all_date = []
+  for row in psql.db_select_query(query):
+    date_as_format = row[0][2:] # remove "dr" in the front
+    date_as_format = date_as_format.replace("_", "/")
+    all_date.append(date_as_format)
+
+  psql.db_close()
+  all_date.sort()
+
+  return JsonResponse({
+    "status": status.HTTP_200_OK,
+    "data": all_date
+  })
 
 
 @api_view(["GET"])

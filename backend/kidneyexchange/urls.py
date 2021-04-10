@@ -19,6 +19,7 @@ from .backend import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('getAllDate', views.get_all_date),
     path('getData', views.get_data),
     path('getFinalizedExchange', views.get_finalized_exchange),
 ]

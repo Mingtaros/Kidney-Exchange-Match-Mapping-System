@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 
 from .postgre.postgre_helper import PostgreSQLHelper
-from .postgre.postgre_env_reader import POSTGRE_ENV, DONOR_RECIPIENT_TABLE_NAME
+from .postgre.postgre_env_reader import POSTGRE_ENV
 
 
 def read_pairs_file(filename):
