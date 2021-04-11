@@ -119,6 +119,18 @@ div.childElement {
   vertical-align: middle;
 }
 
+div.divNumCalculate {
+  display: grid;
+  grid-template-columns: 80% 20%;
+  margin: 1em;
+}
+
 p.numberOfPairs {
   font-size: 18px;
+}
+
+button.goToComparator {
+  background-color: aqua;
+  border: none;
+  padding: 1em;
 }

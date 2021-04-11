@@ -1,4 +1,5 @@
-const DJANGO_URL = "http://localhost:8000"
+// IMPORTED FROM Utils/constants.js
+//    - DJANGO_URL
 
 // get all Dates
 function getAllDate(doc){
@@ -17,8 +18,10 @@ function putDatesInSelection(doc, result) {
   var divDatePicker = admin.getElementsByClassName("divDatePicker")[0]
   var datePicker = divDatePicker.getElementsByClassName("datePicker")[0];
 
+  var dataDates = result.data;
+  dataDates.sort()
   // append datePicker with options
-  result.data.forEach((date) => {
+  dataDates.forEach((date) => {
     var opt = document.createElement('option');
     opt.value = date;
     opt.innerHTML = date;
@@ -39,21 +42,20 @@ function getDataDate(date, doc) {
   var datePicker = divDatePicker.getElementsByClassName("datePicker")[0];
 
   if (datePicker.value !== "--Pick a Date") {
-    console.log(date)
     let xmlhttp = new XMLHttpRequest();
     const url = DJANGO_URL + "/getData?dataDate=" + date;
     xmlhttp.open("GET", url, true);
     xmlhttp.send();
 
     xmlhttp.onload = function () {
-      showDonorRecipientData(doc, JSON.parse(xmlhttp.responseText))
+      showDonorRecipientData(date, doc, JSON.parse(xmlhttp.responseText))
     }
   } else {
     // do nothing before datePicker use value
   }
 }
 
-function showDonorRecipientData(doc, result) {
+function showDonorRecipientData(date, doc, result) {
   var admin = doc.getElementsByClassName("Admin")[0];
   var masterDataTable = admin.getElementsByClassName("divMasterDataTable")[0];
   masterDataTable.innerHTML = ''; // clear the table after date change
@@ -161,7 +163,20 @@ function showDonorRecipientData(doc, result) {
     masterDataTable.appendChild(childDataTable);
   })
 
-  var divNumberOfPairs = admin.getElementsByClassName("divNumberOfPairs")[0];
+  // show number of pairs
+  var divNumCalculate = admin.getElementsByClassName("divNumCalculate")[0];
+  var divNumberOfPairs = divNumCalculate.getElementsByClassName("divNumberOfPairs")[0];
   var numberOfPairs = divNumberOfPairs.getElementsByClassName("numberOfPairs")[0];
   numberOfPairs.innerHTML = "Number of Pairs: <b>" + result.data.length + "</b> pairs";
+
+  // create calculate exchange for this data button
+  var divCalculateExchange = divNumCalculate.getElementsByClassName("calculateExchangeButton")[0];
+  divCalculateExchange.innerHTML = "";
+  var exchangeButton = document.createElement("button");
+  exchangeButton.className = "goToComparator";
+  exchangeButton.onclick = () => {
+    location.href = "comparator.html"
+  }
+  exchangeButton.innerHTML = "Compare Performances for Data";
+  divCalculateExchange.appendChild(exchangeButton);
 }
