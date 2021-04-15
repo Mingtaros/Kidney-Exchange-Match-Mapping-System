@@ -109,5 +109,6 @@ def get_finalized_exchange(request):
   return JsonResponse({
     "status": status.HTTP_200_OK,
     "exchanges": exchanger.cycles,
+    "numOfMatchedPairs": exchanger.get_num_of_matched_pairs(),
     "timeElapsed": time_elapsed # in millisecond
   })
