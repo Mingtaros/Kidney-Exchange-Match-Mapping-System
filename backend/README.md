@@ -54,6 +54,7 @@ Returns:
 {
   status: INT (status of the request),
   exchanges: LIST of LIST (list of cycles of matchmaking result),
+  numOfMatchedPairs: INT (number of matched pairs),
   timeElapsed: FLOAT (time elapsed for finalizing exchange),
 }
 ```
