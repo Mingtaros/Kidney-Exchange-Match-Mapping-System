@@ -4,7 +4,7 @@
 // get all Comparable Data Dates
 function initializePanel(doc){
   var xmlhttp = new XMLHttpRequest();
-  const url = DJANGO_URL + "/getAllDate"
+  const url = DJANGO_URL + "/getAllDate";
   xmlhttp.open("GET", url, true);
   xmlhttp.send();
 
@@ -13,6 +13,7 @@ function initializePanel(doc){
     setCombinations(doc);
   }
 }
+
 
 function putDatesOptions(doc, result) {
   var datePicker = doc.getElementsByClassName("Comparator")[0]
@@ -31,6 +32,7 @@ function putDatesOptions(doc, result) {
     datePicker.appendChild(opt);
   });
 }
+
 
 function setCombinations(doc) {
   var dashPanel = doc.getElementsByClassName("Comparator")[0]
@@ -79,19 +81,18 @@ function setCombinations(doc) {
 
   }
   // add comparison submitter
-  var submitComparison = document.createElement("div");
-  submitComparison.className = "submitComparison";
+  var submitDiv = dashPanel.getElementsByClassName("submitComparison")[0];
 
   var submitComparisonButton = document.createElement("button");
-  submitComparisonButton.className = "submitComparison";
+  submitComparisonButton.className = "buttonSubmitComparison";
   submitComparisonButton.innerHTML = "Show Comparison";
   submitComparisonButton.onclick = () => {
-    console.log("TEMP");
+    getAllExchangeResult(doc);
   }
-  submitComparison.appendChild(submitComparisonButton);
-  dashPanel.appendChild(submitComparison);
+  submitDiv.appendChild(submitComparisonButton);
   onChangeSelectExchangeType(doc);
 }
+
 
 function onChangeSelectExchangeType(doc) {
   var dashPanel = doc.getElementsByClassName("Comparator")[0]
@@ -128,6 +129,7 @@ function onChangeSelectExchangeType(doc) {
   }
 }
 
+
 function edmondsFillDiv(algoDiv) {
   // input priority threshold
   var thresholdName = document.createElement("p");
@@ -136,10 +138,11 @@ function edmondsFillDiv(algoDiv) {
   algoDiv.appendChild(thresholdName);
 
   var thresholdInput = document.createElement("input");
-  thresholdInput.id = "thresholdInput";
+  thresholdInput.className = "thresholdInput";
   thresholdInput.placeholder = "Input priority threshold";
   algoDiv.appendChild(thresholdInput);
 }
+
 
 function firstAcceptFillDiv(algoDiv) {
   // input N
@@ -149,7 +152,7 @@ function firstAcceptFillDiv(algoDiv) {
   algoDiv.appendChild(nChooserName);
 
   var nChooserInput = document.createElement("input");
-  nChooserInput.id = "nChooserInput";
+  nChooserInput.className = "nChooserInput";
   nChooserInput.placeholder = "Input number of N";
   algoDiv.appendChild(nChooserInput);
 
@@ -160,6 +163,7 @@ function firstAcceptFillDiv(algoDiv) {
   algoDiv.appendChild(nMethodName);
 
   var nMethodSelector = document.createElement("select");
+  nMethodSelector.className = "methodSelector";
   N_METHODS.forEach((methodType) => {
     var methodOption = document.createElement("option");
     methodOption.value = methodType[1];
@@ -169,6 +173,7 @@ function firstAcceptFillDiv(algoDiv) {
   algoDiv.appendChild(nMethodSelector);
 }
 
+
 function priorityBasedFillDiv(algoDiv) {
   // input N
   var nChooserName = document.createElement("p");
@@ -177,7 +182,7 @@ function priorityBasedFillDiv(algoDiv) {
   algoDiv.appendChild(nChooserName);
 
   var nChooserInput = document.createElement("input");
-  nChooserInput.id = "nChooserInput";
+  nChooserInput.className = "nChooserInput";
   nChooserInput.placeholder = "Input number of N";
   algoDiv.appendChild(nChooserInput);
 
@@ -188,6 +193,7 @@ function priorityBasedFillDiv(algoDiv) {
   algoDiv.appendChild(nMethodName);
 
   var nMethodSelector = document.createElement("select");
+  nMethodSelector.className = "methodSelector";
   N_METHODS.forEach((methodType) => {
     var methodOption = document.createElement("option");
     methodOption.value = methodType[1];
@@ -203,6 +209,7 @@ function priorityBasedFillDiv(algoDiv) {
   algoDiv.appendChild(priorityMethodName);
 
   var prioritySelector = document.createElement("select");
+  prioritySelector.className = "prioritySelector";
   PRIORITY_TYPES.forEach((priorityType) => {
     var priorityOption = document.createElement("option");
     priorityOption.value = priorityType[1];

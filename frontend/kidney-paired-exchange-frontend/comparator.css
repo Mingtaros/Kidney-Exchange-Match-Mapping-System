@@ -26,12 +26,15 @@ div.panelGraph {
   display: grid;
   grid-template-columns: 30% 70%;
   margin: 2em 0em 0em 0em;
+  height: 100%;
 }
 
 div.dashPanel {
   display: grid;
   border-right: 1px solid black;
   grid-template-rows: 5% repeat(5, auto) 5%;
+  overflow-y: scroll;
+  height: 90%;
 }
 
 div.combination1 {
@@ -152,8 +155,12 @@ div.submitComparison {
   margin: 1em;
 }
 
-button.submitComparison {
+button.buttonSubmitComparison {
   background-color: aqua;
   border: none;
   padding: 1em;
+}
+
+div.compareGraph {
+  padding: 3em;
 }

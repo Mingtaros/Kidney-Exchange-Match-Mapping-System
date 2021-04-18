@@ -1,5 +1,7 @@
 // IMPORTED FROM Utils/constants.js
 //    - DJANGO_URL
+// IMPORTED FROM makeBarComparison.js
+//    - getAllExchangeResult
 
 // get all Dates
 function getAllDate(doc){
@@ -12,6 +14,7 @@ function getAllDate(doc){
     putDatesInSelection(doc, JSON.parse(xmlhttp.responseText))
   }
 }
+
 
 function putDatesInSelection(doc, result) {
   var admin = doc.getElementsByClassName("Admin")[0];
@@ -35,6 +38,7 @@ function putDatesInSelection(doc, result) {
   });
 }
 
+
 // get Data from given Date
 function getDataDate(date, doc) {
   var admin = doc.getElementsByClassName("Admin")[0];
@@ -54,6 +58,7 @@ function getDataDate(date, doc) {
     // do nothing before datePicker use value
   }
 }
+
 
 function showDonorRecipientData(date, doc, result) {
   var admin = doc.getElementsByClassName("Admin")[0];
