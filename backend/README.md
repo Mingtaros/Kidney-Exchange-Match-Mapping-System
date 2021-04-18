@@ -14,7 +14,7 @@ Returns:
 ```
 {
   status: INT (status of the request),
-  data: List of String (date in String format)
+  data: LIST of STRING (date in String format)
 }
 ```
 
@@ -31,7 +31,7 @@ Returns:
 ```
 {
   status: INT (status of the request),
-  data: List of List (in (pair_num, donor_name, donor_bloodtype, recipient_name, recipient_bloodtype, pra, email) format)
+  data: LIST of LIST (in (pair_num, donor_name, donor_bloodtype, recipient_name, recipient_bloodtype, pra, email) format)
 }
 ```
 
