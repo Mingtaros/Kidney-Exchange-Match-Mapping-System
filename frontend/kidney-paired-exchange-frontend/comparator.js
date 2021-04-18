@@ -1,5 +1,7 @@
 // IMPORTED FROM Utils/constants.js
 //    - DJANGO_URL
+// IMPORTED FROM makeBarComparison.js
+//    - getAllExchangeResult
 
 // get all Comparable Data Dates
 function initializePanel(doc){

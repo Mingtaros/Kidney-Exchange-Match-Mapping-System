@@ -1,7 +1,5 @@
 // IMPORTED FROM Utils/constants.js
 //    - DJANGO_URL
-// IMPORTED FROM makeBarComparison.js
-//    - getAllExchangeResult
 
 // get all Dates
 function getAllDate(doc){

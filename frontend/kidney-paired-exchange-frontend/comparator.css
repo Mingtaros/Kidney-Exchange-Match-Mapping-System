@@ -34,7 +34,7 @@ div.dashPanel {
   border-right: 1px solid black;
   grid-template-rows: 5% repeat(5, auto) 5%;
   overflow-y: scroll;
-  height: 90%;
+  height: 100%;
 }
 
 div.combination1 {
@@ -42,6 +42,7 @@ div.combination1 {
   grid-template-columns: auto;
   grid-template-rows: auto auto auto;
   margin: 0.5em 0em 0.5em 0em;
+  width: 100%;
 }
 
 div.combination2 {
@@ -49,6 +50,7 @@ div.combination2 {
   grid-template-columns: auto;
   grid-template-rows: auto auto auto;
   margin: 0.5em 0em 0.5em 0em;
+  width: 100%;
 }
 
 div.combination3 {
@@ -56,6 +58,7 @@ div.combination3 {
   grid-template-columns: auto;
   grid-template-rows: auto auto auto;
   margin: 0.5em 0em 0.5em 0em;
+  width: 100%;
 }
 
 div.combination4 {
@@ -63,12 +66,14 @@ div.combination4 {
   grid-template-columns: auto;
   grid-template-rows: auto auto auto;
   margin: 0.5em 0em 0.5em 0em;
+  width: 100%;
 }
 
 div.combination5 {
   display: grid;
   grid-template-rows: auto auto auto;
   margin: 0.5em 0em 0.5em 0em;
+  width: 100%;
 }
 
 p.exchangerName {
