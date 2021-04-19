@@ -19,6 +19,6 @@ class EdmondsAlgorithm(ExchangeAlgorithm):
     cycles = edmond_priority_cycle(directed_graph, self.priority_threshold)
     # Edmond's Algorithm only solves 2 way exchange
     cycles = [cycle for cycle in cycles if (len(cycle) == 2)]
-    
+
     self.occuring_cycle_removal(cycles)
     self.vertices = directed_graph.get_vertices()
