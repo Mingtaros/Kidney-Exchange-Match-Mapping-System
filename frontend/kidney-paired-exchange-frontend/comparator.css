@@ -169,3 +169,46 @@ button.buttonSubmitComparison {
 div.compareGraph {
   padding: 3em;
 }
+
+table.compareResult {
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: 100%;
+}
+
+th.exchanger {
+  border: 1px solid black;
+  width: 15%;
+}
+
+th.matchmap {
+  border: 1px solid black;
+  width: 60%;
+}
+
+th.numofmatchpair {
+  border: 1px solid black;
+  width: 15%;
+}
+
+th.timeelapsed {
+  border: 1px solid black;
+  width: 10%;
+}
+
+td.compareResult {
+  border: 1px solid black;
+  text-align: center;
+}
+
+td.matchMap {
+  border: 1px solid black;
+  text-align: left;
+  height: 7.5em;
+}
+
+div.matchMap {
+  overflow: auto;
+  height: 100%;
+  width: 100%;
+}

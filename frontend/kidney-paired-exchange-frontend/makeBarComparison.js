@@ -14,49 +14,52 @@ function getExchangeResult(doc, exchangerObject, exchangerName) {
   xmlhttp.send();
 
   xmlhttp.onload = function () {
-    addToBarPlot(doc, JSON.parse(xmlhttp.responseText), exchangerName);
+    addToTable(doc, JSON.parse(xmlhttp.responseText), exchangerName);
   }
 }
 
 
-// bar plot of comparisons
-function addToBarPlot(doc, result, exchangerName) {
-  // table representation
-  var barPlot = doc.getElementsByClassName("Comparator")[0]
-                   .getElementsByClassName("panelGraph")[0]
-                   .getElementsByClassName("compareGraph")[0]
-                   .getElementsByClassName("barPlot")[0];
-
-  var barLength = result["numOfMatchedPairs"];
-  var barLabel = result["numOfMatchedPairs"].toString() + " pairs; "
-  barLabel += result["timeElapsed"].toFixed(3) + " ms";
-
+function addToTable(doc, result, exchangerName) {
+  var compareResult = doc.getElementsByClassName("Comparator")[0]
+                         .getElementsByClassName("panelGraph")[0]
+                         .getElementsByClassName("compareGraph")[0]
+                         .getElementsByClassName("compareResult")[0];
+  
   // make a table row
   var tableRow = document.createElement("tr");
-
-  // create exchanger name
   var exchangerNameColumn = document.createElement("td");
+  exchangerNameColumn.className = "compareResult";
   exchangerNameColumn.innerHTML = exchangerName;
   tableRow.appendChild(exchangerNameColumn);
+  
+  // add matchmaking result in text format
+  var exchangerList = [];
+  result["exchanges"].forEach((matchMap) => {
+    exchangerList.push(matchMap.join(" --> "));
+  })
+  exchangerList = exchangerList.join("<br>");
 
-  // create bar length
-  for (var i=0; i<barLength; i++) {
-    var tableColumn = document.createElement("td");
-    tableColumn.style.backgroundColor = "aqua";
-    tableRow.appendChild(tableColumn);
-  }
+  var matchMapping = document.createElement("td");
+  matchMapping.className = "matchMap";
+  var matchMappingDiv = document.createElement("div");
+  matchMappingDiv.className = "matchMap";
+  matchMappingDiv.innerHTML = exchangerList;
+  matchMapping.appendChild(matchMappingDiv);
+  tableRow.appendChild(matchMapping);
 
-  for (var j=barLength; j<100; j++) {
-    var whiteColumn = document.createElement("td");
-    tableRow.appendChild(whiteColumn);
-  }
+  // add num of matches
+  var numOfMatchedPairs = document.createElement("td");
+  numOfMatchedPairs.className = "compareResult";
+  numOfMatchedPairs.innerHTML = result["numOfMatchedPairs"];
+  tableRow.appendChild(numOfMatchedPairs);
 
-  // add label of the corresponding bar
-  var labelColumn = document.createElement("td");
-  labelColumn.innerHTML = barLabel;
-  tableRow.appendChild(labelColumn);
+  // add execution time
+  var timeElapsed = document.createElement("td");
+  timeElapsed.className = "compareResult";
+  timeElapsed.innerHTML = result["timeElapsed"].toFixed(3);
+  tableRow.appendChild(timeElapsed);
 
-  barPlot.appendChild(tableRow);
+  compareResult.appendChild(tableRow);
 }
 
 
@@ -64,10 +67,10 @@ function getAllExchangeResult(doc) {
   var panelGraph = doc.getElementsByClassName("Comparator")[0]
                       .getElementsByClassName("panelGraph")[0];
 
-  // clear out bar plot and make a new one
-  var barPlot = panelGraph.getElementsByClassName("compareGraph")[0]
-                          .getElementsByClassName("barPlot")[0];
-  barPlot.innerHTML = "";
+  // clear out compare result table and make a new one
+  var compareResult = panelGraph.getElementsByClassName("compareGraph")[0]
+                          .getElementsByClassName("compareResult")[0];
+  compareResult.innerHTML = "";
 
   var dashPanel = panelGraph.getElementsByClassName("dashPanel")[0];
   var datePicker = dashPanel
@@ -76,6 +79,30 @@ function getAllExchangeResult(doc) {
   var currentExchangeDate = datePicker.value;
 
   if (currentExchangeDate !== "--Pick a Date") {
+    // add header to compareResult table
+    var headerRow = document.createElement("tr");
+    var exchangerNameHeader = document.createElement("th");
+    exchangerNameHeader.className = "exchanger";
+    exchangerNameHeader.innerHTML = "Exchanger Name";
+    headerRow.appendChild(exchangerNameHeader);
+
+    var matchMappingHeader = document.createElement("th");
+    matchMappingHeader.className = "matchmap";
+    matchMappingHeader.innerHTML = "Match Mapping";
+    headerRow.appendChild(matchMappingHeader);
+
+    var numOfMatchedPairsHeader = document.createElement("th");
+    numOfMatchedPairsHeader.className = "numofmatchpair";
+    numOfMatchedPairsHeader.innerHTML = "Number of Matched Pair";
+    headerRow.appendChild(numOfMatchedPairsHeader);
+
+    var timeElapsedHeader = document.createElement("th");
+    timeElapsedHeader.className = "timeelapsed";
+    timeElapsedHeader.innerHTML = "Time Elapsed (ms)";
+    headerRow.appendChild(timeElapsedHeader);
+
+    compareResult.appendChild(headerRow);
+
     var templateString = "combination";
     for (var i=1; i<6; i++) {
       var classname = templateString + i.toString();
@@ -119,6 +146,10 @@ function getAllExchangeResult(doc) {
         getExchangeResult(doc, exchangerObject, "Exchanger "+i.toString());
 
       } // if algorithm is not defined then ignore
+      // create bar plot after table is made TBD
     }
-  } // if dataDate is still placeholder than not doing anything 
+  } else {
+    // if dataDate is still placeholder than tell it in the compareResult
+    compareResult.innerHTML = "Select Date";
+  }
 }
