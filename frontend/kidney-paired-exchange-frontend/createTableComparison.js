@@ -67,9 +67,9 @@ function getAllExchangeResult(doc) {
   var panelGraph = doc.getElementsByClassName("Comparator")[0]
                       .getElementsByClassName("panelGraph")[0];
 
-  // clear out compare result table and make a new one
-  var compareResult = panelGraph.getElementsByClassName("compareGraph")[0]
-                          .getElementsByClassName("compareResult")[0];
+  // clear out compare result table to make a new one
+  var compareGraph = panelGraph.getElementsByClassName("compareGraph")[0];
+  var compareResult = compareGraph.getElementsByClassName("compareResult")[0];       
   compareResult.innerHTML = "";
 
   var dashPanel = panelGraph.getElementsByClassName("dashPanel")[0];
@@ -102,6 +102,18 @@ function getAllExchangeResult(doc) {
     headerRow.appendChild(timeElapsedHeader);
 
     compareResult.appendChild(headerRow);
+
+    if (!compareGraph.getElementsByClassName("buttonSubmitComparison")[0]) {
+      // add visualization button if not exist
+      var visualize = document.createElement("button");
+      visualize.className = "buttonSubmitComparison";
+      visualize.innerHTML = "Visualize";
+      visualize.onclick = () => {
+        console.log("now visualizing")
+        createBarPlot(document);
+      }
+      compareGraph.insertBefore(visualize, compareGraph.children[1]);
+    }
 
     var templateString = "combination";
     for (var i=1; i<6; i++) {
@@ -146,7 +158,6 @@ function getAllExchangeResult(doc) {
         getExchangeResult(doc, exchangerObject, "Exchanger "+i.toString());
 
       } // if algorithm is not defined then ignore
-      // create bar plot after table is made TBD
     }
   } else {
     // if dataDate is still placeholder than tell it in the compareResult
