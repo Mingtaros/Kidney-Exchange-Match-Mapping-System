@@ -51,3 +51,23 @@ def show_data_db(data_date):
 
   # return data in list of pair format
   return rows
+
+
+def get_all_dates():
+  # get all dates available in DB --> table names in DB
+  psql = PostgreSQLHelper(POSTGRE_ENV) 
+
+  # query to get table names
+  query = "SELECT table_name"
+  query += " FROM information_schema.tables"
+  query += " WHERE table_schema='public' AND table_type='BASE TABLE'"
+
+  all_date = []
+  for row in psql.db_select_query(query):
+    date_as_format = row[0][2:] # remove "dr" in the front
+    date_as_format = date_as_format.replace("_", "/")
+    all_date.append(date_as_format)
+
+  psql.db_close()
+
+  return all_date
