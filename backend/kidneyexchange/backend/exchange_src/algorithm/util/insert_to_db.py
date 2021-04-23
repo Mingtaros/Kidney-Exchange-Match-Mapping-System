@@ -9,6 +9,7 @@ from postgre.postgre_env_reader import POSTGRE_ENV
 base_path = "../../data/100/"
 psql = PostgreSQLHelper(POSTGRE_ENV)
 
+
 for i in range(30):
   # read data file
   f_name = "100_" + str(i) + "_pairs.txt"
@@ -46,3 +47,12 @@ for i in range(30):
 
     psql.db_edit_query(insert_query)
     print(datum, "inserted to", table_name)
+
+
+# create best_result database
+add_best_result_db = "CREATE TABLE IF NOT EXISTS best_result ("
+add_best_result_db += " date VARCHAR(50) PRIMARY KEY,"
+add_best_result_db += " matched_pairs varchar(8000) NOT NULL)"
+psql.db_edit_query(add_best_result_db)
+
+psql.db_close()

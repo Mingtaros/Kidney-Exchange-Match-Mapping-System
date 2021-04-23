@@ -13,6 +13,7 @@ from email.mime.text import MIMEText # compose message body
 from .exchange_src.algorithm.util.constants import template_email, template_link, from_email, from_email_password
 from .exchange_src.algorithm.util.read_pairs_data import get_emails
 
+
 @api_view(['POST'])
 def send_email(request):
   # send email to people in that date so they can see the match mapping result
@@ -51,7 +52,7 @@ def send_email(request):
 
     # send message to each receiver
     server.sendmail(from_email, receiver_email, message.as_string())
-    break
+    break # REMOVE THIS BREAK after testing is done
 
   # return template response
   return JsonResponse({

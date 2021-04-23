@@ -10,7 +10,7 @@ def insert_or_update_best_result(data_date, matched_pairs):
   matched_pairs = matched_pairs.replace("\'", "\"")
 
   return_message = ""
-  # check if exist
+  # check if data_date already exist in best_result
   select_query = "SELECT * FROM best_result WHERE date = '" + data_date + "'"
   rows = psql.db_select_query(select_query)
   if len(rows) == 0:

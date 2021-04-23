@@ -7,6 +7,7 @@ import json
 
 from .exchange_src.algorithm.util.crud_best_result import insert_or_update_best_result
 
+
 @api_view(["POST"])
 def save_best_result(request):
   data = request.data
