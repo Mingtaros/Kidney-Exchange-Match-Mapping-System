@@ -78,3 +78,41 @@ Returns:
   numberOfSentEmail: INT (number of successfully sent emails)
 }
 ```
+## Save Best Result
+Post Request, save best matched pairs combination for that particular date. If the date already has a best combination in DB, save the newer one if it is better than one in DB.
+```
+POST /saveBestResult
+```
+Body: 
+```
+{
+  dataDate: Data date in %Y/%m/%d format,
+  matchedPairs: List of Pairs that gets matched with another pairs
+}
+```
+Returns:
+```
+{
+  status: INT (status of the request),
+  message: STRING (what happened to DB (Insert / Update / Not Updating))
+}
+```
+### Get Matched Pairs
+Get Request to get the Pairs in that particular date. If date not in db, send status 404.
+```
+GET /getMatchedPairs
+```
+Query Parameters: 
+```
+{
+  dataDate: Data date in %Y/%m/%d format
+}
+```
+Returns:
+```
+{
+  status: INT (status of the request),
+  matchedPairs: LIST of STRING (list of matched pairs from that date),
+  numOfMatchedPairs: INT (number of matched pairs)
+}
+```

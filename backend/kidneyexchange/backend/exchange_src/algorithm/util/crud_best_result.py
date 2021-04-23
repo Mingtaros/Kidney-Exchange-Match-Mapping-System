@@ -7,7 +7,6 @@ from .postgre.postgre_env_reader import POSTGRE_ENV
 def insert_or_update_best_result(data_date, matched_pairs):
   # returning post return message
   psql = PostgreSQLHelper(POSTGRE_ENV)
-  matched_pairs = matched_pairs.replace("\'", "\"")
 
   return_message = ""
   # check if data_date already exist in best_result
@@ -38,3 +37,13 @@ def insert_or_update_best_result(data_date, matched_pairs):
 
   psql.db_close()
   return return_message
+
+
+def select_best_result_pairs(data_date):
+  psql = PostgreSQLHelper(POSTGRE_ENV)
+
+  select_query = "SELECT * FROM best_result WHERE date = '" + data_date + "'"
+  rows = psql.db_select_query(select_query) # the result SHOULD only be 1 row
+  psql.db_close()
+
+  return rows # list of pair [(date, exchanges)]

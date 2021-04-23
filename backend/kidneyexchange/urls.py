@@ -23,5 +23,6 @@ urlpatterns = [
     path('getData', views.get_data),
     path('getFinalizedExchange', views.get_finalized_exchange),
     path('sendEmail', views.send_email),
-    path('saveBestResult', views.save_best_result)
+    path('saveBestResult', views.save_best_result),
+    path('getMatchedPairs', views.get_matched_pairs),
 ]

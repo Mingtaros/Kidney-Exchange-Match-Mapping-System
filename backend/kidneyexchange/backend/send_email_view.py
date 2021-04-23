@@ -17,7 +17,7 @@ from .exchange_src.algorithm.util.read_pairs_data import get_emails
 @api_view(['POST'])
 def send_email(request):
   # send email to people in that date so they can see the match mapping result
-  data = json.loads(json.dumps(request.data))
+  data = request.data
   flatten = lambda t: [item for sublist in t for item in sublist]
   data_date = data['dataDate']
   receivers = get_emails(data_date)
