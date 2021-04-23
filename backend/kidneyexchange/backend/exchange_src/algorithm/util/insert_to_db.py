@@ -36,8 +36,7 @@ for i in range(30):
     donor_name = ''.join(random.choice(letters) for _ in range(random.randint(3, 10)))
     recipient_name = ''.join(random.choice(letters) for _ in range(random.randint(3, 10)))
 
-    # generate random email
-    email = ''.join(random.choice(letters) for _ in range(random.randint(3, 10))) + "@testdata.com"
+    email = "leonardow41@gmail.com"
 
     # insert to table query construction
     insert_query = "INSERT INTO " + table_name + "(pair_num, donor_name, donor_bloodtype, recipient_name, recipient_bloodtype, pra, email)"
