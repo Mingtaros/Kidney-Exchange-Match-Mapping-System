@@ -97,22 +97,25 @@ function setCombinations(doc) {
   sendEmailPostBestResult.className = "buttonSubmitComparison";
   sendEmailPostBestResult.innerHTML = "Publish Matching with Best Result";
   sendEmailPostBestResult.onclick = () => {
-    var dashPanel = doc.getElementsByClassName("Comparator")[0]
-                       .getElementsByClassName("panelGraph")[0]
-                       .getElementsByClassName("dashPanel")[0];
-    
-    var exchangeResultLocator = dashPanel.getElementsByClassName("submitComparison")[0]
-                                         .getElementsByClassName("exchangeResultLocator")[0];
+    if (confirm("Are You Sure You Want to Submit the Best Result to the System?")) {
+      var dashPanel = doc.getElementsByClassName("Comparator")[0]
+                        .getElementsByClassName("panelGraph")[0]
+                        .getElementsByClassName("dashPanel")[0];
+      
+      var exchangeResultLocator = dashPanel.getElementsByClassName("submitComparison")[0]
+                                          .getElementsByClassName("exchangeResultLocator")[0];
 
-    var datePicker = dashPanel.getElementsByClassName("divDateSelector")[0]
-                              .getElementsByClassName("datePicker")[0];
-    
-    if (exchangeResultLocator.value !== "") {
-      // send email and post best matching result into db
-      var dataDate = datePicker.value;
-      sendEmailRequest(dataDate);
-      postBestResult(dataDate, exchangeResultLocator);
-    } // if still empty, not doing anything
+      var datePicker = dashPanel.getElementsByClassName("divDateSelector")[0]
+                                .getElementsByClassName("datePicker")[0];
+      
+      if (exchangeResultLocator.value !== "") {
+        // send email and post best matching result into db
+        var dataDate = datePicker.value;
+        sendEmailRequest(dataDate);
+        postBestResult(dataDate, exchangeResultLocator);
+        alert("Best Result Submitted!");
+      } // if exchangeResultLocator still empty, do nothing.
+    } // if not chosen yes, do nothing.
   }
   submitDiv.appendChild(sendEmailPostBestResult);
 

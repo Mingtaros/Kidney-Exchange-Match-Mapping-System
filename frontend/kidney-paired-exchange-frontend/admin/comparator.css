@@ -169,6 +169,8 @@ button.buttonSubmitComparison {
 
 div.compareGraph {
   padding: 3em;
+  height: 100%;
+  overflow: auto;
 }
 
 table.compareResult {
@@ -212,4 +214,9 @@ div.matchMap {
   overflow: auto;
   height: 100%;
   width: 100%;
+}
+
+div.barPlotLoc {
+  display: grid;
+  grid-template-rows: auto auto;
 }
