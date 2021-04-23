@@ -10,9 +10,9 @@ from .exchange_src.algorithm.util.crud_best_result import insert_or_update_best_
 @api_view(["POST"])
 def save_best_result(request):
   data = request.data
-  insert_or_update_best_result(data["dataDate"], data["cycles"])
+  message = insert_or_update_best_result(data["dataDate"], data["matchedPairs"])
 
   return JsonResponse({
     "status": status.HTTP_200_OK,
-    "dateInserted": data["dataDate"],
+    "message": message,
   })
