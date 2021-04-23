@@ -61,6 +61,7 @@ def get_all_dates():
   query = "SELECT table_name"
   query += " FROM information_schema.tables"
   query += " WHERE table_schema='public' AND table_type='BASE TABLE'"
+  query += " and table_name LIKE 'dr%'"
 
   all_date = []
   for row in psql.db_select_query(query):
