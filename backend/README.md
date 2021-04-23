@@ -1,8 +1,8 @@
 # Final Project Backend
 Backend Endpoints for web app in order to access database and match-searching algorithms. Created with Django.
 
-## Get Finalized Exchange
-Get Request to get list of cycles given data from a specific date and also the algorithms
+## Get All Date
+Get Request to get all dates from data that has at least one registrant pair (which are the table names).
 ```
 GET /getAllDate
 ```
@@ -17,7 +17,8 @@ Returns:
   data: LIST of STRING (date in String format)
 }
 ```
-
+## Get Data
+Get Request to return all data from that database given the date.
 ```
 GET /getData
 ```
@@ -34,7 +35,8 @@ Returns:
   data: LIST of LIST (in (pair_num, donor_name, donor_bloodtype, recipient_name, recipient_bloodtype, pra, email) format)
 }
 ```
-
+## Get Finalized Exchange
+Get Request to get list of cycles given data from a specific date and also the algorithms
 ```
 GET /getFinalizedExchange
 ```
@@ -56,5 +58,24 @@ Returns:
   exchanges: LIST of LIST (list of cycles of matchmaking result),
   numOfMatchedPairs: INT (number of matched pairs),
   timeElapsed: FLOAT (time elapsed for finalizing exchange in millisecond (ms)),
+}
+```
+## Send Email
+Post Request to send emails regarding the match mapping result to the pairs from that date. 
+```
+POST /sendEmail
+```
+Body: 
+```
+{
+  dataDate: Data date in %Y/%m/%d format,
+  cycles: Cycles of pair to get all emails of that match mapping.
+}
+```
+Returns:
+```
+{
+  status: INT (status of the request),
+  numberOfSentEmail: INT (number of sent emails)
 }
 ```

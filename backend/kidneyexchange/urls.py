@@ -22,4 +22,5 @@ urlpatterns = [
     path('getAllDate', views.get_all_date),
     path('getData', views.get_data),
     path('getFinalizedExchange', views.get_finalized_exchange),
+    path('sendEmail', views.send_email),
 ]

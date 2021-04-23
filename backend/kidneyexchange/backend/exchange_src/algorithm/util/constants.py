@@ -1,3 +1,8 @@
+from environs import Env
+
+env = Env()
+env.read_env()
+
 # BIOLOGICAL CONSTANTS
 blood_type_match = {
   # row: donor blood type
@@ -9,3 +14,17 @@ blood_type_match = {
 }
 
 NO_TYPE = "-"
+
+
+# SENDING EMAIL CONSTANTS
+from_email = env("FROM_EMAIL")
+from_email_password = env("FROM_EMAIL_PASSWORD")
+template_email = """
+<html><body>
+Dear __pair_num__,
+<br><br>
+Thanks for your patience. Here's the __link__ to see your match mapping result. Thank you.
+<br><br>
+System
+</body></html>"""
+template_link = env("TEMPLATE_LINK")
