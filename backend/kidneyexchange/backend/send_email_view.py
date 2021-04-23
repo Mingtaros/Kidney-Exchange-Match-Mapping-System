@@ -45,8 +45,6 @@ def send_email(request):
     this_link = this_link.replace("__data_date__", data_date)
     # this_link = "<a href=\"" + this_link + "\"> link </a>"
     this_body = this_body.replace("__link__", this_link)
-    # because the link is not a link but a html part, set the link below
-    this_body += "<br><br><br>" + this_link
     body = MIMEText(this_body, 'html')
     message.attach(body)
 
