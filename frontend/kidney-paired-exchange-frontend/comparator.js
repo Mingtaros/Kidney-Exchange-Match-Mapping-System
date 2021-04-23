@@ -1,6 +1,6 @@
 // IMPORTED FROM Utils/constants.js
 //    - DJANGO_URL
-// IMPORTED FROM makeBarComparison.js
+// IMPORTED FROM createTableComparison.js
 //    - getAllExchangeResult
 
 // get all Comparable Data Dates
@@ -92,6 +92,26 @@ function setCombinations(doc) {
     getAllExchangeResult(doc);
   }
   submitDiv.appendChild(submitComparisonButton);
+
+  var sendEmailPostBestResult = document.createElement("button");
+  sendEmailPostBestResult.className = "buttonSubmitComparison";
+  sendEmailPostBestResult.innerHTML = "Publish Matching with Best Result";
+  sendEmailPostBestResult.onclick = () => {
+    var dashPanel = doc.getElementsByClassName("Comparator")[0]
+                       .getElementsByClassName("panelGraph")[0]
+                       .getElementsByClassName("dashPanel")[0];
+    
+    var exchangeResultLocator = dashPanel.getElementsByClassName("submitComparison")[0]
+                                         .getElementsByClassName("exchangeResultLocator")[0];
+    
+    if (exchangeResultLocator.value !== "") {
+      // send email and post best matching result into db
+      var dataDate = dateSelector.value;
+      sendEmailRequest(dataDate);
+    } // if still empty, not doing anything
+  }
+  submitDiv.appendChild(sendEmailPostBestResult);
+
   onChangeSelectExchangeType(doc);
 }
 
@@ -219,4 +239,15 @@ function priorityBasedFillDiv(algoDiv) {
     prioritySelector.appendChild(priorityOption);
   });
   algoDiv.appendChild(prioritySelector);
+}
+
+
+function sendEmailRequest(dataDate) {
+  var xmlhttp = new XMLHttpRequest();
+  const url = DJANGO_URL + "/sendEmail";
+  xmlhttp.open("POST", url, true);
+  var requestBody = {
+    "dataDaate": dataDate,
+  }
+  xmlhttp.send(JSON.stringify(requestBody));
 }

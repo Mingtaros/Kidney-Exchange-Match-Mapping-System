@@ -164,6 +164,7 @@ button.buttonSubmitComparison {
   background-color: aqua;
   border: none;
   padding: 1em;
+  margin: 0.5em;
 }
 
 div.compareGraph {

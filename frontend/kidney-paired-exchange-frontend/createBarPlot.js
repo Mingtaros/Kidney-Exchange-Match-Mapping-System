@@ -1,9 +1,9 @@
 function createBarPlot(doc) {
+  var panelGraph = doc.getElementsByClassName("Comparator")[0]
+                      .getElementsByClassName("panelGraph")[0];
+  var compareGraph = panelGraph.getElementsByClassName("compareGraph")[0];
+  
   // get data from the compareResult table and then plot it
-  var compareGraph = doc.getElementsByClassName("Comparator")[0]
-                         .getElementsByClassName("panelGraph")[0]
-                         .getElementsByClassName("compareGraph")[0];
-
   var compareResult = compareGraph.getElementsByClassName("compareResult")[0];
   var barPlotLoc = compareGraph.getElementsByClassName("barPlotLoc")[0];
   // clear the plot before making new one

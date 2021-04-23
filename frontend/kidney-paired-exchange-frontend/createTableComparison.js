@@ -14,12 +14,14 @@ function getExchangeResult(doc, exchangerObject, exchangerName) {
   xmlhttp.send();
 
   xmlhttp.onload = function () {
-    addToTable(doc, JSON.parse(xmlhttp.responseText), exchangerName);
+    addToTable(doc, xmlhttp.responseText, exchangerName);
   }
 }
 
 
-function addToTable(doc, result, exchangerName) {
+function addToTable(doc, rawResult, exchangerName) {
+  result = JSON.parse(rawResult);
+
   var compareResult = doc.getElementsByClassName("Comparator")[0]
                          .getElementsByClassName("panelGraph")[0]
                          .getElementsByClassName("compareGraph")[0]
@@ -60,6 +62,19 @@ function addToTable(doc, result, exchangerName) {
   tableRow.appendChild(timeElapsed);
 
   compareResult.appendChild(tableRow);
+  putToExchangeResultLocator(doc, rawResult);
+}
+
+
+function putToExchangeResultLocator(doc, result) {
+  var panelGraph = doc.getElementsByClassName("Comparator")[0]
+                      .getElementsByClassName("panelGraph")[0];
+
+  var exchangeResultLocator = panelGraph.getElementsByClassName("dashPanel")[0]
+                                        .getElementsByClassName("submitComparison")[0]
+                                        .getElementsByClassName("exchangeResultLocator")[0];
+
+  exchangeResultLocator.value += result + "<<separator>>";
 }
 
 
@@ -71,6 +86,10 @@ function getAllExchangeResult(doc) {
   var compareGraph = panelGraph.getElementsByClassName("compareGraph")[0];
   var compareResult = compareGraph.getElementsByClassName("compareResult")[0];       
   compareResult.innerHTML = "";
+  var exchangeResultLocator = panelGraph.getElementsByClassName("dashPanel")[0]
+                                        .getElementsByClassName("submitComparison")[0]
+                                        .getElementsByClassName("exchangeResultLocator")[0];
+  exchangeResultLocator.value = "";  
 
   var dashPanel = panelGraph.getElementsByClassName("dashPanel")[0];
   var datePicker = dashPanel
@@ -107,10 +126,10 @@ function getAllExchangeResult(doc) {
       // add visualization button if not exist
       var visualize = document.createElement("button");
       visualize.className = "buttonSubmitComparison";
-      visualize.innerHTML = "Visualize";
+      visualize.innerHTML = "Visualize and Find Best Result";
       visualize.onclick = () => {
-        console.log("now visualizing")
         createBarPlot(document);
+        putBestInExchangeResultLocator(document);
       }
       compareGraph.insertBefore(visualize, compareGraph.children[1]);
     }
@@ -163,4 +182,25 @@ function getAllExchangeResult(doc) {
     // if dataDate is still placeholder than tell it in the compareResult
     compareResult.innerHTML = "Select Date";
   }
+}
+
+function putBestInExchangeResultLocator(doc) {
+  // get best result in exchangeResultLocator
+  var panelGraph = doc.getElementsByClassName("Comparator")[0]
+                      .getElementsByClassName("panelGraph")[0];
+
+  var exchangeResultLocator = panelGraph.getElementsByClassName("dashPanel")[0]
+                                        .getElementsByClassName("submitComparison")[0]
+                                        .getElementsByClassName("exchangeResultLocator")[0];
+
+  // filter which is best
+  var results = []
+  exchangeResultLocator.value.split("<<separator>>").forEach((result) => {
+    if (result !== "") {
+      results.push(JSON.parse(result));
+    }
+  });
+  // find best result from results
+  var bestResult = results.reduce((a, b) => a["numOfMatchedPairs"] > b["numOfMatchedPairs"] ? a : b)
+  exchangeResultLocator.value = JSOn.stringify(bestResult);
 }
