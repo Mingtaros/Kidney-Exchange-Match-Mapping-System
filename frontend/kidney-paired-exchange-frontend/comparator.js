@@ -103,11 +103,15 @@ function setCombinations(doc) {
     
     var exchangeResultLocator = dashPanel.getElementsByClassName("submitComparison")[0]
                                          .getElementsByClassName("exchangeResultLocator")[0];
+
+    var datePicker = dashPanel.getElementsByClassName("divDateSelector")[0]
+                              .getElementsByClassName("datePicker")[0];
     
     if (exchangeResultLocator.value !== "") {
       // send email and post best matching result into db
-      var dataDate = dateSelector.value;
+      var dataDate = datePicker.value;
       sendEmailRequest(dataDate);
+      postBestResult(dataDate, exchangeResultLocator);
     } // if still empty, not doing anything
   }
   submitDiv.appendChild(sendEmailPostBestResult);
@@ -246,8 +250,25 @@ function sendEmailRequest(dataDate) {
   var xmlhttp = new XMLHttpRequest();
   const url = DJANGO_URL + "/sendEmail";
   xmlhttp.open("POST", url, true);
+  xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
   var requestBody = {
-    "dataDaate": dataDate,
+    "dataDate": dataDate,
+  }
+  xmlhttp.send(JSON.stringify(requestBody));
+}
+
+
+function postBestResult(dataDate, resultLocator) {
+  var exchangerResult = JSON.parse(resultLocator.value)["exchanges"];
+  var exchanges = exchangerResult.toString();
+
+  var xmlhttp = new XMLHttpRequest();
+  const url = DJANGO_URL + "/saveBestResult";
+  xmlhttp.open("POST", url, true);
+  xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  var requestBody = {
+    "dataDate": dataDate,
+    "cycles": exchanges,
   }
   xmlhttp.send(JSON.stringify(requestBody));
 }

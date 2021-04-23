@@ -15,11 +15,11 @@ from .exchange_src.algorithm.util.read_pairs_data import get_emails
 
 @api_view(['POST'])
 def send_email(request):
+  # send email to people in that date so they can see the match mapping result
   data = json.loads(json.dumps(request.data))
   flatten = lambda t: [item for sublist in t for item in sublist]
   data_date = data['dataDate']
-  pairs = flatten(ast.literal_eval(data['cycles']))
-  receivers = get_emails(data_date, pairs)
+  receivers = get_emails(data_date)
   email_body = template_email
 
   #server
@@ -36,7 +36,7 @@ def send_email(request):
     message = MIMEMultipart()
     message['From'] = from_email
     message['To'] = receiver_email
-    message['Subject'] = pair_num + " Match Mapping Result"
+    message['Subject'] = "Your Match Mapping Result"
 
     # compose body
     this_body = email_body.replace("__pair_num__", pair_num)

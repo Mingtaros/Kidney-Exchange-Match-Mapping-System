@@ -69,13 +69,12 @@ Body:
 ```
 {
   dataDate: Data date in %Y/%m/%d format,
-  cycles: Cycles of pair to get all emails of that match mapping.
 }
 ```
 Returns:
 ```
 {
   status: INT (status of the request),
-  numberOfSentEmail: INT (number of sent emails)
+  numberOfSentEmail: INT (number of successfully sent emails)
 }
 ```

@@ -73,16 +73,16 @@ def get_all_dates():
   return all_date
 
 
-def get_emails(data_date, list_of_pair_nums):
+def get_emails(data_date):
   # get email addresses of each pair numbers
   psql = PostgreSQLHelper(POSTGRE_ENV)
 
-  pair_numbers = "('" + "', '".join(list_of_pair_nums) + "')"
   data_date = data_date.replace("/", "_")
   table_name = "dr" + data_date
 
   query = "SELECT pair_num, email"
   query += " FROM " + table_name
-  query += " WHERE pair_num in " + pair_numbers
 
-  return psql.db_select_query(query)
+  rows = psql.db_select_query(query)
+  psql.db_close()
+  return rows

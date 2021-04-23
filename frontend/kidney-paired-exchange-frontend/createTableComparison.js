@@ -202,5 +202,5 @@ function putBestInExchangeResultLocator(doc) {
   });
   // find best result from results
   var bestResult = results.reduce((a, b) => a["numOfMatchedPairs"] > b["numOfMatchedPairs"] ? a : b)
-  exchangeResultLocator.value = JSOn.stringify(bestResult);
+  exchangeResultLocator.value = JSON.stringify(bestResult);
 }
