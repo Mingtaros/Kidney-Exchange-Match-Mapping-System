@@ -268,7 +268,7 @@ function postBestResult(dataDate, resultLocator) {
   xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
   var requestBody = {
     "dataDate": dataDate,
-    "cycles": exchanges,
+    "matchedPairs": exchanges,
   }
   xmlhttp.send(JSON.stringify(requestBody));
 }

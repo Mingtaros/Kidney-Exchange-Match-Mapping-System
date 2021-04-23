@@ -48,6 +48,17 @@ function createBarPlot(doc) {
               beginAtZero: true
           }
       },
+      plugins: {
+        legend: {
+          labels: {
+            font: {
+              family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', \
+              'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', \
+              sans-serif",
+            }
+          }
+        }
+      }
     }
   });
 
