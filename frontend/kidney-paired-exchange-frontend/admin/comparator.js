@@ -114,7 +114,13 @@ function setCombinations(doc) {
         sendEmailRequest(dataDate);
         postBestResult(dataDate, exchangeResultLocator);
         alert("Best Result Submitted!");
-      } // if exchangeResultLocator still empty, do nothing.
+      } else { // exchangeResultLocator still empty
+        var alert_message = "No Result Selected! Steps:\n"
+        alert_message += "1. Show Comparison\n"
+        alert_message += "2. Visualize and Find Best Result\n"
+        alert_message += "3. Publish Matching with Best Result";
+        alert(alert_message) 
+      }
     } // if not chosen yes, do nothing.
   }
   submitDiv.appendChild(sendEmailPostBestResult);
