@@ -69,8 +69,8 @@ button.RegisterButton {
   background-color: aqua;
   border: none;
   margin: 0.5em;
-  padding: 0.5em 1.5em;
-  font-size: 1.5em;
+  padding: 1em 3em;
+  font-size: 1em;
 }
 
 input {

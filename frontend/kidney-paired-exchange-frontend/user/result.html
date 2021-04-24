@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <title>Kidney Paired Exchange Match Mapping System</title>
+    <link rel="stylesheet" type="text/css" href="result.css">
+    <script src="../Utils/constants.js"></script>
+    <script src="result.js"></script>
+  </head>
+  <body>
+    <div class="MatchingResult">
+
+    </div>
+    
+    <script type="text/javascript">
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const pairNum = urlParams.get("pairNum");
+      const registrationDate = urlParams.get("registrationDate");
+      assignOrNot(pairNum, registrationDate);
+    </script>
+  </body>
+</html>

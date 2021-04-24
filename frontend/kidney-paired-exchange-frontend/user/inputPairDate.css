@@ -11,3 +11,48 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+div.InputPairDate {
+  display: grid;
+  grid-template-rows: auto auto auto auto;
+  grid-template-columns: auto;
+  text-align: center;
+  padding: 10em 10em;
+}
+
+p.InputYourRegistrationData {
+  font-size: 2em;
+  text-align: center;
+}
+
+div.RegistrationDate, div.RegistrationPairNumber {
+  display: grid;
+  grid-template-columns: 45% 55%;
+}
+
+select {
+  margin: 1em 0em;
+  padding: 0.3em;
+  border-radius: 5px;
+	background-color: #ddd;
+  width: 40%;
+}
+
+input {
+  margin: 1em 0em;
+  padding: 0.3em;
+  width: 40%;
+}
+
+p.InputTextExtra {
+  text-align: right;
+  padding: 0em 1em;
+}
+
+button.SeeMatchingResultButton {
+  background-color: aqua;
+  border: none;
+  margin: 0.5em;
+  padding: 1em 3em;
+  font-size: 1em;
+}

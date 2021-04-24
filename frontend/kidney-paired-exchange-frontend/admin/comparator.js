@@ -269,7 +269,7 @@ function sendEmailRequest(dataDate) {
 
 function postBestResult(dataDate, resultLocator) {
   var exchangerResult = JSON.parse(resultLocator.value)["exchanges"];
-  var exchanges = exchangerResult.toString();
+  var exchanges = JSON.stringify(exchangerResult);
 
   var xmlhttp = new XMLHttpRequest();
   const url = DJANGO_URL + "/saveBestResult";

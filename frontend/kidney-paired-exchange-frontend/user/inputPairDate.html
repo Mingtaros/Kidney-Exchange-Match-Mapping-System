@@ -2,10 +2,35 @@
   <head>
     <title>Kidney Paired Exchange Match Mapping System</title>
     <link rel="stylesheet" type="text/css" href="inputPairDate.css">
+    <script src="../Utils/constants.js"></script>
+    <script src="inputPairDate.js"></script>
   </head>
   <body>
     <div class="InputPairDate">
-      <!-- TBD -->
+      <div class="ThisPageTitle">
+        <p class="InputYourRegistrationData">Input your Registration Data</p>
+      </div>
+      <div class="RegistrationData">
+        <div class="RegistrationDate">
+          <p class="InputTextExtra">Your Registration Date</p>
+          <select class="RegistrationDateSelector">
+            <option value="" disabled selected hidden>--Pick a Date</option>
+            <!-- Filled with getAllDate -->
+          </select>
+        </div>
+        <div class="RegistrationPairNumber">
+          <p class="InputTextExtra">Your Pair Number</p>
+          <input class="PairNumber">
+        </div>
+      </div>
+      <div class="SeeMatchingResult">
+        <button class="SeeMatchingResultButton">See Matching Result</button>
+      </div>
     </div>
+
+    <script type="text/javascript">
+      getAllDate(document);
+      implementSeeButtonOnClick(document);
+    </script>
   </body>
 </html>
