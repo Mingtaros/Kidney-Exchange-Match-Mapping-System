@@ -220,3 +220,10 @@ div.barPlotLoc {
   display: grid;
   grid-template-rows: auto auto;
 }
+
+select {
+  margin-left: 1em;
+  padding: 0.2em;
+  border-radius: 5px;
+	background-color: #ddd;
+}

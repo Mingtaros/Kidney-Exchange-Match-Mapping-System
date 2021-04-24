@@ -32,7 +32,8 @@ def insert_new_pair(table_name, donor_name, donor_bloodtype, recipient_name, rec
     pair_num = "P0"
   else:
     # if not empty table, use last Pair Number + 1
-    pair_num = int(rows[-1][0][1:]) + 1
+    max_pair_num = max(rows, key=lambda x: int(x[0][1:]))
+    pair_num = int(max_pair_num[0][1:]) + 1
     pair_num = "P" + str(pair_num)
 
   insert_query = "INSERT INTO " + table_name + " (pair_num, donor_name, donor_bloodtype, recipient_name, recipient_bloodtype, pra, email)"
