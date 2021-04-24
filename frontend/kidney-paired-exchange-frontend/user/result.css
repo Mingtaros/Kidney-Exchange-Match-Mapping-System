@@ -14,15 +14,7 @@ code {
 
 div.MatchingResult {
   margin: 0em 3rem;
-}
-
-div.goodNews {
-  display: grid;
-  grid-template-rows: auto auto auto auto auto;
-  grid-template-columns: auto;
   text-align: center;
-  margin-left: auto;
-  margin-right: auto;
   padding: 5em 0em;
 }
 
@@ -51,7 +43,7 @@ div.dataTableDiv {
   grid-template-columns: auto;
   padding: 3em;
   overflow-y: scroll;
-  height: 75%;
+  height: 50%;
   border: 2px solid #777777;
 }
 
@@ -155,8 +147,9 @@ div.childElement {
 
 div.operationDetailDiv {
   display: grid;
+  grid-template-columns: auto;
   grid-template-rows: auto auto auto;
-  margin: 5em;
+  margin: 1em;
 }
 
 div.operationDetailLocTime {
