@@ -25,4 +25,5 @@ urlpatterns = [
     path('sendEmail', views.send_email),
     path('saveBestResult', views.save_best_result),
     path('getMatchedPairs', views.get_matched_pairs),
+    path('postNewPair', views.post_new_pair),
 ]

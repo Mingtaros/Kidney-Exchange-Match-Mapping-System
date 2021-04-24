@@ -116,3 +116,26 @@ Returns:
   numOfMatchedPairs: INT (number of matched pairs)
 }
 ```
+### Post New Pair
+Post Request to put new registered pair to database. If table already exist, pair num = last pair num + 1; if it is not, pair num = 0.
+```
+POST /postNewPair
+```
+Body: 
+```
+{
+  donorName: New pair's donor name,
+  donorBloodtype: New pair's donor blood type,
+  recipientName: New pair's recipient name,
+  recipientBloodtype: New pair's recipient blood type,
+  pra: New pair's panel reactive antibody (exclude the `%` character),
+  email: New pair's email address for contacting,
+}
+```
+Returns:
+```
+{
+  status: INT (status of the request),
+  pairNum: STRING (new pair's pair number as a result),
+}
+```

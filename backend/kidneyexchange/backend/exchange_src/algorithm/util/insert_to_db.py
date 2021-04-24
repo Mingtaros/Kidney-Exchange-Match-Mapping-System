@@ -40,7 +40,7 @@ for i in range(30):
     email = "leonardow41@gmail.com"
 
     # insert to table query construction
-    insert_query = "INSERT INTO " + table_name + "(pair_num, donor_name, donor_bloodtype, recipient_name, recipient_bloodtype, pra, email)"
+    insert_query = "INSERT INTO " + table_name + " (pair_num, donor_name, donor_bloodtype, recipient_name, recipient_bloodtype, pra, email)"
     insert_query += " VALUES ('" + pair_num + "', '" + donor_name + "', '" + donor_bloodtype
     insert_query += "', '" + recipient_name + "', '" + recipient_bloodtype + "', " + pra
     insert_query += ", '" + email + "')"
