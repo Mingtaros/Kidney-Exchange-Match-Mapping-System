@@ -2,6 +2,8 @@
   <head>
     <title>Kidney Paired Exchange Match Mapping System</title>
     <link rel="stylesheet" type="text/css" href="register.css">
+    <script src="../Utils/constants.js"></script>
+    <script src="register.js"></script>
   </head>
   <body>
     <div class="RegistrationPage">
@@ -35,7 +37,7 @@
         </div>
         <div class="DonorRecipientInput">
           <p class="InputNames">Blood Type</p>
-          <select class="RecipientBloodtype" required>
+          <select class="DonorBloodtype" required>
             <option value="" disabled selected hidden>--Choose Blood Type</option>
             <option value="A">A</option>
             <option value="B">B</option>
@@ -46,11 +48,16 @@
       </div>
       <div class="PairEmail">
         <p class="InputNames">Email Address</p>
-        <input type="text" class="PairEmail">
+        <input type="text" class="PairEmailAddress">
       </div>
       <div class="RegisterPair">
         <button class="RegisterButton">Register</button>
       </div>
     </div>
+
+    <!-- Add Post New Pair Functionality -->
+    <script type="text/javascript">
+      addPostNewPairFunctionality(document);
+    </script>
   </body>
 </html>

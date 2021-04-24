@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <title>Kidney Paired Exchange Match Mapping System</title>
+    <link rel="stylesheet" type="text/css" href="registrationComplete.css">
+  </head>
+  <body>
+    <div class="RegistrationComplete">
+      <div class="HasBeenRegistered">
+        <p class="pHasBeenRegistered">You have been Registered as Pair Number</p>
+      </div>
+      <div class="Details">
+        <p class="Details">Matching Informations will be sent to you via Email in 24 hours.</p>
+        <p class="Details">Don't Forget to take note of your <b>Pair Number</b> and <b>Registration Date</b> as you will need them to retrieve the matching results.</p>
+      </div>
+      <div class="BackToHome">
+        <button class="BackToHomeButton">Back to Home</button>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const pairNum = urlParams.get("pairNum");
+      // put pair number in text
+      var toPutPairNum = document.getElementsByClassName("RegistrationComplete")[0]
+                                 .getElementsByClassName("HasBeenRegistered")[0]
+                                 .getElementsByClassName("pHasBeenRegistered")[0];
+      toPutPairNum.innerHTML += "<b> " + pairNum + "</b>";
+
+      // implement onclick to backtohomebutton
+      var backToHomeButton = document.getElementsByClassName("RegistrationComplete")[0]
+                                 .getElementsByClassName("BackToHome")[0]
+                                 .getElementsByClassName("BackToHomeButton")[0];
+      backToHomeButton.onclick = () => {
+        location.href = "home.html";
+      }
+    </script>
+  </body>
+</html>

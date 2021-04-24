@@ -4,7 +4,7 @@
 // get all Dates
 function getAllDate(doc){
   var xmlhttp = new XMLHttpRequest();
-  const url = DJANGO_URL + "/getAllDate"
+  const url = DJANGO_URL + "/getAllDate";
   xmlhttp.open("GET", url, true);
   xmlhttp.send();
 
