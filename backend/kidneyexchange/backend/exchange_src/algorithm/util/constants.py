@@ -23,7 +23,9 @@ template_email = """
 <html><body>
 Dear __pair_num__,
 <br><br>
-Thanks for your patience. Here's the __link__ to see your match mapping result. Thank you.
+Thanks for your patience. The link to see your match mapping result are attached below. Thank you.
+<br><br>
+Please click this link to see your match mapping result: __link__
 <br><br>
 System
 </body></html>"""
