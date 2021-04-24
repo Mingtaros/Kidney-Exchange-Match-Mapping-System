@@ -53,6 +53,23 @@ def show_data_db(data_date):
   return rows
 
 
+def show_data_db_specific_pairs(data_date, pair_numbers):
+  # DATE FORMAT: %Y/%m/%d --> converted to %Y_%m_%d
+  psql = PostgreSQLHelper(POSTGRE_ENV)
+  data_date = data_date.replace("/", "_")
+  table_name = "dr" + data_date
+  pair_number_query = "('" + "', '".join(pair_numbers) + "')"
+
+  query = "SELECT * FROM " + table_name
+  query += " WHERE pair_num IN " + pair_number_query
+  rows = psql.db_select_query(query)
+  
+  psql.db_close()
+
+  # return data in list of pair format
+  return rows
+
+
 def get_all_dates():
   # get all dates available in DB --> table names in DB
   psql = PostgreSQLHelper(POSTGRE_ENV) 

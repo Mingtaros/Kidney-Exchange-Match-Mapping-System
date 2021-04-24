@@ -1,6 +1,8 @@
 import networkx as nx 
 import matplotlib.pyplot as plt 
 
+from .flatten import flatten
+
 
 class GraphVisualization: 
   def __init__(self):
@@ -34,7 +36,6 @@ class GraphVisualization:
 
 
   def add_color(self, no_edge_color, edgy_color):
-    flatten = lambda t: [item for sublist in t for item in sublist]
     all_vertices_with_edge = flatten(self.edges)
     for vertex in self.vertices:
       if (vertex not in all_vertices_with_edge):

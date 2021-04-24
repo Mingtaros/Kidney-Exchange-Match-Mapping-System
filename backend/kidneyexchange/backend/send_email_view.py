@@ -18,9 +18,8 @@ from .exchange_src.algorithm.util.read_pairs_data import get_emails
 def send_email(request):
   # send email to people in that date so they can see the match mapping result
   data = request.data
-  flatten = lambda t: [item for sublist in t for item in sublist]
-  data_date = data['dataDate']
-  receivers = get_emails(data_date)
+  registration_date = data['dataDate']
+  receivers = get_emails(registration_date)
   email_body = template_email
 
   #server
@@ -42,7 +41,7 @@ def send_email(request):
     # compose body
     this_body = email_body.replace("__pair_num__", pair_num)
     this_link = template_link.replace("__pair_num__", pair_num)
-    this_link = this_link.replace("__data_date__", data_date)
+    this_link = this_link.replace("__registration_date__", registration_date)
     # this_link = "<a href=\"" + this_link + "\"> link </a>"
     this_body = this_body.replace("__link__", this_link)
     body = MIMEText(this_body, 'html')

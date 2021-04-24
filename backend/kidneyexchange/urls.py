@@ -21,6 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('getAllDate', views.get_all_date),
     path('getData', views.get_data),
+    path('getDataOnPairNumbers', views.get_data_on_pair_numbers),
     path('getFinalizedExchange', views.get_finalized_exchange),
     path('sendEmail', views.send_email),
     path('saveBestResult', views.save_best_result),

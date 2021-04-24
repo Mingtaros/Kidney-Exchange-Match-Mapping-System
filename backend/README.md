@@ -35,6 +35,25 @@ Returns:
   data: LIST of LIST (in (pair_num, donor_name, donor_bloodtype, recipient_name, recipient_bloodtype, pra, email) format)
 }
 ```
+## Get Data on Specific Pair Numbers
+Get Request to return all data from that database given the date and the pair numbers to be returned.
+```
+GET /getDataOnPairNumbers
+```
+Query Parameters:
+```
+{
+  dataDate: Data date in %Y/%m/%d format,
+  pairNumbers: List of pair numbers
+}
+```
+Returns:
+```
+{
+  status: INT (status of the request),
+  data: LIST of LIST (in (pair_num, donor_name, donor_bloodtype, recipient_name, recipient_bloodtype, pra, email) format for specific data)
+}
+```
 ## Get Finalized Exchange
 Get Request to get list of cycles given data from a specific date and also the algorithms
 ```
@@ -97,7 +116,7 @@ Returns:
   message: STRING (what happened to DB (Insert / Update / Not Updating))
 }
 ```
-### Get Matched Pairs
+## Get Matched Pairs
 Get Request to get the Pairs in that particular date. If date not in db, send status 404.
 ```
 GET /getMatchedPairs
@@ -116,7 +135,7 @@ Returns:
   numOfMatchedPairs: INT (number of matched pairs)
 }
 ```
-### Post New Pair
+## Post New Pair
 Post Request to put new registered pair to database. If table already exist, pair num = last pair num + 1; if it is not, pair num = 0.
 ```
 POST /postNewPair

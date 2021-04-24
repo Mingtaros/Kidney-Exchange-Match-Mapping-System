@@ -1,4 +1,5 @@
 from .util.graph_vis import GraphVisualization
+from .util.flatten import flatten
 
 
 class ExchangeAlgorithm(object):
@@ -14,7 +15,6 @@ class ExchangeAlgorithm(object):
 
 
   def get_num_of_matched_pairs(self):
-    flatten = lambda t: [item for sublist in t for item in sublist]
     return len(flatten(self.cycles))
 
 

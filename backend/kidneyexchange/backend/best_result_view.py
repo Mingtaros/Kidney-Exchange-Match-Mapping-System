@@ -4,8 +4,10 @@ from rest_framework.response import Response
 from rest_framework import status
 
 import json
+import ast
 
 from .exchange_src.algorithm.util.crud_best_result import insert_or_update_best_result, select_best_result_pairs
+from .exchange_src.algorithm.util.flatten import flatten
 
 
 @api_view(["POST"])
@@ -31,9 +33,9 @@ def get_matched_pairs(request):
   if len(best_result_pairs) == 0: # data date not found in db
     return Response(status=status.HTTP_404_NOT_FOUND)
   else:
-    matched_pairs = best_result_pairs[0][1].split(",")
+    matched_pairs = ast.literal_eval(best_result_pairs[0][1])
     return JsonResponse({
       "status": status.HTTP_200_OK,
       "matchedPairs": matched_pairs,
-      "numOfMatchedPairs": len(matched_pairs)
+      "numOfMatchedPairs": len(flatten(matched_pairs))
     })
