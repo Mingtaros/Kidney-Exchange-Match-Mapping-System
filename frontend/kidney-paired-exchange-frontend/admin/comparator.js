@@ -1,4 +1,4 @@
-// IMPORTED FROM Utils/constants.js
+// IMPORTED FROM ../Utils/constants.js
 //    - DJANGO_URL
 // IMPORTED FROM createTableComparison.js
 //    - getAllExchangeResult

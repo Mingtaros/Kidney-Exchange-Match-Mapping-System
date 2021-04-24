@@ -1,5 +1,7 @@
-// IMPORTED FROM Utils/constants.js
+// IMPORTED FROM ../Utils/constants.js
 //    - DJANGO_URL
+// IMPORTED FROM createBarPlot.js
+//    - createBarPlot
 
 function getExchangeResult(doc, exchangerObject, exchangerName) {
   var xmlhttp = new XMLHttpRequest();

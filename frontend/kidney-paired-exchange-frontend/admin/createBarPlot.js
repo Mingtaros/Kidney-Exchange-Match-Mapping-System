@@ -21,7 +21,7 @@ function createBarPlot(doc) {
     numOfMatchedPairsList.push(compareResult.rows[i].cells[2].innerHTML);
     timeElapsedList.push(compareResult.rows[i].cells[3].innerHTML);
   }
-  
+  // make matched pair plot
   var matchedPairPlot = document.createElement("canvas");
   matchedPairPlot.className = "barPlotCanvas";
   
@@ -61,7 +61,7 @@ function createBarPlot(doc) {
     }
   });
   matchPlotLoc.appendChild(matchedPairPlot);
-
+  // make time elapsed plot
   var timeElapsedPlot = document.createElement("canvas");
   timeElapsedPlot.className = "barPlotCanvas";
   

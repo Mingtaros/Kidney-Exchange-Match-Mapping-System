@@ -5,7 +5,52 @@
   </head>
   <body>
     <div class="RegistrationPage">
-      <!-- TBD -->
+      <div class="RecipientInformations">
+        <p class="DonorRecipientInformations">Recipient Informations</p>
+        <div class="DonorRecipientInput">
+          <p class="InputNames">Name</p>
+          <input type="text" class="RecipientName">
+        </div>
+        <div class="DonorRecipientInput">
+          <p class="InputNames">Blood Type</p>
+          <select class="RecipientBloodtype" required>
+            <option value="" disabled selected hidden>--Choose Blood Type</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="O">O</option>
+            <option value="AB">AB</option>
+          </select>
+        </div>
+        <div class="PRAInput">
+          <p class="InputNames">PRA</p>
+          <input type="text" class="PairPRA">
+          <p class="PRAPercentage">%</p>
+        </div>
+      </div>
+      <div class="DonorInformations">
+        <p class="DonorRecipientInformations">Donor Informations</p>
+        <div class="DonorRecipientInput">
+          <p class="InputNames">Name</p>
+          <input type="text" class="DonorName">
+        </div>
+        <div class="DonorRecipientInput">
+          <p class="InputNames">Blood Type</p>
+          <select class="RecipientBloodtype" required>
+            <option value="" disabled selected hidden>--Choose Blood Type</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="O">O</option>
+            <option value="AB">AB</option>
+          </select>
+        </div>
+      </div>
+      <div class="PairEmail">
+        <p class="InputNames">Email Address</p>
+        <input type="text" class="PairEmail">
+      </div>
+      <div class="RegisterPair">
+        <button class="RegisterButton">Register</button>
+      </div>
     </div>
   </body>
 </html>

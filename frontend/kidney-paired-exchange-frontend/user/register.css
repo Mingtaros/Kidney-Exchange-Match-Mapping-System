@@ -11,3 +11,93 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+div.RegistrationPage {
+  display: grid;
+  grid-template-rows: auto auto auto;
+  grid-template-columns: auto auto;
+  text-align: center;
+  padding: 10em 10em;
+}
+
+div.RecipientInformations {
+  display: grid;
+  grid-template-rows: auto auto auto auto;
+  text-align: center;
+}
+
+p.DonorRecipientInformations {
+  font-size: 2em;
+  text-align: center;
+}
+
+div.DonorRecipientInput {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  padding: 0.5em 0em;
+}
+
+div.PRAInput {
+  display: grid;
+  grid-template-columns: 30% 21% 59%;
+  padding: 0.5em 0em;
+}
+
+div.PairEmail {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  display: grid;
+  grid-template-columns: 45% 55%;
+  text-align: right;
+}
+
+p.InputNames {
+  padding: 0.2em;
+  margin: 0.2em;
+  text-align: right;
+}
+
+div.RegisterPair {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+button.RegisterButton {
+  background-color: aqua;
+  border: none;
+  margin: 0.5em;
+  padding: 0.5em 1.5em;
+  font-size: 1.5em;
+}
+
+input {
+  padding: 0.2em;
+  margin: 0.2em;
+}
+
+input.RecipientName, input.DonorName {
+  width: 70%;
+}
+
+input.PairEmail {
+  width: 50%;
+}
+
+input.PairPRA {
+  width: 100%;
+}
+
+p.PRAPercentage {
+  padding: 0.2em;
+  margin: 0.2em;
+  text-align: left;
+}
+
+select.DonorBloodtype, select.RecipientBloodtype {
+  padding: 0.2em;
+  margin: 0.2em;
+  width: 35%;
+}
