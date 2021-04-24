@@ -1,8 +1,8 @@
 // IMPORTED FROM Utils/constants.js
 //    - DJANGO_URL
 
-// get all Dates
 function getAllDate(doc){
+  // get all Dates
   var xmlhttp = new XMLHttpRequest();
   const url = DJANGO_URL + "/getAllDate";
   xmlhttp.open("GET", url, true);
