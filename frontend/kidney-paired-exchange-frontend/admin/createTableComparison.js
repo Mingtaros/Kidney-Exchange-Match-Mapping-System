@@ -51,6 +51,12 @@ function addToTable(doc, rawResult, exchangerName) {
   matchMapping.appendChild(matchMappingDiv);
   tableRow.appendChild(matchMapping);
 
+  // add maximum length of matchmapping
+  var matchmapMaxLength = document.createElement("td");
+  matchmapMaxLength.className = "matchmapMaxLength";
+  matchmapMaxLength.innerHTML = Math.max(...result["exchanges"].map(x => x.length));
+  tableRow.appendChild(matchmapMaxLength);
+
   // add num of matches
   var numOfMatchedPairs = document.createElement("td");
   numOfMatchedPairs.className = "compareResult";
@@ -111,6 +117,11 @@ function getAllExchangeResult(doc) {
     matchMappingHeader.className = "matchmap";
     matchMappingHeader.innerHTML = "Match Mapping";
     headerRow.appendChild(matchMappingHeader);
+
+    var maxlengthHeader = document.createElement("th");
+    maxlengthHeader.className = "maxlength";
+    maxlengthHeader.innerHTML = "Match Map Max Length";
+    headerRow.appendChild(maxlengthHeader);
 
     var numOfMatchedPairsHeader = document.createElement("th");
     numOfMatchedPairsHeader.className = "numofmatchpair";

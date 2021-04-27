@@ -186,7 +186,12 @@ th.exchanger {
 
 th.matchmap {
   border: 1px solid black;
-  width: 60%;
+  width: 50%;
+}
+
+th.maxlength {
+  border: 1px solid black;
+  width: 10%;
 }
 
 th.numofmatchpair {
@@ -214,6 +219,11 @@ div.matchMap {
   overflow: auto;
   height: 100%;
   width: 100%;
+}
+
+td.matchmapMaxLength {
+  border: 1px solid black;
+  text-align: center;
 }
 
 div.barPlotLoc {
