@@ -18,8 +18,10 @@ function createBarPlot(doc) {
   for (let i=1; i < compareResult.rows.length; i++) {
     // skip rows[0] because it's header
     exchangerNameList.push(compareResult.rows[i].cells[0].innerHTML);
-    numOfMatchedPairsList.push(compareResult.rows[i].cells[2].innerHTML);
-    timeElapsedList.push(compareResult.rows[i].cells[3].innerHTML);
+    // skip rows[1] because it's match mapping
+    // skip rows[2] because it's max length of match mappings
+    numOfMatchedPairsList.push(compareResult.rows[i].cells[3].innerHTML);
+    timeElapsedList.push(compareResult.rows[i].cells[4].innerHTML);
   }
   // make matched pair plot
   var matchedPairPlot = document.createElement("canvas");
