@@ -1,3 +1,6 @@
+import sys
+
+
 def graph_cycle_search(directed_graph, vertex, cycles, visited, finished):
   # Recursive DFS to find all cycle from a vertex
   # WEAKNESS: Python's Recursion Limit
@@ -10,7 +13,11 @@ def graph_cycle_search(directed_graph, vertex, cycles, visited, finished):
 
     else:
       if ((adjacent_vertex not in visited) and (adjacent_vertex not in finished) and (adjacent_vertex in directed_graph)):
-        graph_cycle_search(directed_graph, adjacent_vertex, cycles, visited, finished)
+        try:
+          graph_cycle_search(directed_graph, adjacent_vertex, cycles, visited, finished)
+        except RecursionError:
+          sys.setrecursionlimit(1e6)
+          graph_cycle_search(directed_graph, adjacent_vertex, cycles, visited, finished)
 
   visited.remove(vertex)
   finished.add(vertex)
@@ -21,7 +28,6 @@ def graph_cycle_search(directed_graph, vertex, cycles, visited, finished):
 def find_all_cycles(directed_graph):
   # Recursive DFS to find all cycle in a directed graph (from all vertices)
   # CALLING graph_cycle_search function for all vertices
-  # WEAKNESS: Python's Recursion Limit
   visited = []
   finished = set()
   cycles = []
@@ -29,7 +35,8 @@ def find_all_cycles(directed_graph):
   for vertex in directed_graph:
     cycle = []
     if (vertex not in visited):
-      cycle, visited, finished = graph_cycle_search(directed_graph, vertex, cycle, visited, finished)
+      result = graph_cycle_search(directed_graph, vertex, cycle, visited, finished)
+      cycle, visited, finished = result
       cycles += cycle
 
   return cycles

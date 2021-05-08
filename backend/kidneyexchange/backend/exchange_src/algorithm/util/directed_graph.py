@@ -1,7 +1,7 @@
 import pandas as pd
 import json
 
-from .constants import *
+from .constants import blood_type_match, NO_TYPE
 from .cycle_detection import find_all_cycles
 
 
@@ -30,10 +30,15 @@ class DirectedGraph(object):
     for donor_idx, donor_bloodtype, _, _ in self.medical_data.values:
       for recipient_idx, _, recipient_bloodtype, _ in self.medical_data.values:
         if (recipient_bloodtype != NO_TYPE) and (donor_idx != recipient_idx):
-            can_donate = blood_type_match[donor_bloodtype][recipient_bloodtype]
+            can_donate = self.is_compatible(donor_bloodtype, recipient_bloodtype)
             if can_donate:
               # add edge to adjacency list
               self.adjacency[donor_idx].append(recipient_idx)
+
+
+  # scalable is_compatible function, can be easily changed if criterion changes
+  def is_compatible(self, donor_bloodtype, recipient_bloodtype):
+    return blood_type_match[donor_bloodtype][recipient_bloodtype]
 
 
   def get_adjacency_list(self):
@@ -50,7 +55,7 @@ class DirectedGraph(object):
 
 
   def get_vertices(self):
-    return self.medical_data["pair_num"].tolist()
+    return list(self.adjacency.keys())
 
 
   def get_cycles(self):
@@ -61,7 +66,7 @@ class DirectedGraph(object):
     data = {
       "adjacency": self.adjacency,
       "cycles": self.cycles,
-      "medical_data": str(self.medical_data)
+      "medical_data": self.medical_data.to_dict()
     }
 
     with open(directory, 'w') as f:
@@ -73,6 +78,6 @@ class DirectedGraph(object):
     with open(directory, 'r') as f:
       data = json.load(f)
     
-    self.medical_data = data['medical_data']
+    self.medical_data = pd.DataFrame(data['medical_data'])
     self.adjacency = data['adjacency']
     self.cycles = data['cycles']
