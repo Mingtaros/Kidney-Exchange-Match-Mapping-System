@@ -191,12 +191,12 @@ th.matchmap {
 
 th.maxlength {
   border: 1px solid black;
-  width: 10%;
+  width: 12.5%;
 }
 
 th.numofmatchpair {
   border: 1px solid black;
-  width: 15%;
+  width: 12.5%;
 }
 
 th.timeelapsed {
@@ -221,7 +221,7 @@ div.matchMap {
   width: 100%;
 }
 
-td.matchmapMaxLength {
+td.matchmapLength {
   border: 1px solid black;
   text-align: center;
 }

@@ -52,10 +52,14 @@ function addToTable(doc, rawResult, exchangerName) {
   tableRow.appendChild(matchMapping);
 
   // add maximum length of matchmapping
-  var matchmapMaxLength = document.createElement("td");
-  matchmapMaxLength.className = "matchmapMaxLength";
-  matchmapMaxLength.innerHTML = Math.max(...result["exchanges"].map(x => x.length));
-  tableRow.appendChild(matchmapMaxLength);
+  var matchmapLength = document.createElement("td");
+  matchmapLength.className = "matchmapLength";
+  var exchangesLength = result["exchanges"].map(x => x.length);
+  const exchangesLengthSum = exchangesLength.reduce((a, b) => a + b, 0);
+  const exchangesAvg = (exchangesLengthSum / exchangesLength.length) || 0;
+  matchmapLength.innerHTML = Math.max(...exchangesLength) + " / ";
+  matchmapLength.innerHTML += exchangesAvg.toFixed(3);
+  tableRow.appendChild(matchmapLength);
 
   // add num of matches
   var numOfMatchedPairs = document.createElement("td");
@@ -120,7 +124,7 @@ function getAllExchangeResult(doc) {
 
     var maxlengthHeader = document.createElement("th");
     maxlengthHeader.className = "maxlength";
-    maxlengthHeader.innerHTML = "Match Map Max Length";
+    maxlengthHeader.innerHTML = "Match Map Max/Avg Length";
     headerRow.appendChild(maxlengthHeader);
 
     var numOfMatchedPairsHeader = document.createElement("th");
