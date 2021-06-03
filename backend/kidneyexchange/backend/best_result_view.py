@@ -26,7 +26,7 @@ def get_matched_pairs(request):
   data = json.loads(json.dumps(request.query_params))
 
   if ("dataDate" not in data):
-    return Responser(status=status.HTTP_400_BAD_REQUEST)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
 
   best_result_pairs = select_best_result_pairs(data["dataDate"])
 
