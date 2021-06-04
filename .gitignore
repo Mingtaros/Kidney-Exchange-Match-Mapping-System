@@ -29,3 +29,7 @@ cycle_generation_all.py
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# jupyter-generated save files
+*.xlsx
+*.csv
