@@ -33,3 +33,14 @@ yarn-error.log*
 # jupyter-generated save files
 *.xlsx
 *.csv
+
+# LaTeX generated files
+*.aux
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+*.synctex
+*.log
+.DS_Store
+13517048_Leonardo_Paper
+IEEEtran.cls
