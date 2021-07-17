@@ -7,6 +7,7 @@
 \usepackage{graphicx}
 \usepackage{textcomp}
 \usepackage{xcolor}
+\usepackage{diagbox}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 
@@ -47,10 +48,83 @@ kidney transplantation, kidney exchange, match map searching algorithm
 \end{IEEEkeywords}
 
 \section{Introduction}
-This document is a model and instructions for \LaTeX.
-Please observe the conference page limits. 
+Every year, in Indonesia alone, there are more than 100,000 patients with kidney needs. But among
+those patients, only about 20\% can get a kidney transplantation \cite{wiradarma}. There are many types
+of problems that leads to this condition, for example financial problems, public opinions, and the most
+common, kidney availability.
+This availability problem arises because many criteria must be met before kidney transplant can be
+performed \cite{wiradarma}. The donor needs to have a healthy kidney, matching blood type, and no blood-borne
+diseases. Also, the patient's immune system must be able to accept the donor's kidney without killing it.
 
-\section{Ease of Use}
+\subsection{Kidney Transplant Prerequisites}
+\begin{table}[htbp]
+    \caption{Blood Type Compatibility between Patient and Donor \cite{raja}}
+    \begin{center}
+    \def\arraystretch{1.5}
+    \begin{tabular}{|c|c|c|c|c|}
+    \hline
+    \backslashbox{\textbf{Recipient}}{\textbf{Donor}}&\textbf{O}&\textbf{A}&\textbf{B}&\textbf{AB} \\
+    \hline
+    \textbf{O}&1&0&0&0 \\
+    \hline
+    \textbf{A}&1&1&0&0 \\
+    \hline
+    \textbf{B}&1&0&1&0 \\
+    \hline
+    \textbf{AB}&1&1&1&1 \\
+    \hline
+    \end{tabular}
+    \label{tab1}
+    \end{center}
+\end{table}
+
+The blood type test, is performed to both the donor and the recipient. Donors can only make a
+donation if one's blood type is compatible with the recipient's blood type.
+In Table I, number 1 indicates compatibility and 0 indicates incompatibility. Donors with blood type
+O are considered Universal Donors because they can give donors to every patients regardless of the blood
+type. Recipients with blood type AB are considered a Universal Recipients because they can accept kidney
+donation from every donors regardless of the blood type \cite{charge}.
+The immune test is performed after the donor-recipient pair passes the blood type test \cite{adrian}. The tests
+are cross match test and Human Leucocyte Antigen (HLA) test. In cross match test, donor's blood are met with
+recipient's blood to see whether there is a resistance reaction from recipient's immune system. The resistance
+reaction happens when the donor kidney is considered a foreign object that must be killed by recipient's
+immune system \cite{aprilano}. HLA test tests the same reaction as cross match test, but donor's and recipient's
+tissue cells are being used instead of blood \cite{nguyen}.
+Finally, to test whether the donor has any blood-borne diseases, serology is performed \cite{aprilano}.
+
+\subsection{Kidney Exchange Program}
+Because of kidney transplant prerequisites, Kidney Exchange program named Kidney Paired Donation (KPD) was created \cite{raja}
+so that an incompatible donor-recipient pair can exchange their incompatible kidney to another incompatible
+pair, making cross-donation possible. The kidney exchange can be done two-way and can go up to \textit{N}-way.
+
+\begin{figure}[h]
+\includegraphics[width=0.5\textwidth]{images/kidney-exchange.png}
+\caption{Two-way(left) and Three-way(right) Exchange in KPD program}
+\end{figure}
+
+Unfortunately, because of the large number of incompatible pairs, hospitals cannot find the optimal
+matching solution for the pool of incompatible pairs. An algorithm that perform a mapping search is needed
+to address this issue. One of the most known algorithm to tackle this problem is Edmond's Algorithm \cite{raja}.
+In Edmond's Algorithm, the pool of incompatible pairs are represented as a graph with each node representing
+an incompatible pair and each edge representing a match between two incompatible pairs. The algorithm focuses on
+high priority pairs so that pairs who need a transplantation more can get an exchange first.
+Another algorithm regarding this problem is First Accept Heuristic Match \cite{raja} which focuses more on the
+heuristic if one registers first, then one gets an exchange first.
+
+These algorithms are called Match Map Searching Algorithms. There are two performance metrics to evaluate these
+algorithms. The first one is Matching Efficiency, which measures the number of donor-patient pairs that matched
+another pair and were able to exchange divided by the total number of donor-patient pairs, represented in a percentage.
+The second metric is execution time, which measures how long does the algorithm run to get the optimal match map,
+usually measured in millisecond. The best match map searching algorithm is the algorithm that can produce high matching
+efficiency with low execution time. Meaning that many patients can be saved as fast as possible.
+
+As good as it looks, Edmond's Algorithm and First Accept Heuristic Match can only find two-way exchanges from the
+incompatible pairs pool. Meaning these algorithms are not able find a solution with three-way exchanges or more,
+closing the possibility.
+
+\section{Methodology}
+From the existing algorithms problems addressed in the previous section, match map searching algorithms that can find
+\textit{N}-way exchanges from incompatible pairs pool are needed.
 
 \subsection{Maintaining the Integrity of the Specifications}
 
@@ -62,7 +136,7 @@ and others are deliberate, using specifications that anticipate your paper
 as one part of the entire proceedings, and not as an independent document. 
 Please do not revise any of the current designations.
 
-\section{Prepare Your Paper Before Styling}
+\section{Experiment}
 Before you begin to format your paper, first write and save the content as a 
 separate text file. Complete all content and organizational editing before 
 formatting. Please note sections \ref{AA}--\ref{SCM} below for more information on 
@@ -204,7 +278,7 @@ copy& More table copy$^{\mathrm{a}}$& &  \\
 \hline
 \multicolumn{4}{l}{$^{\mathrm{a}}$Sample of a Table footnote.}
 \end{tabular}
-\label{tab1}
+\label{tab2}
 \end{center}
 \end{table}
 
@@ -217,6 +291,15 @@ with units. In the example, write ``Magnetization (A/m)'' or ``Magnetization
 \{A[m(1)]\}'', not just ``A/m''. Do not label axes with a ratio of 
 quantities and units. For example, write ``Temperature (K)'', not 
 ``Temperature/K''.
+
+\section{Results and Analysis}
+ababwa
+
+\section{Related Work}
+this is still a template
+
+\section{Conclusion}
+ababwa
 
 \section*{Acknowledgment}
 
@@ -247,17 +330,17 @@ For papers published in translation journals, please give the English
 citation first, followed by the original foreign-language citation \cite{b6}.
 
 \begin{thebibliography}{00}
-\bibitem{b1} Adrian, K. (2020, May 17). Berbagai Persiapan Donor Ginjal yang Perlu Anda Ketahui. Retrieved from alodokter.com: https://www.alodokter.com/hal-hal-yang-harus-diperhatikan-sebelum-melakukan-donor-ginjal
-\bibitem{b2} Aprilano, W. D. (2021, January 20). Teknik Transplantasi Ginjal. Retrieved from alomedika.com: https://www.alomedika.com/tindakan-medis/transplantasi/transplantasi-ginjal/teknik
-\bibitem{b3} Chargé, S., Hodgkinson, K. (2017, January). Blood: the basics. Retrieved from profedu.blood.ca/: https://profedu.blood.ca/en/transfusion/publications/blood-basics.
-\bibitem{b4} Mehta, D. (2020, May 27). Detect Cycle in a Directed Graph. Retrieved from geeksforgeeks.org: https://www.geeksforgeeks.org/detect-cycle-in-a-graph/
-\bibitem{b5} Nguyen, H. D., Williams, R. L., Wong, G., Lim, W. H. (2013, February 13). The Evolution of HLA-Matching in Kidney Transplantation. Retrieved from intechopen.com: https://www.intechopen.com/books/current-issues-and-future-direction-in-kidney-transplantation/the-evolution-of-hla-matching-in-kidney-transplantation
-\bibitem{b6} Raja, S., S., P. D., K., S. R. (2011). Web Based Decision Support System for Kidney. International Journal of Computer Applications (0975 – 8887), 9.
-\bibitem{b7} Roth, A. E., Sonmez, T., Unver, M. U. (2005). Kidney Exchange. Quarterly Journal of Economics, 32.
-\bibitem{b8} Roth, A. E., Sonmez, T., Unver, M. U., Delmonico, F. L., Saidman, S. L. (2006, September 18). Utilizing List Exchange and Nondirected Donation through ‘Chain’ Paired Kidney Donations. Retrieved from onlinelibrary.wiley.com: https://onlinelibrary.wiley.com/doi/full/10.1111/j.1600-6143.2006.01515.x
-\bibitem{b9} Sedgewick, R., Wayne, K. (2020). Directed Graphs. In R. Sedgewick, K. Wayne, Algorithms, 4th Edition (p. 955). New Jersey: Princeton University.
-\bibitem{b10} Tullis, T., Albert, B. (2013, June 3). Performance Metrics. Retrieved from sciencedirect.com: https://www.sciencedirect.com/science/article/pii/B9780124157811000042
-\bibitem{b11} Wiradarma, K. (2016, February 3). Transplantasi Ginjal di Indonesia: Pencapaian dan Hambatannya. Retrieved from klikdokter.com: https://www.klikdokter.com/info-sehat/read/2697086/transplantasi-ginjal-di-indonesia-pencapaian-dan-hambatannya
+\bibitem{wiradarma} Wiradarma, K. (2016, February 3). Transplantasi Ginjal di Indonesia: Pencapaian dan Hambatannya. Retrieved from klikdokter.com: https://www.klikdokter.com/info-sehat/read/2697086/transplantasi-ginjal-di-indonesia-pencapaian-dan-hambatannya
+\bibitem{raja} Raja, S., S., P. D., K., S. R. (2011). Web Based Decision Support System for Kidney. International Journal of Computer Applications (0975 – 8887), 9.
+\bibitem{charge} Chargé, S., Hodgkinson, K. (2017, January). Blood: the basics. Retrieved from profedu.blood.ca/: https://profedu.blood.ca/en/transfusion/publications/blood-basics.
+\bibitem{adrian} Adrian, K. (2020, May 17). Berbagai Persiapan Donor Ginjal yang Perlu Anda Ketahui. Retrieved from alodokter.com: https://www.alodokter.com/hal-hal-yang-harus-diperhatikan-sebelum-melakukan-donor-ginjal
+\bibitem{aprilano} Aprilano, W. D. (2021, January 20). Teknik Transplantasi Ginjal. Retrieved from alomedika.com: https://www.alomedika.com/tindakan-medis/transplantasi/transplantasi-ginjal/teknik
+\bibitem{nguyen} Nguyen, H. D., Williams, R. L., Wong, G., Lim, W. H. (2013, February 13). The Evolution of HLA-Matching in Kidney Transplantation. Retrieved from intechopen.com: https://www.intechopen.com/books/current-issues-and-future-direction-in-kidney-transplantation/the-evolution-of-hla-matching-in-kidney-transplantation
+\bibitem{mehta} Mehta, D. (2020, May 27). Detect Cycle in a Directed Graph. Retrieved from geeksforgeeks.org: https://www.geeksforgeeks.org/detect-cycle-in-a-graph/
+\bibitem{roth2005} Roth, A. E., Sonmez, T., Unver, M. U. (2005). Kidney Exchange. Quarterly Journal of Economics, 32.
+\bibitem{roth2006} Roth, A. E., Sonmez, T., Unver, M. U., Delmonico, F. L., Saidman, S. L. (2006, September 18). Utilizing List Exchange and Nondirected Donation through ‘Chain’ Paired Kidney Donations. Retrieved from onlinelibrary.wiley.com: https://onlinelibrary.wiley.com/doi/full/10.1111/j.1600-6143.2006.01515.x
+\bibitem{sedgewick} Sedgewick, R., Wayne, K. (2020). Directed Graphs. In R. Sedgewick, K. Wayne, Algorithms, 4th Edition (p. 955). New Jersey: Princeton University.
+\bibitem{tullis} Tullis, T., Albert, B. (2013, June 3). Performance Metrics. Retrieved from sciencedirect.com: https://www.sciencedirect.com/science/article/pii/B9780124157811000042
 \end{thebibliography}
 
 \end{document}
