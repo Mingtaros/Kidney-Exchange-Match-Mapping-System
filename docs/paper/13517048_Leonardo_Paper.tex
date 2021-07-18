@@ -78,7 +78,7 @@ diseases. Also, the patient's immune system must be able to accept the donor's k
     \end{center}
 \end{table}
 
-The blood type test, is performed to both the donor and the recipient. Donors can only make a
+The blood type test is performed to both the donor and the recipient. Donors can only make a
 donation if one's blood type is compatible with the recipient's blood type.
 In Table I, number 1 indicates compatibility and 0 indicates incompatibility. Donors with blood type
 O are considered Universal Donors because they can give donors to every patients regardless of the blood
@@ -95,7 +95,7 @@ Finally, to test whether the donor has any blood-borne diseases, serology is per
 \subsection{Kidney Exchange Program}
 Because of kidney transplant prerequisites, Kidney Exchange program named Kidney Paired Donation (KPD) was created \cite{raja}
 so that an incompatible donor-recipient pair can exchange their incompatible kidney to another incompatible
-pair, making cross-donation possible. The kidney exchange can be done two-way and can go up to \textit{N}-way.
+pair, making cross-donation possible. The kidney exchange can be done two-way, three-way, and can go up to \textit{N}-way.
 
 \begin{figure}[h]
 \includegraphics[width=0.5\textwidth]{images/kidney-exchange.png}
@@ -124,17 +124,38 @@ closing the possibility.
 
 \section{Methodology}
 From the existing algorithms problems addressed in the previous section, match map searching algorithms that can find
-\textit{N}-way exchanges from incompatible pairs pool are needed.
+\textit{N}-way exchanges from incompatible pairs pool are needed. By modifying existing algorithms and the used data
+structure, new algorithms can be created.
 
-\subsection{Maintaining the Integrity of the Specifications}
+\subsection{Compatibility Graph}
+Before creating new algorithms, incompatibility pairs pool data structure needs to be redefined. Compatibility Graph
+used in Edmond's Algorithm is an undirected graph \cite{raja}, meaning that every edge connecting two vertices represent a back-and-forth
+relationship between the aforementioned two vertices, making the returned exchanges to be edges, closing up possibility
+of three-way exchanges or more. If the algorithm is modified to use cycle detection instead of edge detection, Edmond's
+Algorithm can already be used to return \textit{N}-way exchanges.
 
-The IEEEtran class file is used to format your paper and style the text. All margins, 
-column widths, line spaces, and text fonts are prescribed; please do not 
-alter them. You may note peculiarities. For example, the head margin
-measures proportionately more than is customary. This measurement 
-and others are deliberate, using specifications that anticipate your paper 
-as one part of the entire proceedings, and not as an independent document. 
-Please do not revise any of the current designations.
+\begin{figure}
+\includegraphics[width=0.5\textwidth]{images/edge-vs-cycle-detection.jpg}
+\caption{Edge Detection(left) vs. Cycle Detection(right) in Compatibility Graph}
+\end{figure}
+
+As seen in Fig. 2, using cycle detection yields a result with three-way exchange instead of the two-way exchange result
+returned by edge detection, resulting in a higher matching efficiency using the same compatibility graph. However, changing
+edge detection to cycle detection is not enough. The cycles returned from the graph are all back-and-forth cycles. If the
+compatibility graph is converted into a directed graph instead of undirected, one-way cycles can also be returned, further
+increasing the number of cycles, therefore increasing the matching efficiency.
+
+\subsection{\textit{N}-way Match Map Searching Algorithms}
+With directed graph as compatibility graph and using cycle detection algorithm, \textit{N}-way match map searching algorithms
+can be created.
+
+\subsubsection{First Accept Searching Algorithm}
+The first \textit{N}-way match map searching algorithm is first accept searching algorithm which is inspired by first accept
+heuristic match algorithm.
+
+\subsubsection{Priority-based Searching Algorithm}
+The second \textit{N}-way match map searching algorithm is priority-based searching algorithm which is inspired by Edmond's
+algorithm.
 
 \section{Experiment}
 Before you begin to format your paper, first write and save the content as a 
