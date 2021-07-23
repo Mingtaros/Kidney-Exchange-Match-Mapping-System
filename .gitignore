@@ -41,6 +41,7 @@ yarn-error.log*
 *.synctex.gz
 *.synctex
 *.log
+*.out
 .DS_Store
 13517048_Leonardo_Paper
 IEEEtran.cls
