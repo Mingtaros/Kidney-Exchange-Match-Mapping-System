@@ -21,12 +21,14 @@
 \hypersetup{
     colorlinks=true,
     citecolor=black,
-    urlcolor=blue
+    urlcolor=cyan,
+    linkcolor=black
 }
 
 % color definition
 \definecolor{moreratio}{rgb}{0,1,0}
 \definecolor{lessratio}{rgb}{0.95,0.5,0.5}
+\definecolor{tableheader}{rgb}{0.8,0.8,0.8}
 
 % document start
 \begin{document}
@@ -82,15 +84,15 @@ the donor's kidney without killing it.
     \def\arraystretch{1.5}
     \begin{tabular}{|c|c|c|c|c|}
     \hline
-    \backslashbox{\textbf{Recipient}}{\textbf{Donor}}&\textbf{O}&\textbf{A}&\textbf{B}&\textbf{AB} \\
+    \cellcolor{tableheader}\backslashbox{\textbf{Recipient}}{\textbf{Donor}}&\cellcolor{tableheader}\textbf{O}&\cellcolor{tableheader}\textbf{A}&\cellcolor{tableheader}\textbf{B}&\cellcolor{tableheader}\textbf{AB} \\
     \hline
-    \textbf{O}&1&0&0&0 \\
+    \cellcolor{tableheader}\textbf{O}&1&0&0&0 \\
     \hline
-    \textbf{A}&1&1&0&0 \\
+    \cellcolor{tableheader}\textbf{A}&1&1&0&0 \\
     \hline
-    \textbf{B}&1&0&1&0 \\
+    \cellcolor{tableheader}\textbf{B}&1&0&1&0 \\
     \hline
-    \textbf{AB}&1&1&1&1 \\
+    \cellcolor{tableheader}\textbf{AB}&1&1&1&1 \\
     \hline
     \end{tabular}
     \label{tab1}
@@ -225,13 +227,14 @@ there will be comparison for Execution Time and Matching Efficiency for each alg
 \subsection{Execution Time Comparison}
 \subsubsection{Execution Time Comparison for Different Algorithm Combinations}
 For this experiment, each algorithm is used for 3000 incompatible pairs divided into 30 groups of 100. A group is called a seed. Each
-algorithm will be fitted with the same dataset group 50 times for every group. As seen in Figure 3, each data point in the boxplot
+algorithm will be fitted with the same dataset group 50 times for every group. As seen in Figure \ref{exctimealgo}, each data point in the boxplot
 is used to show the average execution time from the 50 executions for every dataset group, in one Y coordinate, there are 30 data
 points, each one for one data group. 
 
 \begin{figure}[h]
     \includegraphics[width=0.5\textwidth]{images/average_execution_time_for_3_algorithms.png}
     \caption{Average Execution Time for 3 Algorithms}
+    \label{exctimealgo}
 \end{figure}
 
 As seen from the boxplot, Edmond's Algorithm and Priority-based with infrequent method of priority assignment are the slowest
@@ -247,36 +250,38 @@ executed 10 times for each algorithm for each data size.
 \begin{figure}[h]
     \includegraphics[width=0.5\textwidth]{images/execution_time_for_different_amount_of_data.png}
     \caption{Execution Time for Different Amount of Data}
+    \label{exctimedata}
 \end{figure}
 
-As seen in Figure 4, there are two plots, each one representing a group of fast algorithms and a group of slow algorithms.
+As seen in Figure \ref{exctimedata}, there are two plots, each one representing a group of fast algorithms and a group of slow algorithms.
 From the upper figure, even with 3000 incompatible pairs, the maximum algorithm runtime is around 3000 milliseconds. Meanwhile,
 from the lower figure, both of the algorithms can reach 600000 milliseconds (10 minutes) to process 3000 pairs. From the
-overall line plot, we can conclude that the relation of data size and execution time is a form of polynomial function, not linear.
+overall line plot, it can be concluded that the relation of data size and execution time is a form of polynomial function, not linear.
 
 \subsection{Overall Matching Efficiency Comparison for Different Algorithms}
 The final experiment is conducted to show which algorithm-parameter combination is the best one in producing high matching efficiency.
-In this experiment, each combination is used for every data seed. To ease up the comparison, in Figure 5, we use ratio of improvement
+In this experiment, each combination is used for every data seed. To ease up the comparison, in Figure \ref{matcheffratio}, ratio of improvement is used
 in comparison to Edmond's Algorithm as a baseline shown as a horizontal line in the figure. Every data point is a matching efficiency
 multiplier of the matching efficiency obtained when Edmond's Algorithm is used.
 
-\begin{figure*}
-    \includegraphics[width=\textwidth]{images/matching_efficiency_ratio_against_baseline.png}
+\begin{figure}[h]
+    \includegraphics[width=0.5\textwidth]{images/matching_efficiency_ratio_against_baseline.png}
     \caption{Matching Efficiency Ratio of \textit{N}-way Algorithms against Baseline}
-\end{figure*}
+    \label{matcheffratio}
+\end{figure}
 
-To simplify the figure, Table II is used to store average matching efficiency improvement ratio in compared to baseline. The average used
+To simplify the figure, Table \ref{tab2} is used to store average matching efficiency improvement ratio in compared to baseline. The average used
 in the table is the average improvement ratio of an algorithm in comparison to baseline for all data seeds.
 
 \begin{table}[htbp]
     \caption{Average Matching Efficiency Ratio of \textit{N}-way Algorithms compared to Baseline}
     \begin{center}
     \def\arraystretch{1.5}
-    \begin{tabular}{|c  |c|}
+    \begin{tabular}{|c|c|}
     \hline
-    &\textbf{Average} \\
-    \textbf{Algorithm}&\textbf{Improvement}\\
-    &\textbf{Ratio}\\
+    \cellcolor{tableheader}&\cellcolor{tableheader}\textbf{Average} \\
+    \cellcolor{tableheader}\textbf{Algorithm}&\cellcolor{tableheader}\textbf{Improvement}\\
+    \cellcolor{tableheader}&\cellcolor{tableheader}\textbf{Ratio}\\
     \hline
     Baseline: Edmond's Algorithm&1.0 \\
     \hline
@@ -309,21 +314,61 @@ in the table is the average improvement ratio of an algorithm in comparison to b
     \end{center}
 \end{table}
 
-As we can see from Table II, most of \textit{N}-way match map searching algorithm produces higher matching efficiency in
+As can be seen from Table \ref{tab2}, most of \textit{N}-way match map searching algorithm produces higher matching efficiency in
 comparison to the baseline, Edmond's Algorithm. However, some algorithms, using the exact method of using \textit{N} parameter,
 have worse results compared to baseline. The average matching efficiency of the \textit{N}-way match map searching
 algorithms is 7.75\% higher than the baseline algorithm. The higher matching efficiency improvement is obtained when First Accept
 Searching algorithm is used when \textit{N} is 10, maximum method of using \textit{N}, with data seed 21, where the improvement
-against baseline is 47.06\%. 
+against baseline is 47.06\%.
+
+While \textit{N}-way match map searching algorithms may produce better results, it is worth noting that with \textit{N}-way exchanges
+being produced by algorithm may be harder to execute in hospitals since the kidney exchanges have to be operated in the same time. The
+implication is that exchanges with lower number of ways are easier to conduct as less hospital resources are needed to conduct the operation.
+Therefore, there needs to be an algorithm comparison regarding the average and the maximum exchanges length of the cycles in the match map.
+In this experiment, every algorithm and parameter combinations are being tested for 30 data seeds with each containing 100 incompatible pairs. 
+
+\begin{figure}[h]
+   \includegraphics[width=0.5\textwidth]{images/maximum_match_length_for_different_combinations.png}
+   \caption{Maximum Match Length for Different Algorithm Combinations}
+   \label{figuremaxlength}
+\end{figure}
+
+From what can be seen in Figure \ref{figuremaxlength}, Edmond's Algorithm and algorithms with \textit{N} usage method parameter assigned to exact, produced the maximum
+length of \textit{N} as the cycles in the produced match map is all of the same length that is \textit{N}.
+The more interesting result is that although the parameter \textit{N} is 10, as can be seen with the green and the yellow line, the maximum length is
+is not that close to 10. 
+
+\begin{figure}[h]
+    \includegraphics[width=0.5\textwidth]{images/average_match_length_for_different_combinations.png}
+    \caption{Average Match Length for Different Algorithm Combinations}
+    \label{figureavglength}
+\end{figure}
+
+Similar to what can be seen in Figure \ref{figuremaxlength}, in Figure \ref{figureavglength}, Edmond's Algorithm and algorithms with
+\textit{N} usage method parameter assigned to exact, produced the average length of \textit{N} as the cycles in the produced match map is all
+of the same length that is \textit{N}. Generally, almost every algorithm that uses maximum method of \textit{N} usage produces cycles with the
+average length of around 2 to 3, with Priority-based Searching algorithm with N=10, Method=Max, and Priority=Greedy, having an averagely high
+average length of exchanges.
 
 \section{Conclusion}
-ababwa
+This paper shows that it is a viable option to use \textit{N}-way match map searching algorithms instead of the usual two-way
+algorithms such as Edmond's Algorithm for Kidney Paired Donation, with \textit{N}-way algorithms producing better matching efficiency
+and competitive execution time in comparison to the baseline, Edmond's Algorithm provided the same dataset. Generally speaking,
+the usage of \textit{N}-way algorithms increases matching efficiency by 7.75\%.
+
+With the provided data, First Accept Searching algorithm have a more consistent performance in general compared to Priority-based Searching
+algorithm. However, with Priority-based Searching algorithm, the matching efficiency improvement is generally higher with the exception of
+when exact method to utilize \textit{N} is being used instead of the maximum method. However, it is worth noting that priority-based searching
+algorithm may produce high matching efficiency with the compromise of high average matching length if greedy priority assignment method is being
+used. Therefore it can be concluded that First Accept Searching algorithm is the most ideal \textit{N}-way match map searching algorithm to use
+in Kidney Exchange Program. 
 
 \section{Related Work}
-this is still a template
-
-\section*{Acknowledgment}
-
+The idea of the solution, the existing algorithms, and the performance metrics being used as a performance measure are all obtained from
+the main reference paper, Web Based Decision Support System for Kidney Exchange by Samy Raja, Prasanna Devi S., and Suryaprakasa Rao K. in
+International Journal of Computer Applications \cite{raja}. In that paper, two-way match map searching algorithms are being used to tackle
+the problem of the humanely-impossible task of searching the most optimal match map out of an incompatible pairs pool, which becomes the baseline
+and the reference of the newer algorithms being implemented in this paper.
 
 \begin{thebibliography}{00}
 \bibitem{roth2005} Roth, A. E., Sonmez, T., Unver, M. U. (2005). Kidney Exchange. Quarterly Journal of Economics, 32.
