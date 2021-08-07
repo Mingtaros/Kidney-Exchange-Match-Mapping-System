@@ -30,6 +30,13 @@
 \definecolor{lessratio}{rgb}{0.95,0.5,0.5}
 \definecolor{tableheader}{rgb}{0.8,0.8,0.8}
 
+% renew some commands (to Indonesian Language)
+\renewcommand{\abstractname}{Abstrak}
+\renewcommand{\IEEEkeywordsname}{Kata Kunci}
+\renewcommand{\tablename}{Tabel}
+\renewcommand{\figurename}{Gambar}
+\renewcommand{\refname}{Referensi}
+
 % document start
 \begin{document}
 
@@ -49,42 +56,42 @@
 \maketitle
 
 \begin{abstract}
-Before kidney transplant is performed, the kidney donor and the kidney recipient must
-be a compatible pair. In reality, it's not uncommon that incompatibility occurs between the donor-recipient pair.
-To solve this problem, Kidney Exchange Program was created so that an incompatible pair can exchange the kidney
-to another incompatible pair, making cross donation easier. But to search for the optimal match map from incompatible
-pairs pool is not an easy task. Match map searching algorithm is an algorithm created for this task. Edmond's
-Algorithm, the existing algorithm, is suboptimal because it closes the possibiliy of three or more-way exchanges.
-Therefore, in this paper, by modifying existing two-way match map searching algorithms, \textit{N}-way match
-map searching algorithm is implemented. Based on the test results, using 3000 incompatible pairs data, it is
-proven that \textit{N}-way match map searching algorithm is superior in terms of matching efficiency compared to
-the two-way match map searching algorithm. The increase in matching efficiency obtained on average reaches 7.75\%
-in comparison to the matching efficiency obtained by Edmond's Algorithm. 
+Sebelum transplantasi ginjal dilakukan, pendonor dan pasien calon penerima ginjal harus merupakan pasangan yang cocok.
+Faktanya, tidak jarang ketidakcocokan terjadi di antara pasangan donor-resipien, menimbulkan masalah ketersediaan ginjal.
+Untuk menyelesaikan masalah ketersediaan ini, Program Pertukaran Ginjal (\textit{Kidney Exchange program}) diciptakan agar
+pasangan-pasangan ketidakcocokan dapat melakukan pertukaran ginjal dengan pasangan ketidakcocokan lainnya, membuat pendonoran
+silang. Namun karena sangat banyaknya pasangan ketidakcocokan, mencari pemetaan kecocokan dari sekumpulan pasangan ketidakcocokan
+bukanlah hal yang mudah. Oleh karena itu, algoritma pencarian pemetaan kecocokan dibuat. Algoritma yang sudah ada, \textit{Edmond's Algorithm},
+tidaklah optimal karena sifatnya yang menutup kemungkinan terjadinya pertukaran tiga arah atau lebih. Pada paper ini,
+dengan memodifikasi algoritma pencarian pemetaan kecocokan dua arah yang sudah ada, diimplementasikan algoritma pencarian
+pemetaan kecocokan \textit{N} arah. Berdasarkan hasil pengujian, menggunakan data berisikan 3000 pasangan ketidakcocokan,
+terbukti bahwa algoritma \textit{N} arah adalah algoritma yang superior dibandingkan dengan algoritma dua arah apabila diukur
+menggunakan metrik efisensi pencocokan (\textit{matching efficiency}). Peningkatan efisiensi pencocokan yang didapatkan secara
+rata-rata mencapai 7.75\% jika dibandingkan dengan efisiensi pencocokan yang didapatkan oleh \textit{Edmond's Algorithm}.
 \end{abstract}
 
 \begin{IEEEkeywords}
-kidney transplantation, kidney exchange, match map searching algorithm
+transplantasi ginjal, pertukaran ginjal, algoritma pencarian pemetaan kecocokan
 \end{IEEEkeywords}
 
-\section{Introduction}
-Kidney transplantation is the most recommended treatment method for serious kidney diseases \cite{roth2005}.
-Every year, in Indonesia alone, there are more than 100,000 patients with kidney transplantation needs. But among
-those patients, only about 20\% can get a kidney transplantation \cite{wiradarma}. There are many types
-of problems that leads to this condition, for example financial problems, public opinions, and the most
-common, kidney availability.
-Even though live donor numbers are steadily increasing\cite{roth2006}, availability problem arises because many criteria must
-be met before kidney transplant can be performed \cite{wiradarma}. The donor needs to have a healthy kidney,
-matching blood type, and no blood-borne diseases. Also, the patient's immune system must be able to accept
-the donor's kidney without killing it.
+\section{Pendahuluan}
+Transplantasi ginjal merupakan metode perawatan yang paling direkomendasikan untuk penyakit-penyakit ginjal yang serius\cite{roth2005}.
+Setiap tahunnya, di Indonesia sendiri, terdapat lebih dari 100,000 pasien yang memiliki kebutuhan ginjal transplan. Namun
+hanya sekitar 20\% dari pasien-pasien tersebut yang bisa mendapatkan transplantasi\cite{wiradarma}. Hal ini terjadi karena
+adanya masalah finansial, pandangan masyarakat, dan yang paling umum, masalah ketersediaan.
+Meskipun jumlah pendonor setiap tahunnya semakin meningkat\cite{roth2006}, masalah ketersediaan ginjal tetaplah ada
+dikarenakan oleh banyaknya kriteria medis yang harus dipenuhi oleh pasangan donor-resipien sebelum operasi dapat dilakukan\cite{wiradarma}.
+Pendonor harus memiliki ginjal yang sehat, golongan darah yang cocok dengan resipien, dan tidak memiliki penyakit yang dapat
+menular melalui darah. Selain itu, sistem imun dari pasien juga harus dapat menerima ginjal pendonor tanpa membunuh ginjal yang bersangkutan.
 
-\subsection{Kidney Transplant Prerequisites}
+\subsection{Transplantasi Ginjal}
 \begin{table}[htbp]
-    \caption{Blood Type Compatibility between Patient and Donor \cite{raja}}
+    \caption{Kompatibilitas Golongan Darah Penerima dan Pemberi Donor Ginjal \cite{raja}}
     \begin{center}
     \def\arraystretch{1.5}
     \begin{tabular}{|c|c|c|c|c|}
     \hline
-    \cellcolor{tableheader}\backslashbox{\textbf{Recipient}}{\textbf{Donor}}&\cellcolor{tableheader}\textbf{O}&\cellcolor{tableheader}\textbf{A}&\cellcolor{tableheader}\textbf{B}&\cellcolor{tableheader}\textbf{AB} \\
+    \cellcolor{tableheader}\backslashbox{\textbf{Resipien}}{\textbf{Donor}}&\cellcolor{tableheader}\textbf{O}&\cellcolor{tableheader}\textbf{A}&\cellcolor{tableheader}\textbf{B}&\cellcolor{tableheader}\textbf{AB} \\
     \hline
     \cellcolor{tableheader}\textbf{O}&1&0&0&0 \\
     \hline
@@ -99,54 +106,54 @@ the donor's kidney without killing it.
     \end{center}
 \end{table}
 
-There are few tests that have to be performed before kidney transplant can be done \cite{adrian}.
-The blood type test is performed to both the donor and the recipient. Donors can only make a
-donation if one's blood type is compatible with the recipient's blood type.
-In Table I, number 1 indicates compatibility and 0 indicates incompatibility. Donors with blood type
-O are considered Universal Donors because they can give donors to every patients regardless of the blood
-type. Recipients with blood type AB are considered a Universal Recipients because they can accept kidney
-donation from every donors regardless of the blood type \cite{charge}.
-The immune test is performed after the donor-recipient pair passes the blood type test \cite{adrian}. The tests
-are cross match test and Human Leucocyte Antigen (HLA) test. In cross match test, donor's blood are met with
-recipient's blood to see whether there is a resistance reaction from recipient's immune system. The resistance
-reaction happens when the donor kidney is considered a foreign object that must be killed by recipient's
-immune system \cite{aprilano}. HLA test tests the same reaction as cross match test, but donor's and recipient's
-tissue cells are being used instead of blood \cite{nguyen}.
-Finally, to test whether the donor has any blood-borne diseases, serology is performed \cite{aprilano}.
+Terdapat beberapa buah pengujian yang harus dilalui sebelum transplantasi ginjal dapat dilakukan \cite{adrian}.
+Uji golongan darah dilakukan untuk donor dan juga resipien. Seorang pendonor hanya dapat melakukan pendonoran apabila
+golongan darah pendonor bersifat cocok dengan golongan darah resipien. Seperti yang dapat dilihat pada Tabel \ref{tab1},
+angka 1 mengindikasikan kecocokan dan angka 0 mengindikasikan ketidakcocokan. Pendonor dengan golongan darah O merupakan
+\textit{Universal Donor} karena dapat melakukan donor ke semua golongan darah. Resipien dengan golongan darah AB merupakan
+\textit{Universal Recipient} karena dapat menerima donor dari semua golongan darah \cite{charge}.
+Uji imunitas dilakukan setelah pasangan donor-resipien melewati uji golongan darah \cite{adrian}. Terdapat dua jenis
+pengujian yang dilakukan, yaitu uji silang dan uji \textit{Human Leucocyte Antigen} (HLA). Pada uji silang, darah pendonor
+dipertemukan dengan darah resipien untuk melihat terjadinya penggumpalan atau tidak. Penggumpalan terjadi apabila sistem imun
+dari resipien menganggap darah dari pendonor merupakan benda asing yang harus dieksterminasi\cite{aprilano}. Uji HLA juga
+dilakukan untuk menguji perlawanan dari sistem imun pasien terhadap ginjal pendonor, namun digunakan sel tisu dari pendonor
+dan resipien melainkan darah \cite{nguyen}. Setelah semua pengujian selesai, uji serologi dilakukan pada pendonor untuk
+menguji apakah terdapat penyakit yang dapat menular melalui darah pada pendonor \cite{aprilano}.
 
-\subsection{Kidney Exchange Program}
-Because of kidney transplant prerequisites, Kidney Exchange program named Kidney Paired Donation (KPD) was created
-so that an incompatible donor-recipient pair can exchange their incompatible kidney to another incompatible
-pair, making cross-donation possible \cite{raja}. The kidney exchange can be done two-way, three-way, and can
-go up to \textit{N}-way.
+\subsection{Program Pertukaran Ginjal}
+Karena banyaknya pasangan donor-resipien yang tidak cocok akibat prasyarat-prasyarat transplantasi, program pertukaran
+ginjal bernama \textit{Kidney Paired Donation} (KPD) diciptakan agar pasangan donor-resipien ketidakcocokan dapat mempertukarkan
+ginjal dengan pasangan ketidakcocokan lainnya, membuat pendonoran silang menjadi mungkin \cite{raja}. Pertukaran ginjal
+antar-pasangan dapat dilakukan secara dua arah, tiga arah, dan dapat dilakukan hingga \textit{N} arah.
 
-\begin{figure}[h]
+\begin{figure}
     \includegraphics[width=0.5\textwidth]{images/kidney-exchange.png}
-    \caption{Two-way(left) and Three-way(right) Exchange in KPD program}
+    \caption{Pertukaran dua arah(kiri) dan tiga arah(kanan) pada Program Pertukaran Ginjal}
 \end{figure}
 
-Unfortunately, because of the large number of incompatible pairs, hospitals cannot find the optimal
-matching solution for the pool of incompatible pairs. An algorithm that perform a mapping search is needed
-to address this issue. One of the most known algorithm to tackle this problem is Edmond's Algorithm \cite{raja}.
-In Edmond's Algorithm, the pool of incompatible pairs are represented as a graph with each node representing
-an incompatible pair and each edge representing a match between two incompatible pairs. The algorithm focuses on
-high priority pairs so that pairs who need a transplantation more can get an exchange first.
-Another algorithm regarding this problem is First Accept Heuristic Match \cite{raja} which focuses more on the
-heuristic if one registers first, then one gets an exchange first.
+Karena banyaknya pasangan ketidakcocokan, rumah sakit-rumah sakit tidak dapat secara mudah mendapatkan solusi pencocokan
+yang optimal untuk sekumpulan pasangan-pasangna ketidakcocokan. Dibutuhkan algoritma untuk mencarikan pemetaan kecocokan.
+Salah satu algoritma yang diketahui untuk menyelesaikan permasalahan ini adalah \textit{Edmond's Algorithm} \cite{raja}.
+Pada \textit{Edmond's Algorithm}, kumpulan pasangan ketidakcocokan direpresentasikan dengan suatu graf dengan setiap simpul
+yang adalah pasangan ketidakcocokan dan sisi yang merupakan arah pencocokan antar-pasangan yang mungkin. Algoritma ini berfokus
+untuk mencarikan kecocokan terlebih dahulu untuk pasangan-pasangan dengan prioritas tinggi sehingga pasien-pasien yang lebih
+membutuhkan transplantasi dapat mendapatkan pertukaran terlebih dahulu. Algoritma lain pada lingkup kerja ini adalah algoritma
+\textit{First Accept Heuristic Match} \cite{raja} yang menggunakan heuristik dimana pasangan yang registrasi lebih dulu akan
+mendapatkan kecocokan terlebih dahulu.
 
-These algorithms are called Match Map Searching Algorithms. To evaluate and measure the performance of an algorithm,
-a few specific performance metrics are use\cite{tullis}. There are two performance metrics to evaluate these
-algorithms. The first one is Matching Efficiency, which measures the number of donor-patient pairs that matched
-another pair and were able to exchange divided by the total number of donor-patient pairs, represented in a percentage.
-The second metric is execution time, which measures how long does the algorithm run to get the optimal match map,
-usually measured in millisecond. The best match map searching algorithm is the algorithm that can produce high matching
-efficiency with low execution time. Meaning that many patients can be saved as fast as possible.
+Algoritma-algoritma ini dinamakan algoritma pencarian pemetaan kecocokan. Bagus atau tidaknya algoritma-algoritma ini diukur
+menggunakan metrik performa Efisiensi Pencocokan dan Waktu Eksekusi Algoritma \cite{tullis}. Efisiensi pencocokan merepresentasikan
+berapa banyaknya pasangan yang mendapatkan kecocokan dari semua pasangan yang ada, ditulis dalam bentuk persentase. Waktu Eksekusi
+Algoritma adalah metrik yang mengukur seberapa lama waktu jalannya algoritma dimulai dari \textit{input} masuk hingga \textit{output}
+keluar, diukur dalam milisekon (ms). Algoritma pencarian pemetaan kecocokan terbaik merupakan algoritma yang mampu menghasilkan
+efisiensi pencocokan yang tinggi dalam waktu eksekusi yang singkat, yang berarti lebih banyak pasien yang lebih dapat terselamatkan
+secepat mungkin.
 
-As good as it looks, Edmond's Algorithm and First Accept Heuristic Match can only find two-way exchanges from the
-incompatible pairs pool. Meaning these algorithms are not able find a solution with three-way exchanges or more,
-closing the possibility.
+Meskipun \textit{Edmond's Algorithm} dan \textit{First Accept Heuristic Match} sudah ada, algoritma-algoritma
+tersebut hanya dapat mengembalikan pertukaran dua arah. Hal ini merupakan suatu batasan karena algoritma-algoritma
+ini menutup kemungkinan dicarikannya solusi dengan pertukaran tiga arah atau lebih.
 
-\section{Methodology}
+\section{Metodologi}
 From the existing algorithms problems addressed in the previous section, match map searching algorithms that can find
 \textit{N}-way exchanges from incompatible pairs pool are needed. By modifying existing algorithms and the used data
 structure, new algorithms can be created.
@@ -160,7 +167,7 @@ Algorithm can already be used to return \textit{N}-way exchanges.
 As seen in Fig. 2, using cycle detection yields a result with three-way exchange instead of the two-way exchange result
 returned by edge detection, resulting in a higher matching efficiency using the same compatibility graph. 
 
-\begin{figure}
+\begin{figure}[h]
     \includegraphics[width=0.5\textwidth]{images/edge-vs-cycle-detection.jpg}
     \caption{Edge Detection(left) vs. Cycle Detection(right) in Compatibility Graph}
 \end{figure}
