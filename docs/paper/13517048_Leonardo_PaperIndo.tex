@@ -154,73 +154,100 @@ tersebut hanya dapat mengembalikan pertukaran dua arah. Hal ini merupakan suatu 
 ini menutup kemungkinan dicarikannya solusi dengan pertukaran tiga arah atau lebih.
 
 \section{Metodologi}
-From the existing algorithms problems addressed in the previous section, match map searching algorithms that can find
-\textit{N}-way exchanges from incompatible pairs pool are needed. By modifying existing algorithms and the used data
-structure, new algorithms can be created.
+Berdasarkan masalah-masalah dari algoritma yang sudah dijelaskan pada bab sebelumnya, dibutuhkan algoritma pencarian
+pemetaan kecocokan \textit{N} arah untuk kumpulan pasangan ketidakcocokan. Dengan memodifikasi algoritma-algoritma yang
+ada, algoritma-algoritma baru dapat dibuat.
 
-\subsection{Compatibility Graph}
-Before creating new algorithms, incompatibility pairs pool data structure needs to be redefined. Compatibility Graph
-used in Edmond's Algorithm is an undirected graph \cite{raja}, meaning that every edge connecting two vertices represent a bidirectional
-relationship between the aforementioned two vertices, making the returned exchanges to be edges, closing up possibility
-of three-way exchanges or more. If the algorithm is modified to use cycle detection instead of edge detection, Edmond's
-Algorithm can already be used to return \textit{N}-way exchanges.
-As seen in Fig. 2, using cycle detection yields a result with three-way exchange instead of the two-way exchange result
-returned by edge detection, resulting in a higher matching efficiency using the same compatibility graph. 
+\subsection{Modifikasi-modifikasi untuk Algoritma yang sudah ada}
+Sebelum algoritma baru dibuat, struktur data dari kumpulan pasangan ketidakcocokan perlu didefinisikan ulang. Graf Kompatibilitas
+yang digunakan pada \textit{Edmond's Algorithm} adalah graf tak berarah \cite{raja}, yang berarti sisi pada graf merepresentasikan
+kecocokan antara dua simpul, sehingga untuk mencari kecocokan antar pasangan, algoritma hanya perlu mendeteksi sisi pada graf kompatibilitas
+yang sudah ada. Hal ini menutup kemungkinan terdeteksinya kecocokan tiga arah atau lebih. Apabila dilakukan modifikasi untuk digunakan
+algoritma deteksi siklus dan bukan deteksi sisi untuk menggantikan ini, algoritma-algoritma yang sudah ada akan mampu mendeteksi
+kecocokan \textit{N} arah.
+Seperti yang dapat dilihat pada Gambar \ref{edgevscycle}, dengan data yang sama, dengan menggantikan algoritma deteksi sisi dengan
+deteksi siklus, kecocokan tiga arah dapat terdeteksi sehingga efisiensi pencocokan yang didapat meningkat, membuahkan hasil yang lebih baik.
 
 \begin{figure}[h]
     \includegraphics[width=0.5\textwidth]{images/edge-vs-cycle-detection.jpg}
-    \caption{Edge Detection(left) vs. Cycle Detection(right) in Compatibility Graph}
+    \caption{Deteksi Sisi(kiri) vs. Deteksi Siklus(kanan) pada Graf Kompatibilitas}
+    \label{edgevscycle}
 \end{figure}
 
-\subsection{Cycle Detection for Directed Graph}
-As stated in the previous subsection, edge detection used in existing algorithms needs to be converted to cycle detection.
-However, changing edge detection to cycle detection is not enough. The cycles returned from the graph are all bidirectional
-cycles. If the compatibility graph is converted into a directed graph instead of undirected, unidirectional cycles can also be
-returned, further increasing the number of cycles, therefore increasing the matching efficiency.
-Directed graph is a data structure consisting a set of vertices that are connected via edges, where each edge has a one-way
-direction that shows the direction of movement from one vertex to another \cite{sedgewick}.
-Cycle detection for directed graph is used to find the existence of a one-way path in a graph that starts and finishes
-at the same vertex \cite{mehta}.
+Meskipun dengan mengubah deteksi sisi menjadi deteksi siklus berpotensi meningkatkan efisiensi pencocokan, hal ini
+tentunya tidak cukup. Perlu diperhatikan bahwa siklus-siklus yang didapatkan dari graf adalah siklus bolak-balik.
+Apabila graf kompatibilitas yang merupakan graf tak berarah dapat diubah menjadi graf berarah, siklus-siklus satu arah
+pada graf juga dapat dideteksi dan dikembalikan, yang secara tidak langsung menambahkan jumlah graf yang dikembalikan,
+sehingga berpotensi meningkatkan efisiensi pencocokan seperti yang dapat dilihat pada gambar \ref{undirectedvsdirected}.
+Graf tak berarah sendiri adalah struktur data yang terdiri dari sekumpulan simpul dan dihubungi oleh sisi, dimana
+setiap sisi memiliki arah yang menunjukkan arah pergerakan yang dapat  dilakukan dari suatu simpul ke simpul-simpul
+lainnya \cite{sedgewick}. Algoritma deteksi siklus untuk graf berarah digunakan untuk mencari keberadaan jalur satu
+arah dari suatu simpul yang kembali ke simpul mulai pada graf \cite{mehta}.
 
-The cycle detection algorithm being used here is a little bit different from the usual cycle detection algorithm that detects
-whether a graph has a cycle or not, instead this algorithm collects and returns all possible cycle in a graph in a list.
-Each cycle in this list is a possible exchange that can be excecuted. The length of the cycle represents the \textit{N} in
-\textit{N}-way exchange (e.g., a cycle with the length of 3 represents a three-way exchange).
-These modification is performed with the hope that the amount of cycles being detected will
-increase and therefore increasing matching efficiency and saving more patients.
+\begin{figure}[h]
+    \includegraphics[width=0.5\textwidth]{images/Graf berarah vs Tak Berarah.jpg}
+    \caption{Graf Kompatibilitas Tak Berarah vs. Berarah}
+    \label{undirectedvsdirected}
+\end{figure}
 
-\subsection{\textit{N}-way Match Map Searching Algorithms}
-With directed graph as compatibility graph and using cycle detection algorithm, \textit{N}-way match map searching algorithms
-can be created. This algorithms receive the list of cycles returned from cycle detection and returned a reduced list of cycles
-called match mapping. The reduction mentioned is done because each pairs in compatibility graph can exist in more than one cycles
-in list of cycle, creating a many-to-many relationship among the pairs. This is obviously impossible as every pair can only donate
-and receive exactly one kidney. The reduction is done to change this many-to-many relationship to be a one-to-one relationship. This
-reduction usually leaves some pairs to be not matched at all, therefore matching efficiency is used as a performance metric to
-measure how many pairs can get matched out of the full incompatible pairs pool.  
+Algoritma deteksi siklus yang digunakan berbeda dengan algoritma deteksi siklus pada umumnya yang mendeteksi apakah
+suatu graf memiliki siklus atau tidak (True/False question). Pada implementasi ini, algoritma akan mengumpulkan dan
+mengembalikan semua siklus yang dapat terbentuk dari suatu graf kompatibilitas. Setiap siklus pada list siklus yang
+dikembalikan adalah pertukaran ginjal yang mungkin terjadi karena bersifat cocok antar-pasangan. Panjang dari siklus
+merepresentasikan \textit{N} pada pertukaran \textit{N} arah (cth. siklus sepanjang 3 merepresentasikan pertukaran
+tiga arah). Modifikasi ini dilakukan dengan harapan jumlah siklus yang didapatkan akan meningkat niscaya meningkatkan
+efisiensi pencocokan, agar lebih banyak pasien yang dapat terselamatkan.
+
+\subsection{Algoritma Pencarian Pemetaan Kecocokan \textit{N} arah}
+Dengan kompatibilitas graf yang berarah dan juga algoritma deteksi siklus, algoritma pencarian pemetaan kecocokan \textit{N}
+arah dapat dibuat. Algoritma-algoritma \textit{N} arah ini akan menerima list siklus yang dikembalikan dari algoritma
+deteksi siklus yang telah dijelaskan sebelumnya. Keluaran dari algoritma ini adalah list siklus yang telah terreduksi
+yang dinamakan sebagai pemetaan kecocokan. Reduksi yang terjadi pada algoritma dilakukan karena setiap pasangan pada graf
+kompatibilitas ada pada lebih dari satu siklus pada list siklus masukan. Hal ini tentunya tidak mungkin karena setiap
+pasangan hanya dapat memberikan dan menerima tepat satu buah ginjal. Reduksi ini dilakukan untuk mengubah hubungan
+\textit{many to many} ini menjadi hubungan \textit{one to one}. Reduksi ini pada umumnya menyebabkan beberapa pasangan
+ketidakcocokan untuk tidak mendapatkan kecocokan sama sekali. Oleh karena itu, metrik efisiensi pencocokan digunakan
+untuk menilai kualitas algoritma dalam menghasilkan jumlah pasangan yang mendapatkan kecocokan sebanyak-banyaknya dari
+kumpulan pasangan ketidakcocokan. 
 
 \subsubsection{First Accept Searching Algorithm}
-The first \textit{N}-way match map searching algorithm is first accept searching algorithm which is inspired by first accept
-heuristic match algorithm. The first-accept approach being used in this algorithm is to to use the first cycles in cycles list
-returned from cycle detection algorithm. This algorithm ensures that no pair gets matched twice or more by deleting cycles that
-contains pairs that have been matched earlier.
+Algoritma \textit{N} arah yang pertama adalah algoritma \textit{First Accept Searching}. Inspirasi dari algoritma ini adalah
+algoritma \textit{First Accept Heuristic Match}. Pendekatan yang digunakan disini adalah untuk mengembalikan siklus-siklus
+yang ada terlebih dahulu. Algoritma ini memastikan tidak ada pasangan yang mendapatkan kecocokan lebih dari satu kali dengan
+menghilangkan siklus-siklus yang mengandung pasangan-pasangan yang telah ada pada siklus-siklus yang telah dikembalikan.
 
-This algorithm uses two parameters. The first parameter is the number of \textit{N}, knowing that this algororithm is an \textit{N}-way
-algorithm. The second parameter is the method to use \textit{N}. The number of \textit{N} can be used as a maximum or exact way of exchanges.
-When the maximum method is used, the algorithm will search for cycles that represents two-to-\textit{N}-way exchanges. Meanwhile when exact
-method is used, the algorithm will search for cycles that have an exact length of \textit{N}.  
+Algoritma ini menggunakan dua buah parameter. Parameter pertama tentunya adalah nilai \textit{N} ini sendiri, karena
+algoritma ini adalah algoritma pencarian pemetaan kecocokan \textit{N} arah. Parameter kedua adalah metode penggunaan
+nilai \textit{N}. Nilai \textit{N} dapat digunakan sebagai panjang kecocokan maksimum dan sebagai panjang kecocokan eksak.
+Jika metode maksimum digunakan, maka siklus-siklus yang dikembalikan dapat memiliki panjang 2 hingga \textit{N}. Sementara
+jika metode eksak digunakan, maka siklus-siklus yang dikembalikan hanya adalah siklus-siklus dengan panjang \textit{N} saja.
+
+Meskipun metode maksimum terlihat lebih unggul dibandingkan metode eksak, tidak selalu terjadi demikian. Sebagai contoh, seperti
+yang dapat dilihat pada Gambar \ref{maxvsexact}, saat \textit{N} adalah 5, saat metode maksimum digunakan, siklus-siklus bolak-balik
+pada graf akan dikembalikan, sehingga pertukaran lima arah pada graf akan dibuang. Saat metode eksak digunakan, karena algoritma
+akan mencari siklus-siklus lima arah, algoritma akan mengembalikan pertukaran lima arah pada graf. Pada kasus ini, efisiensi pencocokan
+yang lebih tinggi diperoleh saat metode eksak digunakan, bukan metode maksimum.
+
+\begin{figure}[h]
+    \includegraphics[width=0.5\textwidth]{images/maksimum-vs-eksak.png}
+    \caption{Case where Exact Method is superior to Maximum Method}
+    \label{maxvsexact}
+\end{figure}
 
 \subsubsection{Priority-based Searching Algorithm}
-The second \textit{N}-way match map searching algorithm is priority-based searching algorithm which is inspired by Edmond's
-algorithm. This algorithm works similarly with First Accept Searching Algorithm, but each cycle is given a priority value so
-that exchanges with highest priority can be returned first compared to the others.
+Algoritma \textit{N} arah yang kedua adalah algoritma \textit{Priority-based Searching}. Insprirasi dari algoritma ini adalah
+\textit{Edmond's Algorithm}. Cara kerja dari algoritma ini sangat mirip dengan algoritma \textit{First Accept Searching}, namun
+setiap siklus diberikan nilai prioritas sehingga siklus-siklus yang memilii prioritas tinggi dapat dikembalikan terlebih
+dahulu dibandingkan yang lainnya. 
 
-This algorothm uses three parameters. The first two are the same parameter used in First Accept Searching Algortihm, number of \textit{N}
-and the method to use \textit{N}. The third parameter is priority assignment method. There are two methods to measure priority of every cycles.
-The first assignment method is the greedy method. This method assigns higher priority for longer cycles, indirectly affecting the algorithm
-to return more of the longer cycles with the hope that it can increase the matching efficiency.
-The second assignment method is the infrequent method. This method assigns higher priority for cycles with infrequent pairs. In implementation,
-infrequent pairs are indicated as vertices that are connected with a low number of edges, meaning that the pairs can only be matched with a low
-number of other incompatible pairs.
+Algoritma ini menggunakan tiga parameter. Dua parameter pertama juga digunakan pada algoritma \textit{First Accept Searching},
+yaitu nilai \textit{N} dan juga metode penggunaan nilai \textit{N}. Parameter ketiga adalah metode penentuan prioritas. Terdapat
+dua metode untuk menentukan prioritas setiap siklus. Metode pertama adalah metode \textit{greedy}. Metode ini memberikan prioritas
+yang lebih tinggi pada siklus-siklus yang lebih panjang, dengan harapan dengan banyaknya siklus-siklus panjang yang dikembalikan,
+akan meningkatkan efisiensi pencocokan. Metode kedua adalah metode \textit{infrequent}. Metode ini memberikan prioritas tinggi
+kepada siklus-siklus dengan pasangan-pasangan yang sulit mendapatkan kecocokan. Pada implementasinya, pasangan-pasangan ini diindikasikan
+sebagai suatu simpul yang terhubung oleh jumlah sisi yang sedikit, sehingga pasangan-pasangan tersebut lebih terbatas dari pasangan
+lainnya untuk mendapatkan kecocokan dengan pasangan-pasangan ketidakcocokan lainnya.
 
 \section{Experiment and Analysis}
 Before experiment is performed, Edmond's Algorithm is also implemented as a baseline algorithm so comparisons can be made against

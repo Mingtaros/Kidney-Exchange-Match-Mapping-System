@@ -151,29 +151,35 @@ From the existing algorithms problems addressed in the previous section, match m
 \textit{N}-way exchanges from incompatible pairs pool are needed. By modifying existing algorithms and the used data
 structure, new algorithms can be created.
 
-\subsection{Compatibility Graph}
+\subsection{Modifications for Existing Algorithms}
 Before creating new algorithms, incompatibility pairs pool data structure needs to be redefined. Compatibility Graph
 used in Edmond's Algorithm is an undirected graph \cite{raja}, meaning that every edge connecting two vertices represent a bidirectional
-relationship between the aforementioned two vertices, making the returned exchanges to be edges, closing up possibility
-of three-way exchanges or more. If the algorithm is modified to use cycle detection instead of edge detection, Edmond's
-Algorithm can already be used to return \textit{N}-way exchanges.
-As seen in Fig. 2, using cycle detection yields a result with three-way exchange instead of the two-way exchange result
+relationship between the aforementioned two vertices. Therefore the exchanges can be detected by getting the edges of the
+compatibility graph, closing up possibility of three-way exchanges or more. If the algorithm is modified to use cycle detection
+instead of edge detection, Edmond's Algorithm can already be used to return \textit{N}-way exchanges.
+As seen in Fig. \ref{edgevscycle}, using cycle detection yields a result with three-way exchange instead of the two-way exchange result
 returned by edge detection, resulting in a higher matching efficiency using the same compatibility graph. 
 
-\begin{figure}
+\begin{figure}[h]
     \includegraphics[width=0.5\textwidth]{images/edge-vs-cycle-detection.jpg}
     \caption{Edge Detection(left) vs. Cycle Detection(right) in Compatibility Graph}
+    \label{edgevscycle}
 \end{figure}
 
-\subsection{Cycle Detection for Directed Graph}
-As stated in the previous subsection, edge detection used in existing algorithms needs to be converted to cycle detection.
+Edge detection used in existing algorithms needs to be converted to cycle detection to increase matching efficiency.
 However, changing edge detection to cycle detection is not enough. The cycles returned from the graph are all bidirectional
 cycles. If the compatibility graph is converted into a directed graph instead of undirected, unidirectional cycles can also be
-returned, further increasing the number of cycles, therefore increasing the matching efficiency.
+returned, further increasing the number of cycles, therefore increasing the matching efficiency as seen in Fig. \ref{undirectedvsdirected}.
 Directed graph is a data structure consisting a set of vertices that are connected via edges, where each edge has a one-way
 direction that shows the direction of movement from one vertex to another \cite{sedgewick}.
 Cycle detection for directed graph is used to find the existence of a one-way path in a graph that starts and finishes
 at the same vertex \cite{mehta}.
+
+\begin{figure}[h]
+    \includegraphics[width=0.5\textwidth]{images/undirected-vs-directed-compatibility-graph.jpg}
+    \caption{Undirected vs. Directed Compatibility Graph}
+    \label{undirectedvsdirected}
+\end{figure}
 
 The cycle detection algorithm being used here is a little bit different from the usual cycle detection algorithm that detects
 whether a graph has a cycle or not, instead this algorithm collects and returns all possible cycle in a graph in a list.
@@ -197,17 +203,29 @@ heuristic match algorithm. The first-accept approach being used in this algorith
 returned from cycle detection algorithm. This algorithm ensures that no pair gets matched twice or more by deleting cycles that
 contains pairs that have been matched earlier.
 
-This algorithm uses two parameters. The first parameter is the number of \textit{N}, knowing that this algororithm is an \textit{N}-way
+This algorithm uses two parameters. The first parameter is the number of \textit{N}, knowing that this algorithm is an \textit{N}-way
 algorithm. The second parameter is the method to use \textit{N}. The number of \textit{N} can be used as a maximum or exact way of exchanges.
 When the maximum method is used, the algorithm will search for cycles that represents two-to-\textit{N}-way exchanges. Meanwhile when exact
-method is used, the algorithm will search for cycles that have an exact length of \textit{N}.  
+method is used, the algorithm will search for cycles that have an exact length of \textit{N}.
+
+Even though maximum method blindly looks like a certainly superior method than exact method, it is not always the case. For example, as can be
+seen in Fig. \ref{maxvsexact}, when \textit{N} is 5, when maximum method is used, the bidirectional cycles in compatibility graph is
+returned first, removing the five-way exchange possibility. When exact method is used, the bidirectional cycles is not returned because
+the algorithm only looks for five-way exchanges, therefore returning the five-way exchange. In this case, higher matching efficiency
+is achieved when exact method is used instead of maximum method.
+
+\begin{figure}[h]
+    \includegraphics[width=0.5\textwidth]{images/maximum-vs-exact.png}
+    \caption{Case where Exact Method is superior to Maximum Method}
+    \label{maxvsexact}
+\end{figure}
 
 \subsubsection{Priority-based Searching Algorithm}
 The second \textit{N}-way match map searching algorithm is priority-based searching algorithm which is inspired by Edmond's
 algorithm. This algorithm works similarly with First Accept Searching Algorithm, but each cycle is given a priority value so
 that exchanges with highest priority can be returned first compared to the others.
 
-This algorothm uses three parameters. The first two are the same parameter used in First Accept Searching Algortihm, number of \textit{N}
+This algorithm uses three parameters. The first two are the same parameter used in First Accept Searching Algortihm, number of \textit{N}
 and the method to use \textit{N}. The third parameter is priority assignment method. There are two methods to measure priority of every cycles.
 The first assignment method is the greedy method. This method assigns higher priority for longer cycles, indirectly affecting the algorithm
 to return more of the longer cycles with the hope that it can increase the matching efficiency.
