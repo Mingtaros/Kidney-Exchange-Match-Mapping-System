@@ -40,6 +40,7 @@ yarn-error.log*
 *.fls
 *.synctex.gz
 *.synctex
+*.synctex(busy)
 *.log
 *.out
 .DS_Store

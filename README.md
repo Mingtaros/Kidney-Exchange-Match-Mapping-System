@@ -2,4 +2,4 @@
 Leonardo W. Bachelor Degree Final Project
 
 ## Docs
-Final Project Report (IN) and Research Paper (EN). Not code documentation.
+Final Project Report (ID) and Research Paper (ID/EN). Not code documentation.
