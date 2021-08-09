@@ -316,14 +316,14 @@ Untuk menyederhanakan, digunakan tabel \ref{avgmatcheffratio} yang berisikan rat
 digunakan pada tabel adalah rata-rata rasio untuk setiap data \textit{seed}.
 
 \begin{table}[htbp]
-    \caption{Average Matching Efficiency Ratio of \textit{N}-way Algorithms compared to Baseline}
+    \caption{Rata-rata Rasio Efisiensi Pencocokan dari Algoritma \textit{N} arah dibandingkan Baseline}
     \begin{center}
     \def\arraystretch{1.5}
     \begin{tabular}{|c|c|}
     \hline
-    \cellcolor{tableheader}&\cellcolor{tableheader}\textbf{Average} \\
-    \cellcolor{tableheader}\textbf{Algorithm}&\cellcolor{tableheader}\textbf{Improvement}\\
-    \cellcolor{tableheader}&\cellcolor{tableheader}\textbf{Ratio}\\
+    \cellcolor{tableheader}&\cellcolor{tableheader}\textbf{Rata-rata} \\
+    \cellcolor{tableheader}\textbf{Algoritma}&\cellcolor{tableheader}\textbf{Rasio}\\
+    \cellcolor{tableheader}&\cellcolor{tableheader}\textbf{Perkembangan}\\
     \hline
     Baseline: Edmond's Algorithm&1.0 \\
     \hline
@@ -356,41 +356,45 @@ digunakan pada tabel adalah rata-rata rasio untuk setiap data \textit{seed}.
     \end{center}
 \end{table}
 
-As can be seen from Table \ref{avgmatcheffratio}, most of \textit{N}-way match map searching algorithm produces higher matching efficiency in
-comparison to the baseline, Edmond's Algorithm. However, some algorithms, using the exact method of using \textit{N} parameter,
-have worse results compared to baseline. The average matching efficiency of the \textit{N}-way match map searching
-algorithms is 7.75\% higher than the baseline algorithm. The higher matching efficiency improvement is obtained when First Accept
-Searching algorithm is used when \textit{N} is 10, maximum method of using \textit{N}, with data seed 21, where the improvement
-against baseline is 47.06\%.
+Seperti yang dapat terlihat pada tabel \ref{avgmatcheffratio}, mayoritas dari algoritma \textit{N} arah menghasilkan efisiensi
+pencocokan yang lebih tinggi dibandingkan dengan \textit{baseline}. Namun, untuk beberapa algoritma yang menggunakan metode
+penggunaan nilai \textit{N} eksak, efisiensi pencocokan yang didapatkan lebih buruk dibandingkan jika digunakan \textit{Edmond's Algorithm}.
+Secara menyeluruh, rata-rata efisiensi pencocokan dari seluruh algoritma \textit{N} arah lebih tinggi 7.75\% dibandingkan jika
+digunakan \textit{Edmond's Algorithm}. Peningkatan efisiensi pencocokan yang paling tinggi dibandingkan \textit{baseline} adalah saat
+algoritma \textit{First Accept Searching} digunakan dengan nilai \textit{N} 10, metode penggunaan nilai \textit{N} maksimum, pada
+data \textit{seed} 10, dimana rasio efisiensi pencocokan sebesar 1.4706 dari \textit{baseline}, mengartikan 47.06\% peningkatan
+efisiensi pencocokan dibandingkan saat digunakan \textit{Edmond's Algorithm}
 
-While \textit{N}-way match map searching algorithms may produce better results, it is worth noting that with \textit{N}-way exchanges
-being produced by algorithm may be harder to execute in hospitals since the kidney exchanges have to be operated in the same time. The
-implication is that exchanges with lower number of ways are easier to conduct as less hospital resources are needed to conduct the operation.
-Therefore, there needs to be an algorithm comparison regarding the average and the maximum exchanges length of the cycles in the match map.
-In this experiment, every algorithm and parameter combinations are being tested for 30 data seeds with each containing 100 incompatible pairs. 
+Meskipun algoritma pencarian pemetaan kecocokan \textit{N} arah menghasilkan efisiensi pencocokan yang lebih tinggi, patut dicatat
+bahwa pertukaran-pertukaran \textit{N} arah pada pemetaan kecocokan yang dihasilkan adalah pertukaran-pertukaran yang lebih sulit
+dieksekusi oleh rumah sakit karena prosedur transplantasi ginjal dari seluruh pasangan dalam suatu pertukaran harus dilakukan pada
+saat yang bersamaan. Implikasinya adalah pertukaran-pertukaran dengan jumlah arah yang sedikit lebih mudah untuk diterima dan dilakukan
+karena menggunakan lebih sedikit sumber daya rumah sakit. Oleh karena itu, eksperimen ini juga mencakup perbandingan mengenai algoritma
+mana yang mampu menghasilkan pemetaan kecocokan dengan panjang rata-rata dan maksimum siklus-siklus yang relatif rendah. Pada eksperimen
+ini, setiap kombinasi algoritma parameter diujikan dengan 30 data \textit{seed} yang masing-masing mengandung 100 pasangan ketidakcocokan. 
 
 \begin{figure}[h]
    \includegraphics[width=0.5\textwidth]{images/maximum_match_length_for_different_combinations.png}
-   \caption{Maximum Match Length for Different Algorithm Combinations}
+   \caption{Panjang Pertukaran Maksimum untuk Algoritma Berbeda}
    \label{figuremaxlength}
 \end{figure}
 
-From what can be seen in Figure \ref{figuremaxlength}, Edmond's Algorithm and algorithms with \textit{N} usage method parameter assigned to exact, produced the maximum
-length of \textit{N} as the cycles in the produced match map is all of the same length that is \textit{N}.
-The more interesting result is that although the parameter \textit{N} is 10, as can be seen with the green and the yellow line, the maximum length is
-is not that close to 10. 
+Seperti yang dapat dilihat pada Gambar \ref{figuremaxlength}, \textit{Edmond's Algorithm} dan algoritma-algoritma dengan metode
+penggunaan nilai \textit{N} eksak merupakan garis lurus pada panjang sama dengan N karena pertukaran-pertukaran yang diambil memiliki
+panjang yang sama dengan \textit{N}. Hasil yang lebih menarik adalah meskipun parameter \textit{N} adalah 10, seperti yang dapat
+dilihat pada garis hijau dan kuning, panjang maksimum pertukaran secara signifikan lebih kecil dari 10.
 
 \begin{figure}[h]
     \includegraphics[width=0.5\textwidth]{images/average_match_length_for_different_combinations.png}
-    \caption{Average Match Length for Different Algorithm Combinations}
+    \caption{Panjang Pertukaran Rata-rata untuk Algoritma Berbeda}
     \label{figureavglength}
 \end{figure}
 
-Similar to what can be seen in Figure \ref{figuremaxlength}, in Figure \ref{figureavglength}, Edmond's Algorithm and algorithms with
-\textit{N} usage method parameter assigned to exact, produced the average length of \textit{N} as the cycles in the produced match map is all
-of the same length that is \textit{N}. Generally, almost every algorithm that uses maximum method of \textit{N} usage produces cycles with the
-average length of around 2 to 3, with Priority-based Searching algorithm with N=10, Method=Max, and Priority=Greedy, having an averagely high
-average length of exchanges.
+Seperti yang ada pada Gambar \ref{figuremaxlength}, pada Gambar \ref{figureavglength}, \textit{Edmond's Algorithm} dan algoritma-algoritma
+dengan metode penggunaan nilai \textit{N} eksak merupakan garis lurus pada panjang sama dengan N karena pertukaran-pertukaran yang diambil
+memiliki panjang yang sama dengan \textit{N}. Secara umum, hampir semua algoritma yang menggunakan metode penggunaan nilai \textit{N} maksimum
+menghasilkan siklus-siklus dengan panjang 2 hingga 3. Namun, algoritma \textit{Priority-based Searching} dengan N=10, Method=Max, dan
+Priority=Greedy, menghasilkan rata-rata panjang pertukaran yang cukup tinggi.
 
 \section{Conclusion}
 This paper shows that it is a viable option to use \textit{N}-way match map searching algorithms instead of the usual two-way
