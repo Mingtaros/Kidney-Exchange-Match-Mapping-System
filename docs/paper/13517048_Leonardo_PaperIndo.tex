@@ -230,7 +230,7 @@ yang lebih tinggi diperoleh saat metode eksak digunakan, bukan metode maksimum.
 
 \begin{figure}[h]
     \includegraphics[width=0.5\textwidth]{images/maksimum-vs-eksak.png}
-    \caption{Case where Exact Method is superior to Maximum Method}
+    \caption{Kasus dimana Metode Eksak unggul dibandingkan Metode Maksimum}
     \label{maxvsexact}
 \end{figure}
 
@@ -249,50 +249,56 @@ kepada siklus-siklus dengan pasangan-pasangan yang sulit mendapatkan kecocokan. 
 sebagai suatu simpul yang terhubung oleh jumlah sisi yang sedikit, sehingga pasangan-pasangan tersebut lebih terbatas dari pasangan
 lainnya untuk mendapatkan kecocokan dengan pasangan-pasangan ketidakcocokan lainnya.
 
-\section{Experiment and Analysis}
-Before experiment is performed, Edmond's Algorithm is also implemented as a baseline algorithm so comparisons can be made against
-an existing algorithm. The data being used in this experiment can be found in this link: \url{https://rdm.inesctec.pt/dataset/ii-2020-001}
-while the source code of the implementation and the experiment can be found in this link: \url{https://github.com/Mingtaros/Kidney-Exchange-Match-Mapping-System}.
-The purpose of these experiments and evaluations are to find the algorithm and parameter combinations which can produce the best
-performance results based on pre-defined metrics. In addition, through the experiments, it can be concluded which \textit{N}-way
-algorithm and parameter combinations are able to outperform the baseline, Edmond's Algorithm. Based on the pre-defined metrics,
-there will be comparison for Execution Time and Matching Efficiency for each algorithm.
+\section{Experimen dan Analisis}
+Sebelum eksperimen dilakukan, \textit{Edmond's Algorithm} diimplementasikan sebagai algoritma \textit{baseline} agar perbandingan
+performa antara algoritma \textit{N} arah dan algoritma yang sudah ada dapat dilakukan. Data yang digunakan pada eksperimen ini dapat
+ditemukan pada pranala \url{https://rdm.inesctec.pt/dataset/ii-2020-001}. Kode sumber lengkap dari implementasi dan eksperimen dapat
+ditemukan pada pranala \url{https://github.com/Mingtaros/Kidney-Exchange-Match-Mapping-System}. Tujuan dari eksperimen dan evaluasi
+ini adalah untuk mencari kombinasi algoritma dengan parameter seperti apa kah yang mampu menghasilkan performa terbaik berdasarkan
+metrik-metrik yang telah ditentukan. Melalui eksperimen-eksperimen ini, tentunya juga diuji apakah algoritma \textit{N} arah mampu
+mengungguli performa dari algoritma \textit{baseline} yang digunakan, \textit{Edmond's Algorithm}. Seperti yang telah dijelaskan,
+pengukuran performa algoritma dilakukan dengan metrik efisiensi pencocokan dan juga waktu eksekusi algoritma.
 
-\subsection{Execution Time Comparison}
-\subsubsection{Execution Time Comparison for Different Algorithm Combinations}
-For this experiment, each algorithm is used for 3000 incompatible pairs divided into 30 groups of 100. A group is called a seed. Each
-algorithm will be fitted with the same dataset group 50 times for every group. As seen in Figure \ref{exctimealgo}, each data point in the boxplot
-is used to show the average execution time from the 50 executions for every dataset group, in one Y coordinate, there are 30 data
-points, each one for one data group. 
+\subsection{Perbandingan Waktu Eksekusi}
+\subsubsection{Perbandingan Waktu Eksekusi untuk Kombinasi Algoritma Berbeda}
+Pada eksperimen ini, setiap algoritma akan memproses data berisi 3000 pasangan ketidakcocokan yang telah dipecah-pecah menjadi 30
+grup yang setiap grupnya dinamakan sebagai suatu \textit{seed}. Setiap \textit{seed} berisikan 100 pasangan ketidakcocokan. Setiap
+algoritma akan dijalankan dengan masing-masing data \textit{seed} 50 kali. Seperti yang dapat dilihat pada gambar \ref{exctimealgo},
+setiap poin data pada \textit{boxplot} adalah waktu eksekusi rata-rata dari 50 kali eksekusi untuk setiap data \textit{seed}. Untuk
+setiap koordinat Y, terdapat 30 titik data yang masing-masing merepresentasikan waktu eksekusi algoritma untuk \textit{seed} yang bersangkutan. 
 
 \begin{figure}[h]
     \includegraphics[width=0.5\textwidth]{images/average_execution_time_for_3_algorithms.png}
-    \caption{Average Execution Time for 3 Algorithms}
+    \caption{Rata-rata Waktu Eksekusi untuk ketiga Algoritma}
     \label{exctimealgo}
 \end{figure}
 
-As seen from the boxplot, Edmond's Algorithm and Priority-based with infrequent method of priority assignment are the slowest
-algorithms. However, given that each and every algorithm does not have a significant difference in execution time, the execution
-time difference can be ignored.
+Seperti yang dapat dilihat pada \textit{boxplot}, \textit{Edmond's Algorithm} dan \textit{Priority-based Searching} dengan
+metode penentuan prioritas \textit{infrequent} adalah algoritma-algoritma yang paling lambat. Namun, seperti yang dapat dilihat,
+karena tidak ada perbedaan waktu eksekusi yang sangat signifikan antar algoritma, dapat dikonklusikan secara kasar bahwa
+perbedaan waktu eksekusi antar algoritma dapat diabaikan.
 
-\subsubsection{Execution Time Comparison for Different Data Sizes}
-This experiment is conducted to show the effect of data size to execution time of the match map searching algorithms. For this
-experiment, the recorded execution time is the average execution time for each algorithm using data size of  100, 200, 300, 400,
-500, 1000, 2000, as well as 3000 incompatible pairs. Each data point is the average of algorithm execution time that has been
-executed 10 times for each algorithm for each data size.
+\subsubsection{Perbedaan Waktu Eksekusi untuk Ukuran Data Berbeda}
+Eksperimen ini dilakukan untuk melihat pengaruh dari ukuran data yang berbeda terhadap waktu eksekusi dari algoritma pencarian
+pemetaan kecocokan. Untuk eksperimen ini, dicatat rata-rata waktu eksekusi setiap algoritma untuk data sebesar 100, 200,
+300, 400, 500, 1000, 2000, dan 3000 pasangan ketidakcocokan. Setiap titik data pada Gambar \ref{exctimedata} menandakan waktu
+eksekusi algoritma untuk jumlah data yang masing-masingnya dilakukan sebanyak 10 kali.
 
 \begin{figure}[h]
     \includegraphics[width=0.5\textwidth]{images/execution_time_for_different_amount_of_data.png}
-    \caption{Execution Time for Different Amount of Data}
+    \caption{Rata-rata Waktu Eksekusi untuk Ukuran Data Berbeda}
     \label{exctimedata}
 \end{figure}
 
-As seen in Figure \ref{exctimedata}, there are two plots, each one representing a group of fast algorithms and a group of slow algorithms.
-From the upper figure, even with 3000 incompatible pairs, the maximum algorithm runtime is around 3000 milliseconds. Meanwhile,
-from the lower figure, both of the algorithms can reach 600000 milliseconds (10 minutes) to process 3000 pairs. From the
-overall line plot, it can be concluded that the relation of data size and execution time is a form of polynomial function, not linear.
+Seperti yang dapat dilihat pada Gambar \ref{exctimedata}, terdapat dua buah diagram yang masing-masing merepresentasikan grup
+algoritma yang cepat dan grup algoritma yang lambat. Untuk algoritma yang cepat, saat digunakan 3000 pasangan, waktu maksimum
+dari eksekusi algoritma berkisar di 3000 milisekon (30 detik). Sementara untuk algoritma yang lambat, saat digunakan 3000 pasangan,
+waktu maksimum dari eksekusi algoritma berkisar di 600000 milisekon (10 menit). Hal ini terjadi karena metode penentuan prioritas
+yang mirip pada \textit{Edmond's Algorithm} dan juga metode penentuan prioritas \textit{infrequent} pada algoritma
+\textit{Priority-based Searching}. Dari kedua diagram, dapat disimpulkan bahwa relasi antara ukuran data dan waktu eksekusi berbentuk
+polinomial dan bukan linear.
 
-\subsection{Overall Matching Efficiency Comparison for Different Algorithms}
+\subsection{Perbandingan Efisiensi Pencocokan secara menyeluruh untuk Algoritma Berbeda}
 The final experiment is conducted to show which algorithm-parameter combination is the best one in producing high matching efficiency.
 In this experiment, each combination is used for every data seed. To ease up the comparison, in Figure \ref{matcheffratio}, ratio of improvement is used
 in comparison to Edmond's Algorithm as a baseline shown as a horizontal line in the figure. Every data point is a matching efficiency

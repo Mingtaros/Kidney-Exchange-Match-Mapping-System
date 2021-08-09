@@ -273,8 +273,10 @@ executed 10 times for each algorithm for each data size.
 
 As seen in Figure \ref{exctimedata}, there are two plots, each one representing a group of fast algorithms and a group of slow algorithms.
 From the upper figure, even with 3000 incompatible pairs, the maximum algorithm runtime is around 3000 milliseconds. Meanwhile,
-from the lower figure, both of the algorithms can reach 600000 milliseconds (10 minutes) to process 3000 pairs. From the
-overall line plot, it can be concluded that the relation of data size and execution time is a form of polynomial function, not linear.
+from the lower figure, both of the algorithms can reach 600000 milliseconds (10 minutes) to process 3000 pairs. This happens
+because of the similarly slow priority assignment method in Edmond's Algorithm and infrequent priority assignment method used in
+Priority-based Searching algorithm. From the overall line plot, it can be concluded that the relation of data size and execution
+time is a form of polynomial function, not linear.
 
 \subsection{Overall Matching Efficiency Comparison for Different Algorithms}
 The final experiment is conducted to show which algorithm-parameter combination is the best one in producing high matching efficiency.
