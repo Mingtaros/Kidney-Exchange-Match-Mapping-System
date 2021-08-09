@@ -102,13 +102,13 @@ menular melalui darah. Selain itu, sistem imun dari pasien juga harus dapat mene
     \cellcolor{tableheader}\textbf{AB}&1&1&1&1 \\
     \hline
     \end{tabular}
-    \label{tab1}
+    \label{bloodtypecompatibility}
     \end{center}
 \end{table}
 
 Terdapat beberapa buah pengujian yang harus dilalui sebelum transplantasi ginjal dapat dilakukan \cite{adrian}.
 Uji golongan darah dilakukan untuk donor dan juga resipien. Seorang pendonor hanya dapat melakukan pendonoran apabila
-golongan darah pendonor bersifat cocok dengan golongan darah resipien. Seperti yang dapat dilihat pada Tabel \ref{tab1},
+golongan darah pendonor bersifat cocok dengan golongan darah resipien. Seperti yang dapat dilihat pada Tabel \ref{bloodtypecompatibility},
 angka 1 mengindikasikan kecocokan dan angka 0 mengindikasikan ketidakcocokan. Pendonor dengan golongan darah O merupakan
 \textit{Universal Donor} karena dapat melakukan donor ke semua golongan darah. Resipien dengan golongan darah AB merupakan
 \textit{Universal Recipient} karena dapat menerima donor dari semua golongan darah \cite{charge}.
@@ -299,19 +299,21 @@ yang mirip pada \textit{Edmond's Algorithm} dan juga metode penentuan prioritas 
 polinomial dan bukan linear.
 
 \subsection{Perbandingan Efisiensi Pencocokan secara menyeluruh untuk Algoritma Berbeda}
-The final experiment is conducted to show which algorithm-parameter combination is the best one in producing high matching efficiency.
-In this experiment, each combination is used for every data seed. To ease up the comparison, in Figure \ref{matcheffratio}, ratio of improvement is used
-in comparison to Edmond's Algorithm as a baseline shown as a horizontal line in the figure. Every data point is a matching efficiency
-multiplier of the matching efficiency obtained when Edmond's Algorithm is used.
+Eksperimen terakhir dilakukan untuk menunjukkan kombinasi algoritma dan parameter mana yang adalah kombinasi terbaik untuk menghasilkan
+pemetaan kecocokan dengan efisiensi pencocokan yang tinggi. Pada eksperimen ini, setiap kombinasi diujikan menggunakan 30 data \textit{seed}
+berisikan 100 data untuk masing-masing \textit{seed}. Untuk mempermudah pengertian, pada Gambar \ref{matcheffratio}, rasio perkembangan
+digunakan untuk menunjukkan besarnya efisiensi pencocokan dari suatu kombinasi algoritma parameter dibandingkan dengan \textit{baseline}
+yang merupakan garis lurus horizontal pada gambar. Setiap titik data merepresentasikan rasio efisiensi pencocokan dari algoritma saat
+digunakan pada data \textit{seed} tertentu dibandingkan dengan efisiensi pencocokan yang didapatkan oleh \textit{Edmond's Algorithm}.
 
 \begin{figure}[h]
     \includegraphics[width=0.5\textwidth]{images/matching_efficiency_ratio_against_baseline.png}
-    \caption{Matching Efficiency Ratio of \textit{N}-way Algorithms against Baseline}
+    \caption{Rasio Efisiensi Pencocokan dari Algoritma \textit{N} arah dibandingkan Baseline}
     \label{matcheffratio}
 \end{figure}
 
-To simplify the figure, Table \ref{tab2} is used to store average matching efficiency improvement ratio in compared to baseline. The average used
-in the table is the average improvement ratio of an algorithm in comparison to baseline for all data seeds.
+Untuk menyederhanakan, digunakan tabel \ref{avgmatcheffratio} yang berisikan rata-rata rasio efisiensi pencocokan dibandingkan baseline. Rata-rata yang
+digunakan pada tabel adalah rata-rata rasio untuk setiap data \textit{seed}.
 
 \begin{table}[htbp]
     \caption{Average Matching Efficiency Ratio of \textit{N}-way Algorithms compared to Baseline}
@@ -350,11 +352,11 @@ in the table is the average improvement ratio of an algorithm in comparison to b
     Priority Based(N=10, Method=Exact, Priority=Infrequent)&\cellcolor{lessratio}0.91 \\
     \hline
     \end{tabular}
-    \label{tab2}
+    \label{avgmatcheffratio}
     \end{center}
 \end{table}
 
-As can be seen from Table \ref{tab2}, most of \textit{N}-way match map searching algorithm produces higher matching efficiency in
+As can be seen from Table \ref{avgmatcheffratio}, most of \textit{N}-way match map searching algorithm produces higher matching efficiency in
 comparison to the baseline, Edmond's Algorithm. However, some algorithms, using the exact method of using \textit{N} parameter,
 have worse results compared to baseline. The average matching efficiency of the \textit{N}-way match map searching
 algorithms is 7.75\% higher than the baseline algorithm. The higher matching efficiency improvement is obtained when First Accept

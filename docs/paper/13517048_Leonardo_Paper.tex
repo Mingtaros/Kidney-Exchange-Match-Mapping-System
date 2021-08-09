@@ -95,14 +95,14 @@ the donor's kidney without killing it.
     \cellcolor{tableheader}\textbf{AB}&1&1&1&1 \\
     \hline
     \end{tabular}
-    \label{tab1}
+    \label{bloodtypecompatibility}
     \end{center}
 \end{table}
 
 There are few tests that have to be performed before kidney transplant can be done \cite{adrian}.
 The blood type test is performed to both the donor and the recipient. Donors can only make a
 donation if one's blood type is compatible with the recipient's blood type.
-In Table I, number 1 indicates compatibility and 0 indicates incompatibility. Donors with blood type
+In Table \ref{bloodtypecompatibility}, number 1 indicates compatibility and 0 indicates incompatibility. Donors with blood type
 O are considered Universal Donors because they can give donors to every patients regardless of the blood
 type. Recipients with blood type AB are considered a Universal Recipients because they can accept kidney
 donation from every donors regardless of the blood type \cite{charge}.
@@ -280,9 +280,10 @@ time is a form of polynomial function, not linear.
 
 \subsection{Overall Matching Efficiency Comparison for Different Algorithms}
 The final experiment is conducted to show which algorithm-parameter combination is the best one in producing high matching efficiency.
-In this experiment, each combination is used for every data seed. To ease up the comparison, in Figure \ref{matcheffratio}, ratio of improvement is used
-in comparison to Edmond's Algorithm as a baseline shown as a horizontal line in the figure. Every data point is a matching efficiency
-multiplier of the matching efficiency obtained when Edmond's Algorithm is used.
+In this experiment, each combination is used for every 30 data seeds with each containing 100 incompatible pairs. To ease up the
+comparison, in Figure \ref{matcheffratio}, ratio of improvement is used in comparison to Edmond's Algorithm as a baseline shown as a
+horizontal line in the figure. Every data point is a matching efficiency multiplier of the matching efficiency obtained when Edmond's
+Algorithm is used.
 
 \begin{figure}[h]
     \includegraphics[width=0.5\textwidth]{images/matching_efficiency_ratio_against_baseline.png}
@@ -290,7 +291,7 @@ multiplier of the matching efficiency obtained when Edmond's Algorithm is used.
     \label{matcheffratio}
 \end{figure}
 
-To simplify the figure, Table \ref{tab2} is used to store average matching efficiency improvement ratio in compared to baseline. The average used
+To simplify the figure, Table \ref{avgmatcheffratio} is used to store average matching efficiency improvement ratio in compared to baseline. The average used
 in the table is the average improvement ratio of an algorithm in comparison to baseline for all data seeds.
 
 \begin{table}[htbp]
@@ -330,11 +331,11 @@ in the table is the average improvement ratio of an algorithm in comparison to b
     Priority Based(N=10, Method=Exact, Priority=Infrequent)&\cellcolor{lessratio}0.91 \\
     \hline
     \end{tabular}
-    \label{tab2}
+    \label{avgmatcheffratio}
     \end{center}
 \end{table}
 
-As can be seen from Table \ref{tab2}, most of \textit{N}-way match map searching algorithm produces higher matching efficiency in
+As can be seen from Table \ref{avgmatcheffratio}, most of \textit{N}-way match map searching algorithm produces higher matching efficiency in
 comparison to the baseline, Edmond's Algorithm. However, some algorithms, using the exact method of using \textit{N} parameter,
 have worse results compared to baseline. The average matching efficiency of the \textit{N}-way match map searching
 algorithms is 7.75\% higher than the baseline algorithm. The higher matching efficiency improvement is obtained when First Accept
