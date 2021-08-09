@@ -58,7 +58,7 @@
 \begin{abstract}
 Sebelum transplantasi ginjal dilakukan, pendonor dan pasien calon penerima ginjal harus merupakan pasangan yang cocok.
 Faktanya, tidak jarang ketidakcocokan terjadi di antara pasangan donor-resipien, menimbulkan masalah ketersediaan ginjal.
-Untuk menyelesaikan masalah ketersediaan ini, Program Pertukaran Ginjal (\textit{Kidney Exchange program}) diciptakan agar
+Untuk menyelesaikan masalah ketersediaan ini, Program Pertukaran Ginjal (\textit{Kidney Exchange Program}) diciptakan agar
 pasangan-pasangan ketidakcocokan dapat melakukan pertukaran ginjal dengan pasangan ketidakcocokan lainnya, membuat pendonoran
 silang. Namun karena sangat banyaknya pasangan ketidakcocokan, mencari pemetaan kecocokan dari sekumpulan pasangan ketidakcocokan
 bukanlah hal yang mudah. Oleh karena itu, algoritma pencarian pemetaan kecocokan dibuat. Algoritma yang sudah ada, \textit{Edmond's Algorithm},
@@ -396,25 +396,29 @@ memiliki panjang yang sama dengan \textit{N}. Secara umum, hampir semua algoritm
 menghasilkan siklus-siklus dengan panjang 2 hingga 3. Namun, algoritma \textit{Priority-based Searching} dengan N=10, Method=Max, dan
 Priority=Greedy, menghasilkan rata-rata panjang pertukaran yang cukup tinggi.
 
-\section{Conclusion}
-This paper shows that it is a viable option to use \textit{N}-way match map searching algorithms instead of the usual two-way
-algorithms such as Edmond's Algorithm for Kidney Paired Donation, with \textit{N}-way algorithms producing better matching efficiency
-and competitive execution time in comparison to the baseline, Edmond's Algorithm provided the same dataset. Generally speaking,
-the usage of \textit{N}-way algorithms increases matching efficiency by 7.75\%.
+\section{Kesimpulan}
+Pada paper ini, diperlihatkan bahwa algoritma pencarian pemetaan kecocokan \textit{N} arah adalah substitusi yang baik untuk algoritma
+pencarian pemetaan kecocokan dua arah seperti \textit{Edmond's Algorithm} yang pada umumnya digunakan pada program KPD. Dengan data yang
+sama, Algoritma \textit{N} arah mampu menghasilkan pemetaan kecocokan dengan efisiensi pencocokan yang unggul dibandingkan algoritma
+dua arah dengan waktu eksekusi yang bersaing. Menggunakan algoritma pencarian pemetaan kecocokan \textit{N} arah, efisiensi pencocokan
+yang didapatkan secara umum unggul sebesar 7.75\% dibandingkan algoritma \textit{baseline}.
 
-With the provided data, First Accept Searching algorithm have a more consistent performance in general compared to Priority-based Searching
-algorithm. However, with Priority-based Searching algorithm, the matching efficiency improvement is generally higher with the exception of
-when exact method to utilize \textit{N} is being used instead of the maximum method. However, it is worth noting that priority-based searching
-algorithm may produce high matching efficiency with the compromise of high average matching length if greedy priority assignment method is being
-used. Therefore it can be concluded that First Accept Searching algorithm is the most ideal \textit{N}-way match map searching algorithm to use
-in Kidney Exchange Program. 
+Dengan data yang ada, algoritma \textit{First Accept Searching} mampu menghasilkan pemetan kecocokan dengan performa yang lebih konsisten
+secara umum dibandingkan algoritma \textit{Priority-based Searching}. Namun, algoritma \textit{Priority-based Searching} mampu menghasilkan
+efisiensi pencocokan yang lebih tinggi jika kombinasi parameter yang digunakan tepat, terkecuali jika metode penggunaan nilai \textit{N} yang digunakan
+adalah metode eksak. Patut diperhatikan bahwa meskipun algoritma \textit{Priority-based Searching} mampu menghasilkan efisiensi pencocokan
+yang tinggi, panjang pertukaran dari siklus-siklus pada pemetaan kecocokan yang dihasilkan relatif tinggi, terutama jika digunakan metode
+penentuan prioritas \textit{greedy}. Oleh karena itu, dapat dikonklusikan bahwa algoritma \textit{First Accept Searching} adalah algoritma
+pencarian pemetaan kecocokan \textit{N} arah yang paling ideal untuk digunakan pada Program Pertukaran Ginjal
 
-\section{Related Work}
-The idea of the solution, the existing algorithms, and the performance metrics being used as a performance measure are all obtained from
-the main reference paper, Web Based Decision Support System for Kidney Exchange by Samy Raja, Prasanna Devi S., and Suryaprakasa Rao K. in
-International Journal of Computer Applications \cite{raja}. In that paper, two-way match map searching algorithms are being used to tackle
-the problem of the humanely-impossible task of searching the most optimal match map out of an incompatible pairs pool, which becomes the baseline
-and the reference of the newer algorithms being implemented in this paper.
+\section{Karya Terkait}
+Ide dari solusi, algoritma-algoritma yang sudah ada, dan juga metrik performa yang digunakan didapatkan dari paper rujukan utama,
+\textit{Web Based Decision Support System for Kidney Exchange} oleh \textit{Samy Raja, Prasanna Devi S., and Suryaprakasa Rao K.} pada
+\textit{International Journal of Computer Applications} \cite{raja}. Pada paper tersebut, algoritma-algoritma pencarian pemetaan
+kecocokan dua arah digunakan sebagai solusi dari masalah pencarian pemetaan kecocokan yang sangat sulit dilakukan secara manual
+terutama untuk pemetaan kecocokan paling optimal dari kumpulan pasangan ketidakcocokan. Salah satu dari algoritma-algoritma tersebut
+digunakan sebagai algoritma \textit{baseline} dan juga inspirasi untuk algoritma-algoritma pencarian pemetaan kecocokan \textit{N}
+arah yng diimplementasikan pada paper ini.
 
 \begin{thebibliography}{00}
 \bibitem{roth2005} Roth, A. E., Sonmez, T., Unver, M. U. (2005). Kidney Exchange. Quarterly Journal of Economics, 32.
