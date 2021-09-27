@@ -33,17 +33,18 @@
 % document start
 \begin{document}
 
-\title{Searching Algorithm for Match Mapping in Kidney Exchange Program}
+\title{N-way Match Map Searching Algorithm in Kidney Exchange Program}
 
 % author
-\author{\IEEEauthorblockN{Fazat Nur Azizah}
+\author{
+\IEEEauthorblockN{Leonardo}
+\IEEEauthorblockA{leonardow41@gmail.com}
+\and
+\IEEEauthorblockN{Fazat Nur Azizah}
 \IEEEauthorblockA{fazat@informatika.org}
 \and
 \IEEEauthorblockN{Ardian Umam}
 \IEEEauthorblockA{ardian@informatika.org}
-\and
-\IEEEauthorblockN{Leonardo}
-\IEEEauthorblockA{leonardow41@gmail.com}
 }
 
 \maketitle
@@ -55,8 +56,8 @@ To solve this problem, Kidney Exchange Program was created so that an incompatib
 to another incompatible pair, making cross donation easier. But to search for the optimal match map from incompatible
 pairs pool is not an easy task. Match map searching algorithm is an algorithm created for this task. Edmond's
 Algorithm, the existing algorithm, is suboptimal because it closes the possibiliy of three or more-way exchanges.
-Therefore, in this paper, by modifying existing two-way match map searching algorithms, \textit{N}-way match
-map searching algorithm is implemented. Based on the test results, using 3000 incompatible pairs data, it is
+Therefore, this paper proposes to extend the existing two-way match map searching algorithms to general \textit{N}-way,
+where \textit{N} can be 2 or more. Based on the test results, using 3000 incompatible pairs data, it is
 proven that \textit{N}-way match map searching algorithm is superior in terms of matching efficiency compared to
 the two-way match map searching algorithm. The increase in matching efficiency obtained on average reaches 7.75\%
 in comparison to the matching efficiency obtained by Edmond's Algorithm. 
@@ -131,7 +132,7 @@ to address this issue. One of the most known algorithm to tackle this problem is
 In Edmond's Algorithm, the pool of incompatible pairs are represented as a graph with each node representing
 an incompatible pair and each edge representing a match between two incompatible pairs. The algorithm focuses on
 high priority pairs so that pairs who need a transplantation more can get an exchange first.
-Another algorithm regarding this problem is First Accept Heuristic Match \cite{raja} which focuses more on the
+Another algorithm addressing this problem is First Accept Heuristic Match \cite{raja} which focuses more on the
 heuristic if one registers first, then one gets an exchange first.
 
 These algorithms are called Match Map Searching Algorithms. To evaluate and measure the performance of an algorithm,
@@ -142,14 +143,23 @@ The second metric is execution time, which measures how long does the algorithm 
 usually measured in millisecond. The best match map searching algorithm is the algorithm that can produce high matching
 efficiency with low execution time. Meaning that many patients can be saved as fast as possible.
 
-As good as it looks, Edmond's Algorithm and First Accept Heuristic Match can only find two-way exchanges from the
+To the best of our knowledge, Edmond's Algorithm and First Accept Heuristic Match can only find two-way exchanges from the
 incompatible pairs pool. Meaning these algorithms are not able find a solution with three-way exchanges or more,
 closing the possibility.
 
+\section{Related Work}
+The idea of the solution, the existing algorithms, and the performance metrics being used as a performance measure are
+all obtained from the main reference paper, Web Based Decision Support System for Kidney Exchange by Samy Raja, Prasanna
+Devi S., and Suryaprakasa Rao K. in International Journal of Computer Applications \cite{raja}. In that paper, two-way
+match map searching algorithms are being used to tackle the problem of the humanely-impossible task of searching the most
+optimal match map out of an incompatible pairs pool. However, from what's mentioned earlier, two-way match map searching
+algorithms are limited in a way that they cannot find an optimal match map in a bigger solution space. This is the problem
+this paper is about to tackle. These two way algorithms become the baseline and the reference of the newer algorithms
+being implemented in this paper.
+
 \section{Methodology}
-From the existing algorithms problems addressed in the previous section, match map searching algorithms that can find
-\textit{N}-way exchanges from incompatible pairs pool are needed. By modifying existing algorithms and the used data
-structure, new algorithms can be created.
+From the existing algorithms problems addressed in the previous sections, match map searching algorithms that can find
+\textit{N}-way exchanges from incompatible pairs pool are needed.
 
 \subsection{Modifications for Existing Algorithms}
 Before creating new algorithms, incompatibility pairs pool data structure needs to be redefined. Compatibility Graph
@@ -190,18 +200,18 @@ increase and therefore increasing matching efficiency and saving more patients.
 
 \subsection{\textit{N}-way Match Map Searching Algorithms}
 With directed graph as compatibility graph and using cycle detection algorithm, \textit{N}-way match map searching algorithms
-can be created. This algorithms receive the list of cycles returned from cycle detection and returned a reduced list of cycles
-called match mapping. The reduction mentioned is done because each pairs in compatibility graph can exist in more than one cycles
+can be created. This algorithm receive the list of cycles returned from cycle detection and returned a reduced list of cycles
+called match mapping. The reduction mentioned is needed because each pairs in compatibility graph can exist in more than one cycles
 in list of cycle, creating a many-to-many relationship among the pairs. This is obviously impossible as every pair can only donate
-and receive exactly one kidney. The reduction is done to change this many-to-many relationship to be a one-to-one relationship. This
+and receive exactly one kidney. The reduction is performed to change this many-to-many relationship to be a one-to-one relationship. This
 reduction usually leaves some pairs to be not matched at all, therefore matching efficiency is used as a performance metric to
 measure how many pairs can get matched out of the full incompatible pairs pool.  
 
 \subsubsection{First Accept Searching Algorithm}
 The first \textit{N}-way match map searching algorithm is first accept searching algorithm which is inspired by first accept
 heuristic match algorithm. The first-accept approach being used in this algorithm is to to use the first cycles in cycles list
-returned from cycle detection algorithm. This algorithm ensures that no pair gets matched twice or more by deleting cycles that
-contains pairs that have been matched earlier.
+returned from cycle detection algorithm. This algorithm ensures that no pair gets matched twice or more by deleting cycles
+containing pairs that have been matched earlier.
 
 This algorithm uses two parameters. The first parameter is the number of \textit{N}, knowing that this algorithm is an \textit{N}-way
 algorithm. The second parameter is the method to use \textit{N}. The number of \textit{N} can be used as a maximum or exact way of exchanges.
@@ -234,9 +244,9 @@ infrequent pairs are indicated as vertices that are connected with a low number 
 number of other incompatible pairs.
 
 \section{Experiment and Analysis}
-Before experiment is performed, Edmond's Algorithm is also implemented as a baseline algorithm so comparisons can be made against
-an existing algorithm. The data being used in this experiment can be found in this link: \url{https://rdm.inesctec.pt/dataset/ii-2020-001}
-while the source code of the implementation and the experiment can be found in this link: \url{https://github.com/Mingtaros/Kidney-Exchange-Match-Mapping-System}.
+In this section, Edmond's Algorithm is also implemented as a baseline algorithm for comparison purposes.
+The data being used in this experiment is INESC TEC dataset \footnote{https://rdm.inesctec.pt/dataset/ii-2020-001}.
+Our code implementation is also publicly available \footnote{https://github.com/Mingtaros/Kidney-Exchange-Match-Mapping-System}.
 The purpose of these experiments and evaluations are to find the algorithm and parameter combinations which can produce the best
 performance results based on pre-defined metrics. In addition, through the experiments, it can be concluded which \textit{N}-way
 algorithm and parameter combinations are able to outperform the baseline, Edmond's Algorithm. Based on the pre-defined metrics,
@@ -291,7 +301,7 @@ Algorithm is used.
     \label{matcheffratio}
 \end{figure}
 
-To simplify the figure, Table \ref{avgmatcheffratio} is used to store average matching efficiency improvement ratio in compared to baseline. The average used
+To simplify the figure, Table \ref{avgmatcheffratio} is used to summarize the average matching efficiency improvement ratio in compared to baseline. The average used
 in the table is the average improvement ratio of an algorithm in comparison to baseline for all data seeds.
 
 \begin{table}[htbp]
@@ -345,7 +355,8 @@ against baseline is 47.06\%.
 While \textit{N}-way match map searching algorithms may produce better results, it is worth noting that with \textit{N}-way exchanges
 being produced by algorithm may be harder to execute in hospitals since the kidney exchanges have to be operated in the same time. The
 implication is that exchanges with lower number of ways are easier to conduct as less hospital resources are needed to conduct the operation.
-Therefore, there needs to be an algorithm comparison regarding the average and the maximum exchanges length of the cycles in the match map.
+Therefore, further comparison among algorithms regarding the maximum and average exchanges length of the cycles in the match map is needed, and
+is summarized in Fig. \ref{figuremaxlength} and \ref{figureavglength} respectively.
 In this experiment, every algorithm and parameter combinations are being tested for 30 data seeds with each containing 100 incompatible pairs. 
 
 \begin{figure}[h]
@@ -357,7 +368,7 @@ In this experiment, every algorithm and parameter combinations are being tested 
 From what can be seen in Figure \ref{figuremaxlength}, Edmond's Algorithm and algorithms with \textit{N} usage method parameter assigned to exact, produced the maximum
 length of \textit{N} as the cycles in the produced match map is all of the same length that is \textit{N}.
 The more interesting result is that although the parameter \textit{N} is 10, as can be seen with the green and the yellow line, the maximum length is
-is not that close to 10. 
+is not that still relatively small, and far from the \textit{N} of 10. 
 
 \begin{figure}[h]
     \includegraphics[width=0.5\textwidth]{images/average_match_length_for_different_combinations.png}
@@ -368,7 +379,7 @@ is not that close to 10.
 Similar to what can be seen in Figure \ref{figuremaxlength}, in Figure \ref{figureavglength}, Edmond's Algorithm and algorithms with
 \textit{N} usage method parameter assigned to exact, produced the average length of \textit{N} as the cycles in the produced match map is all
 of the same length that is \textit{N}. Generally, almost every algorithm that uses maximum method of \textit{N} usage produces cycles with the
-average length of around 2 to 3, with Priority-based Searching algorithm with N=10, Method=Max, and Priority=Greedy, having an averagely high
+average length of around 2 to 3, with Priority-based Searching algorithm with N=10, Method=Max, and Priority=Greedy, having the highest
 average length of exchanges.
 
 \section{Conclusion}
@@ -379,17 +390,10 @@ the usage of \textit{N}-way algorithms increases matching efficiency by 7.75\%.
 
 With the provided data, First Accept Searching algorithm have a more consistent performance in general compared to Priority-based Searching
 algorithm. However, with Priority-based Searching algorithm, the matching efficiency improvement is generally higher with the exception of
-when exact method to utilize \textit{N} is being used instead of the maximum method. However, it is worth noting that priority-based searching
+when exact method to utilize \textit{N} is being used instead of the maximum method. It is worth noting that priority-based searching
 algorithm may produce high matching efficiency with the compromise of high average matching length if greedy priority assignment method is being
 used. Therefore it can be concluded that First Accept Searching algorithm is the most ideal \textit{N}-way match map searching algorithm to use
-in Kidney Exchange Program. 
-
-\section{Related Work}
-The idea of the solution, the existing algorithms, and the performance metrics being used as a performance measure are all obtained from
-the main reference paper, Web Based Decision Support System for Kidney Exchange by Samy Raja, Prasanna Devi S., and Suryaprakasa Rao K. in
-International Journal of Computer Applications \cite{raja}. In that paper, two-way match map searching algorithms are being used to tackle
-the problem of the humanely-impossible task of searching the most optimal match map out of an incompatible pairs pool, which becomes the baseline
-and the reference of the newer algorithms being implemented in this paper.
+in Kidney Exchange Program.
 
 \begin{thebibliography}{00}
 \bibitem{roth2005} Roth, A. E., Sonmez, T., Unver, M. U. (2005). Kidney Exchange. Quarterly Journal of Economics, 32.
